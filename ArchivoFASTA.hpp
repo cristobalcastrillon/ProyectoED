@@ -1,7 +1,10 @@
-#include <iostream>
-#include <fstream>
-#include <vector>
+#ifndef ArchivoFASTA_hpp
+#define ArchivoFASTA_hpp
+
+#include <stdio.h>
 #include <string>
+#include <vector>
+#include <fstream>
 
 class ArchivoFASTA {
     private:
@@ -11,12 +14,16 @@ class ArchivoFASTA {
     
     public:
     ArchivoFASTA();
-    string getLineaDescriptiva(int posicionLD);
-    void setLineaDescriptiva(string lineaDescriptiva);
-    string getSecuencia(int posicionS);
-    void setSecuencia(string cadenaSecuencia);
+    std::string getLineaDescriptiva(int posicionLD);
+    void setLineaDescriptiva(std::string lineaDescriptiva);
+    std::string getSecuencia(int posicionS);
+    void setSecuencia(std::string cadenaSecuencia);
 
-    bool cargarArchivo();
+    //Comandos requeridos en el enunciado del proyecto:
+    bool cargarArchivo(std::string nombreArchivo);
+    int conteoSecuencias();
     void histograma();
 
 };
+
+#endif /* ArchivoFASTA_hpp */
