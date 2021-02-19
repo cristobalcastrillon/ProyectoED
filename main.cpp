@@ -10,19 +10,14 @@
 #include <string>
 #include <vector>
 #include "Secuencia.hpp"
+#include "ArchivoFASTA.hpp"
 
 using namespace std;
-
-struct archivo {
-//Estructura que guarda las subcadenas que componen el archivo (líneas descriptivas; secuencias).
-    vector<string> lineaDescriptiva;
-    vector<Secuencia> secLista;
-};
 
 int main(int argc, const char * argv[]) {
     
     string linea; //String utilizado para extraer cada línea del archivo FASTA.
-    archivo archivoFASTA;
+    ArchivoFASTA archivoFASTA;
     
     ifstream readFasta("ejemplo.txt");
     if(readFasta.is_open()){
