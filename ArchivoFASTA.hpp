@@ -1,16 +1,17 @@
 #ifndef ArchivoFASTA_hpp
 #define ArchivoFASTA_hpp
 
-#include <stdio.h>
+#include <iostream>
 #include <string>
 #include <vector>
 #include <fstream>
+#include "Secuencia.hpp"
 
 class ArchivoFASTA {
     private:
     //Clase que guarda las subcadenas que componen el archivo (líneas descriptivas; secuencias).
-    vector<string> lineaDescriptiva;
-    vector<Secuencia> secLista;
+    std::vector<std::string> lineaDescriptiva;
+    std::vector<Secuencia> secLista;
     
     public:
     ArchivoFASTA();

@@ -2,7 +2,7 @@
 //  Secuencia.cpp
 //  ProyectoED
 //
-//  Created by Cristóbal Castrillón Balcázar on 14/02/21.
+//  Created by Cristóbal Castrillón Balcázar & Nicolás Pérez Fonseca on 14/02/21.
 //
 
 #include "Secuencia.hpp"
