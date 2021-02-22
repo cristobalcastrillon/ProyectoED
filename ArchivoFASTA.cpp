@@ -8,7 +8,9 @@ std::string ArchivoFASTA::getLineaDescriptiva(int posicionLD){ return "cadenaEje
 
 void ArchivoFASTA::setLineaDescriptiva(std::string lineaDescriptiva){}
 
-std::string ArchivoFASTA::getSecuencia(int posicionS){ return "cadenaEjemplo"; }
+std::string ArchivoFASTA::getSecuencia(int posicionS){
+    return this->secLista.at(posicionS).getSecuencia();
+}
 
 void ArchivoFASTA::setSecuencia(std::string cadenaSecuencia){}
 
