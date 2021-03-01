@@ -24,8 +24,9 @@ public:
     Secuencia(std::string seq);
     ~Secuencia();
     std::string getSecuencia();
-    //setSecuencia recibe una sección de la secuencia, correspondiente a la línea que se está leyendo del archivo FASTA.
-    void setSecuencia(std::string linea);
+    void setSecuencia(std::string secuencia);
+    //appendSecuencia recibe una sección de la secuencia, correspondiente a la línea que se está leyendo del archivo FASTA.
+    void appendSecuencia(std::string linea);
     
     //Método que cuenta la frecuencia (cantidad de veces que aparece en la secuencia) de cada base.
     void conteoBases(std::string secuencia);

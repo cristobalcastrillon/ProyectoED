@@ -23,20 +23,16 @@ bool ArchivoFASTA::cargarArchivo(std::string nombreArchivo){
     std::ifstream readFASTA(nombreArchivo);
 
     if(readFASTA.is_open()){
-        int contadorSeq = 0; //Contador de secuencias presentes en el archivo.
+        int contadorSeq = -1; //Contador de secuencias presentes en el archivo. *NO BORRAR*
         Secuencia temp; //Ayuda a gestionar el parsing de secuencias.
         while(getline(readFASTA, linea)){
             if(linea.at(0) == '>'){
                 this->lineaDescriptiva.push_back(linea);
-                if(lineaDescriptiva.size() > 1){
-                    this->secLista.push_back(temp);
-                    contadorSeq++;
-                    //TODO: Destruir y volver a crear el objeto 'temp'.
-                }
+                contadorSeq++;
             }
             else{
-                temp.setSecuencia(linea);
-                std::cout << temp.getSecuencia() << std::endl;                
+                secLista.push_back(temp);
+                secLista.at(contadorSeq).appendSecuencia(linea);
             }
         }
         return true; //Se ha podido cargar el archivo en «memoria»

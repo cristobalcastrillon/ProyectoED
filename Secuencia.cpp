@@ -21,7 +21,11 @@ std::string Secuencia::getSecuencia(){
     return Secuencia::secuencia;
 }
 
-void Secuencia::setSecuencia(std::string linea){
+void Secuencia::setSecuencia(std::string secuencia){
+    this->secuencia = secuencia;
+}
+
+void Secuencia::appendSecuencia(std::string linea){
     std::string a = Secuencia::getSecuencia();
     this->secuencia = a + linea;
 }

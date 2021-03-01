@@ -19,7 +19,6 @@ int main(int argc, const char * argv[]) {
     cout << "Primera línea de referencia del archivo: " << archivo1.getLineaDescriptiva(0) << endl;
     cout << "Primera secuencia del archivo: " << archivo1.getSecuencia(0) << endl;
     cout << "Segunda línea de referencia del archivo: " << archivo1.getLineaDescriptiva(1) << endl;
-    //TODO: Troubleshoot el error que sale con la siguiente línea.
     cout << "Segunda secuencia del archivo: " << archivo1.getSecuencia(1) << endl;
 
     return 0;
