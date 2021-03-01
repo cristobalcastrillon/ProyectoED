@@ -22,6 +22,7 @@ public:
     //Cada uno de los constructores debe garantizar que se cree una lista de las bases existentes (A,G,C,T,U).
     Secuencia();
     Secuencia(std::string seq);
+    ~Secuencia();
     std::string getSecuencia();
     //setSecuencia recibe una sección de la secuencia, correspondiente a la línea que se está leyendo del archivo FASTA.
     void setSecuencia(std::string linea);

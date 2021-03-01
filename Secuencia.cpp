@@ -7,11 +7,15 @@
 
 #include "Secuencia.hpp"
 
-Secuencia::Secuencia(){}
+Secuencia::Secuencia(){
+    this->setSecuencia("");
+}
 
 Secuencia::Secuencia(std::string seq){
-    setSecuencia(seq);
+    this->setSecuencia(seq);
 }
+
+Secuencia::~Secuencia(){}
 
 std::string Secuencia::getSecuencia(){
     return Secuencia::secuencia;
@@ -19,7 +23,7 @@ std::string Secuencia::getSecuencia(){
 
 void Secuencia::setSecuencia(std::string linea){
     std::string a = Secuencia::getSecuencia();
-    a.append(linea);
+    this->secuencia = a + linea;
 }
 
 void Secuencia::conteoBases(std::string secuencia){}
