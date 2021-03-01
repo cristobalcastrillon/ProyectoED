@@ -12,6 +12,7 @@ class ArchivoFASTA {
     //Clase que guarda las subcadenas que componen el archivo (líneas descriptivas; secuencias).
     std::vector<std::string> lineaDescriptiva;
     std::vector<Secuencia> secLista;
+    int contadorSeq; //Su valor es igual al índice de la última posición en el vector 'secLista'.
     
     public:
     ArchivoFASTA();

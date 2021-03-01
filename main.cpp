@@ -21,5 +21,8 @@ int main(int argc, const char * argv[]) {
     cout << "Segunda línea de referencia del archivo: " << archivo1.getLineaDescriptiva(1) << endl;
     cout << "Segunda secuencia del archivo: " << archivo1.getSecuencia(1) << endl;
 
+    cout << "Cantidad de secuencias en el archivo: " << archivo1.conteoSecuencias() << endl;
+    cout << "Cantidad de secuencias en el archivo: " << archivo1.conteoSecuencias() << endl;
+
     return 0;
 }

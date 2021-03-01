@@ -5,13 +5,13 @@
 ArchivoFASTA::ArchivoFASTA(){}
 
 std::string ArchivoFASTA::getLineaDescriptiva(int posicionLD){ 
-        return this->lineaDescriptiva.at(posicionLD); 
-    }
+    return lineaDescriptiva.at(posicionLD);
+}
 
 void ArchivoFASTA::setLineaDescriptiva(std::string lineaDescriptiva){}
 
 std::string ArchivoFASTA::getSecuencia(int posicionS){
-    return this->secLista.at(posicionS).getSecuencia();
+    return secLista.at(posicionS).getSecuencia();
 }
 
 void ArchivoFASTA::setSecuencia(std::string cadenaSecuencia){}
@@ -23,11 +23,11 @@ bool ArchivoFASTA::cargarArchivo(std::string nombreArchivo){
     std::ifstream readFASTA(nombreArchivo);
 
     if(readFASTA.is_open()){
-        int contadorSeq = -1; //Contador de secuencias presentes en el archivo. *NO BORRAR*
+        contadorSeq = -1;
         Secuencia temp; //Ayuda a gestionar el parsing de secuencias.
         while(getline(readFASTA, linea)){
             if(linea.at(0) == '>'){
-                this->lineaDescriptiva.push_back(linea);
+                lineaDescriptiva.push_back(linea);
                 contadorSeq++;
             }
             else{
@@ -43,6 +43,10 @@ bool ArchivoFASTA::cargarArchivo(std::string nombreArchivo){
 
     return false; //No se ha podido cargar el archivo en «memoria»
 }
-int ArchivoFASTA::conteoSecuencias(){ return 0; }
+
+int ArchivoFASTA::conteoSecuencias(){
+    return contadorSeq+1;
+}
+
 void ArchivoFASTA::histograma(){}
 
