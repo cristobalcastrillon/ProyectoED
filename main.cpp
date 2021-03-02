@@ -16,13 +16,18 @@ int main(int argc, const char * argv[]) {
     ArchivoFASTA archivo1;
     archivo1.cargarArchivo("ejemplo.txt");
 
-    cout << "Primera línea de referencia del archivo: " << archivo1.getLineaDescriptiva(0) << endl;
-    cout << "Primera secuencia del archivo: " << archivo1.getSecuencia(0) << endl;
-    cout << "Segunda línea de referencia del archivo: " << archivo1.getLineaDescriptiva(1) << endl;
-    cout << "Segunda secuencia del archivo: " << archivo1.getSecuencia(1) << endl;
+    cout << "Primera línea de referencia del archivo 1: " << archivo1.getLineaDescriptiva(0) << endl;
+    cout << "Primera secuencia del archivo 1: " << archivo1.getSecuencia(0) << endl;
+    cout << "Segunda línea de referencia del archivo 1: " << archivo1.getLineaDescriptiva(1) << endl;
+    cout << "Segunda secuencia del archivo 1: " << archivo1.getSecuencia(1) << endl;
 
-    cout << "Cantidad de secuencias en el archivo: " << archivo1.conteoSecuencias() << endl;
-    cout << "Cantidad de secuencias en el archivo: " << archivo1.conteoSecuencias() << endl;
+    cout << "Cantidad de secuencias en el archivo 1: " << archivo1.conteoSecuencias() << endl;
+    cout << "Cantidad de secuencias en el archivo 1: " << archivo1.conteoSecuencias() << endl;
+
+    ArchivoFASTA archivo2;
+    archivo2.cargarArchivo("ejemplo2.txt");
+
+    cout << "Cantidad de secuencias en el archivo 2: " << archivo2.conteoSecuencias() << endl;
 
     return 0;
 }

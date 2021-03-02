@@ -25,6 +25,10 @@ class ArchivoFASTA {
     bool cargarArchivo(std::string nombreArchivo);
     int conteoSecuencias();
     void histograma();
+    void listarSecuencias(std::string descripcionSecuencia);
+    void subsecuencia(std::string subseq);
+    void enmascarar(std::string secuencia);
+    bool guardar(std::string nombreArchivo);
 
 };
 

@@ -45,8 +45,39 @@ bool ArchivoFASTA::cargarArchivo(std::string nombreArchivo){
 }
 
 int ArchivoFASTA::conteoSecuencias(){
-    return contadorSeq+1;
+    try{
+        if(!(contadorSeq+1)){
+            throw std::runtime_error("Error");
+        }
+        return contadorSeq+1;
+    }
+    catch(std::exception e ){
+        std::cout << "No hay secuencias cargadas en memoria: ";
+        return 0;
+    }
 }
 
-void ArchivoFASTA::histograma(){}
+void ArchivoFASTA::histograma(){
 
+}
+
+void ArchivoFASTA::listarSecuencias(std::string descripcionSecuencia){
+    try{
+
+    }
+    catch(std::exception e){
+        std::cout << "No hay secuencias cargadas en memoria.";
+    }
+}
+
+void ArchivoFASTA::subsecuencia(std::string subseq){
+    
+}
+
+void ArchivoFASTA::enmascarar(std::string secuencia){
+
+}
+
+bool ArchivoFASTA::guardar(std::string nombreArchivo){
+
+}
