@@ -22,7 +22,8 @@ int main(int argc, const char * argv[]) {
     cout << "Segunda secuencia del archivo 1: " << archivo1.getSecuencia(1) << endl;
 
     cout << "Cantidad de secuencias en el archivo 1: " << archivo1.conteoSecuencias() << endl;
-    cout << "Cantidad de secuencias en el archivo 1: " << archivo1.conteoSecuencias() << endl;
+    cout << "Histograma de la secuencia en la posición 0 del vector:" << endl;
+    archivo1.histograma(">Full_SEQUENCE");
 
     ArchivoFASTA archivo2;
     archivo2.cargarArchivo("ejemplo2.txt");

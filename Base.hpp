@@ -17,6 +17,7 @@ private:
     int cantidad; //Por defecto es igual a 0.
 public:
     Base();
+    Base(char letra);
     char getLetraBase();
     int getCantidad();
     void setLetraBase(char b);

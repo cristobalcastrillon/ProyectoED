@@ -24,8 +24,8 @@ class ArchivoFASTA {
     //Comandos requeridos en el enunciado del proyecto:
     bool cargarArchivo(std::string nombreArchivo);
     int conteoSecuencias();
-    void histograma();
-    void listarSecuencias(std::string descripcionSecuencia);
+    void histograma(std::string descripcionSecuencia);
+    void listarSecuencias();
     void subsecuencia(std::string subseq);
     void enmascarar(std::string secuencia);
     bool guardar(std::string nombreArchivo);

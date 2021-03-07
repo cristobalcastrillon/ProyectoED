@@ -7,16 +7,26 @@
 
 #include "Base.hpp"
 
-Base::Base(){}
+Base::Base(){
+    setCantidad(0);
+}
+
+Base::Base(char letra){
+    setLetraBase(letra);
+}
 
 char Base::getLetraBase(){
-    return 'a';
+    return letraBase;
 }
 
 int Base::getCantidad(){
-    return 0;
+    return cantidad;
 }
 
-void Base::setLetraBase(char b){}
+void Base::setLetraBase(char b){
+    letraBase = b;
+}
 
-void Base::setCantidad(int q){}
+void Base::setCantidad(int q){
+    cantidad = q;
+}
