@@ -67,11 +67,16 @@ void ArchivoFASTA::histograma(std::string descripcionSecuencia){
                 for(int i = 0; i < secLista.at(j).getSecuencia().size(); i++){
                     itChar = secLista.at(j).getSecuencia().at(i);
                     //La siguiente línea es de prueba
-                    //std::cout << i << " caracter de la secuencia " << itChar << std::endl;
+                    std::cout << i << " caracter de la secuencia " << itChar << ' ';
                     int tempInt = 0;
-                    for(int k = 0; k < 16; k++){
+                    for(int k = 0; k < CANTIDAD_BASES; k++){
                         if(itChar == secLista.at(j).getBases().at(k).getLetraBase()){
                             //TODO: Aumentar la cantidad del caracter leído en el vector de Bases, propio de la Secuencia.
+                            tempInt = secLista.at(j).getBases().at(k).getCantidad()+1;
+                            secLista.at(j).getBases().at(k).setCantidad(tempInt);
+                            //La siguiente línea es de prueba
+                            std::cout << secLista.at(j).getBases().at(k).getCantidad() << std::endl;
+                            //FIX: No sé por qué está incrementando en uno para todas las bases, como si 'cantidad' fuera cantidad de caracteres en la secuencia...
                         }
                     }
                 }       

@@ -13,6 +13,7 @@ Base::Base(){
 
 Base::Base(char letra){
     setLetraBase(letra);
+    setCantidad(0);
 }
 
 char Base::getLetraBase(){

@@ -8,6 +8,8 @@
 #ifndef Secuencia_hpp
 #define Secuencia_hpp
 
+#define CANTIDAD_BASES 16
+
 #include <stdio.h>
 #include <string>
 #include <vector>
