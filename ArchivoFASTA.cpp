@@ -7,10 +7,10 @@ ArchivoFASTA::ArchivoFASTA(){
 }
 
 std::string ArchivoFASTA::getLineaDescriptiva(int posicionLD){ 
-    return lineaDescriptiva.at(posicionLD);
+    return lineasDescriptivas.at(posicionLD);
 }
 
-void ArchivoFASTA::setLineaDescriptiva(std::string lineaDescriptiva){}
+void ArchivoFASTA::setLineaDescriptiva(std::string lineasDescriptivas){}
 
 std::string ArchivoFASTA::getSecuencia(int posicionS){
     return secLista.at(posicionS).getSecuencia();
@@ -29,7 +29,7 @@ bool ArchivoFASTA::cargarArchivo(std::string nombreArchivo){
         Secuencia temp; //Ayuda a gestionar el parsing de secuencias.
         while(getline(readFASTA, linea)){
             if(linea.at(0) == '>'){
-                lineaDescriptiva.push_back(linea);
+                lineasDescriptivas.push_back(linea);
                 contadorSeq++;
             }
             else{
@@ -61,8 +61,8 @@ int ArchivoFASTA::conteoSecuencias(){
 
 void ArchivoFASTA::histograma(std::string descripcionSecuencia){
     try{
-        for(int j = 0; j < lineaDescriptiva.size(); j++){
-            if(descripcionSecuencia == lineaDescriptiva.at(j)){
+        for(int j = 0; j < lineasDescriptivas.size(); j++){
+            if(descripcionSecuencia == lineasDescriptivas.at(j)){
                 char itChar = ' ';
                 for(int i = 0; i < secLista.at(j).getSecuencia().size(); i++){
                     itChar = secLista.at(j).getSecuencia().at(i);
