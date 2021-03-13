@@ -38,10 +38,11 @@ int main(int argc, const char * argv[]) {
 
         if(comando.find("cargar") != string::npos)
         {
-            //Nombre del archivo
+            //Nombre del archivo: 'nombre_archivo'
             string nombre_archivo = comando.substr(6);
             cout << nombre_archivo << endl;
-            //TODO: Agregar el llamado a función.
+            ArchivoFASTA archivoNuevo;
+            archivoNuevo.cargarArchivo(nombre_archivo);
         }
         if(comando.find("conteo") != string::npos)
         {
