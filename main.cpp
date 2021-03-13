@@ -49,7 +49,6 @@ int main(int argc, const char * argv[]) {
             //PARÁMETROS: 
             //  Descripción de la secuencia: 'descripcion_secuencia'
             string descripcion_secuencia = comando.substr(12);
-            cout << descripcion_secuencia << endl;
             //TODO: Implementar el método 'listarSecuencias()' OJO: No olvidar incluir parámetro 'descripcion_secuencia'.
             archivoNuevo.listarSecuencias();
         }
@@ -59,7 +58,6 @@ int main(int argc, const char * argv[]) {
             //PARÁMETROS: 
             //  Descripción de la secuencia: 'descripcion_secuencia'
             string descripcion_secuencia = comando.substr(12);
-            cout << descripcion_secuencia << endl;
             archivoNuevo.histograma(descripcion_secuencia);
         }
         if(comando.find("es_subsecuencia") != string::npos)
@@ -68,7 +66,6 @@ int main(int argc, const char * argv[]) {
             //PARÁMETROS: 
             //  Secuencia: 'secuencia'
             string secuencia = comando.substr(17);
-            cout << secuencia << endl;
             archivoNuevo.subsecuencia(secuencia);
         }
         if(comando.find("enmascarar") != string::npos)
@@ -77,7 +74,6 @@ int main(int argc, const char * argv[]) {
             //PARÁMETROS: 
             //  Secuencia: 'secuencia'
             string secuencia = comando.substr(12);
-            cout << secuencia << endl;
             archivoNuevo.enmascarar(secuencia);
         }
         if(comando.find("guardar") != string::npos)
@@ -86,7 +82,6 @@ int main(int argc, const char * argv[]) {
             //PARÁMETROS: 
             //  Nombre del archivo: 'nombre_archivo'
             string nombre_archivo = comando.substr(9);
-            cout << nombre_archivo << endl;
             archivoNuevo.guardar(nombre_archivo);
         }
         if(comando.find("salir") != string::npos)
