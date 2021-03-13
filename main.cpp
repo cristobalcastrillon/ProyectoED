@@ -31,60 +31,77 @@ int main(int argc, const char * argv[]) {
     // cout << "Cantidad de secuencias en el archivo 2: " << archivo2.conteoSecuencias() << endl;
 
     string comando;
-
+    ArchivoFASTA archivoNuevo;
     while(1)
     {
         getline(cin,comando);
-
         if(comando.find("cargar") != string::npos)
         {
-            //Nombre del archivo: 'nombre_archivo'
+            //DESCRIPCIÓN: Carga en memoria los datos contenidos en el archivo identificado por nombre_archivo.
+            //PARÁMETROS: 
+            //  Nombre del archivo: 'nombre_archivo'
             string nombre_archivo = comando.substr(6);
             cout << nombre_archivo << endl;
-            ArchivoFASTA archivoNuevo;
             archivoNuevo.cargarArchivo(nombre_archivo);
         }
         if(comando.find("conteo") != string::npos)
         {
-            //Ejecuta conteo
-            //TODO: Agregar el llamado a función.
+            //DESCRIPCIÓN: Imprime por pantalla la cantidad de secuencias cargadas en memoria.
+            //PARÁMETROS: 
+            //  N/A
+            archivoNuevo.conteoSecuencias();
         }
         if(comando.find("listar_secuencias")!= string::npos)
         {
-            //Ejecuta listar_secuencias
-            //TODO: Agregar el llamado a función.
+            //DESCRIPCIÓN:  Imprime en n líneas (una para secuencia) la información básica (cantidad de bases) de cada secuencia. Si la secuencia es completa (i.e. no tiene el código ’-’) imprime el segundo mensaje, si no, el tercero.
+            //PARÁMETROS: 
+            //  Descripción de la secuencia: 'descripcion_secuencia'
+            string descripcion_secuencia = comando.substr(11);
+            cout << descripcion_secuencia << endl;
+            //TODO: Implementar el método 'listarSecuencias()' OJO: No olvidar incluir parámetro 'descripcion_secuencia'.
+            archivoNuevo.listarSecuencias();
         }
         if(comando.find("histograma") != string::npos)
         {
-            //Descripcion_secuencia
+            //DESCRIPCIÓN:  Imprime el histograma de una secuencia, en caso de que exista. El histograma se define como el conteo (frecuencia) de cada código en la secuencia. Por cada línea (’\n’ es el caracter de salto de línea) se escribe el código y la cantidad de veces que aparece en la secuencia.
+            //PARÁMETROS: 
+            //  Descripción de la secuencia: 'descripcion_secuencia'
             string descripcion_secuencia = comando.substr(11);
             cout << descripcion_secuencia << endl;
-            //TODO: Agregar el llamado a función.
+            archivoNuevo.histograma(descripcion_secuencia);
         }
         if(comando.find("es_subsecuencia") != string::npos)
         {
-            //Secuencia
+            //DESCRIPCIÓN:   Determina si una secuencia, dada por el usuario, existe dentro de las secuencias cargadas. Si es así, determina la cantidad de veces en las que esta secuencia dada se repite.
+            //PARÁMETROS: 
+            //  Secuencia: 'secuencia'
             string secuencia = comando.substr(16);
             cout << secuencia << endl;
-            //TODO: Agregar el llamado a función.
+            archivoNuevo.subsecuencia(secuencia);
         }
         if(comando.find("enmascarar") != string::npos)
         {
-            //Secuencia
+            //DESCRIPCIÓN:   Enmascara una secuencia dada por el usuario, si existe. Los elementos que pertenecen a la subsecuencia se enmascaran, cambiando cada código por el código ’X’.
+            //PARÁMETROS: 
+            //  Secuencia: 'secuencia'
             string secuencia = comando.substr(11);
             cout << secuencia << endl;
-            //TODO: Agregar el llamado a función.
+            archivoNuevo.enmascarar(secuencia);
         }
         if(comando.find("guardar") != string::npos)
         {
-            //Nombre_archivo
+            //DESCRIPCIÓN:   Guarda en el archivo nombre_archivo las secuencias cargadas en memoria. Se debe tener en cuenta la justificación (de líneas) del archivo inicial.
+            //PARÁMETROS: 
+            //  Nombre del archivo: 'nombre_archivo'
             string nombre_archivo = comando.substr(8);
             cout << nombre_archivo << endl;
-            //TODO: Agregar el llamado a función.
+            archivoNuevo.guardar(nombre_archivo);
         }
         if(comando.find("salir") != string::npos)
         {
-            //Salir
+            //DESCRIPCIÓN:   Termina la ejecución de la aplicación.
+            //PARÁMETROS: 
+            //  N/A
             exit(0);
         }
     }
