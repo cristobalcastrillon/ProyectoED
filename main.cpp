@@ -46,7 +46,7 @@ int main(int argc, const char * argv[]) {
             //DESCRIPCIÓN:  Imprime en n líneas (una para secuencia) la información básica (cantidad de bases) de cada secuencia. Si la secuencia es completa (i.e. no tiene el código ’-’) imprime el segundo mensaje, si no, el tercero.
             //PARÁMETROS: 
             //  Descripción de la secuencia: 'descripcion_secuencia'
-            string descripcion_secuencia = comando.substr(12);
+            string descripcion_secuencia = comando.substr(18);
             //TODO: Implementar el método 'listarSecuencias()' OJO: No olvidar incluir parámetro 'descripcion_secuencia'.
             archivoNuevo.listarSecuencias();
         }
@@ -55,7 +55,7 @@ int main(int argc, const char * argv[]) {
             //DESCRIPCIÓN:  Imprime el histograma de una secuencia, en caso de que exista. El histograma se define como el conteo (frecuencia) de cada código en la secuencia. Por cada línea (’\n’ es el caracter de salto de línea) se escribe el código y la cantidad de veces que aparece en la secuencia.
             //PARÁMETROS: 
             //  Descripción de la secuencia: 'descripcion_secuencia'
-            string descripcion_secuencia = comando.substr(12);
+            string descripcion_secuencia = comando.substr(11);
             archivoNuevo.histograma(descripcion_secuencia);
         }
         if(comando.find("es_subsecuencia") != string::npos)
@@ -63,7 +63,7 @@ int main(int argc, const char * argv[]) {
             //DESCRIPCIÓN:   Determina si una secuencia, dada por el usuario, existe dentro de las secuencias cargadas. Si es así, determina la cantidad de veces en las que esta secuencia dada se repite.
             //PARÁMETROS: 
             //  Secuencia: 'secuencia'
-            string secuencia = comando.substr(17);
+            string secuencia = comando.substr(16);
             archivoNuevo.subsecuencia(secuencia);
         }
         if(comando.find("enmascarar") != string::npos)
@@ -71,7 +71,7 @@ int main(int argc, const char * argv[]) {
             //DESCRIPCIÓN:   Enmascara una secuencia dada por el usuario, si existe. Los elementos que pertenecen a la subsecuencia se enmascaran, cambiando cada código por el código ’X’.
             //PARÁMETROS: 
             //  Secuencia: 'secuencia'
-            string secuencia = comando.substr(12);
+            string secuencia = comando.substr(11);
             archivoNuevo.enmascarar(secuencia);
         }
         if(comando.find("guardar") != string::npos)
