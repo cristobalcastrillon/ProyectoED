@@ -48,6 +48,7 @@ bool ArchivoFASTA::cargarArchivo(std::string nombreArchivo){
 
 int ArchivoFASTA::conteoSecuencias(){
     try{
+        //OJO: Este método no es fiel a la cantidad de secuencias que existen en realidad en memoria, al no contar el vector, pero sí servirse de la variable 'contadorSeq'.
         if(!(contadorSeq+1)){
             throw std::runtime_error("Error");
         }
