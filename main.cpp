@@ -5,8 +5,6 @@
 //  Created by Cristóbal Castrillón Balcázar & Nicolás Pérez Fonseca on 14/02/21.
 //
 
-#include <iostream>
-#include <string>
 #include "ArchivoFASTA.hpp"
 
 using namespace std;

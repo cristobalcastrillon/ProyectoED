@@ -8,6 +8,8 @@
 #ifndef Base_hpp
 #define Base_hpp
 
+#include <string>
+#include <vector>
 #include <stdio.h>
 
 class Base {

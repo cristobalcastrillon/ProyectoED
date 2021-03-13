@@ -10,8 +10,6 @@
 
 #define CANTIDAD_BASES 16
 
-#include <string>
-#include <vector>
 #include "Base.hpp"
 
 class Secuencia {
