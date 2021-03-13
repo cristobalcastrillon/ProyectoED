@@ -56,7 +56,8 @@ int main(int argc, const char * argv[]) {
             //DESCRIPCIÓN: Imprime por pantalla la cantidad de secuencias cargadas en memoria.
             //PARÁMETROS: 
             //  N/A
-            archivoNuevo.conteoSecuencias();
+            cout << archivoNuevo.conteoSecuencias() << " en memoria" << endl;
+            //FIX: Está imprimiendo "1 en memoria" cuando no hay ninguna secuencia "en memoria".
         }
         if(comando.find("listar_secuencias")!= string::npos)
         {
