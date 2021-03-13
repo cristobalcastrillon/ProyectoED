@@ -21,9 +21,7 @@ void ArchivoFASTA::setSecuencia(std::string cadenaSecuencia){}
 bool ArchivoFASTA::cargarArchivo(std::string nombreArchivo){ 
     //'nombreArchivo' debe constar del título del archivo junto a su extensión (e.g. 'ejemplo.txt')
     std::string linea;
-
     std::ifstream readFASTA(nombreArchivo);
-
     if(readFASTA.is_open()){
         contadorSeq = -1; //IMPORTANTE: Tal vez no es necesario para acceder a la posición (int) del último elemento del vector.
         Secuencia temp; //Ayuda a gestionar el parsing de secuencias.
@@ -42,7 +40,6 @@ bool ArchivoFASTA::cargarArchivo(std::string nombreArchivo){
     else{
         std::cout << "No se ha podido leer el archivo" << std::endl;
     }
-
     return false; //No se ha podido cargar el archivo en «memoria»
 }
 
