@@ -79,7 +79,7 @@ int main(int argc, const char * argv[]) {
             //DESCRIPCIÓN:   Guarda en el archivo nombre_archivo las secuencias cargadas en memoria. Se debe tener en cuenta la justificación (de líneas) del archivo inicial.
             //PARÁMETROS: 
             //  Nombre del archivo: 'nombre_archivo'
-            string nombre_archivo = comando.substr(9);
+            string nombre_archivo = comando.substr(8);
             archivoNuevo.guardar(nombre_archivo);
         }
         if(comando.find("salir") != string::npos)

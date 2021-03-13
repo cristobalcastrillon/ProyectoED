@@ -107,5 +107,19 @@ void ArchivoFASTA::enmascarar(std::string secuencia){
 }
 
 bool ArchivoFASTA::guardar(std::string nombreArchivo){
-    std::ofstream 
+    try{
+        std::ofstream writeFASTA(nombreArchivo);
+        std::string contenidoArchivo;
+        for(int i = 0; i < contadorSeq+1; i++){
+            contenidoArchivo += lineasDescriptivas.at(i) + '\n';
+            contenidoArchivo += secLista.at(i).getSecuencia() + '\n';
+        }
+        writeFASTA << contenidoArchivo;
+        writeFASTA.close();
+        return true;
+    }
+    catch(std::exception e){
+        std::cout << "Error guardando en " << nombreArchivo << std::endl;
+        return false;
+    }
 }
