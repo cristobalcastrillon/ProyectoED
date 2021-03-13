@@ -41,8 +41,15 @@ int main(int argc, const char * argv[]) {
             //PARÁMETROS: 
             //  Nombre del archivo: 'nombre_archivo'
             string nombre_archivo = comando.substr(7);
-            cout << nombre_archivo << endl;
-            archivoNuevo.cargarArchivo(nombre_archivo);
+            if(archivoNuevo.cargarArchivo(nombre_archivo)){
+                switch(int cont = archivoNuevo.conteoSecuencias()){
+                    case 1:
+                        cout << "1 secuencia cargada correctamente desde " << nombre_archivo << endl;
+                        break;
+                    default: 
+                        cout << cont << " secuencias cargadas correctamente desde " << nombre_archivo << endl;
+                }
+            }
         }
         if(comando.find("conteo") != string::npos)
         {
