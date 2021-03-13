@@ -34,13 +34,13 @@ int main(int argc, const char * argv[]) {
     ArchivoFASTA archivoNuevo;
     while(1)
     {
-        getline(cin,comando);
+        getline(cin, comando);
         if(comando.find("cargar") != string::npos)
         {
             //DESCRIPCIÓN: Carga en memoria los datos contenidos en el archivo identificado por nombre_archivo.
             //PARÁMETROS: 
             //  Nombre del archivo: 'nombre_archivo'
-            string nombre_archivo = comando.substr(6);
+            string nombre_archivo = comando.substr(7);
             cout << nombre_archivo << endl;
             archivoNuevo.cargarArchivo(nombre_archivo);
         }
@@ -56,7 +56,7 @@ int main(int argc, const char * argv[]) {
             //DESCRIPCIÓN:  Imprime en n líneas (una para secuencia) la información básica (cantidad de bases) de cada secuencia. Si la secuencia es completa (i.e. no tiene el código ’-’) imprime el segundo mensaje, si no, el tercero.
             //PARÁMETROS: 
             //  Descripción de la secuencia: 'descripcion_secuencia'
-            string descripcion_secuencia = comando.substr(11);
+            string descripcion_secuencia = comando.substr(12);
             cout << descripcion_secuencia << endl;
             //TODO: Implementar el método 'listarSecuencias()' OJO: No olvidar incluir parámetro 'descripcion_secuencia'.
             archivoNuevo.listarSecuencias();
@@ -66,7 +66,7 @@ int main(int argc, const char * argv[]) {
             //DESCRIPCIÓN:  Imprime el histograma de una secuencia, en caso de que exista. El histograma se define como el conteo (frecuencia) de cada código en la secuencia. Por cada línea (’\n’ es el caracter de salto de línea) se escribe el código y la cantidad de veces que aparece en la secuencia.
             //PARÁMETROS: 
             //  Descripción de la secuencia: 'descripcion_secuencia'
-            string descripcion_secuencia = comando.substr(11);
+            string descripcion_secuencia = comando.substr(12);
             cout << descripcion_secuencia << endl;
             archivoNuevo.histograma(descripcion_secuencia);
         }
@@ -75,7 +75,7 @@ int main(int argc, const char * argv[]) {
             //DESCRIPCIÓN:   Determina si una secuencia, dada por el usuario, existe dentro de las secuencias cargadas. Si es así, determina la cantidad de veces en las que esta secuencia dada se repite.
             //PARÁMETROS: 
             //  Secuencia: 'secuencia'
-            string secuencia = comando.substr(16);
+            string secuencia = comando.substr(17);
             cout << secuencia << endl;
             archivoNuevo.subsecuencia(secuencia);
         }
@@ -84,7 +84,7 @@ int main(int argc, const char * argv[]) {
             //DESCRIPCIÓN:   Enmascara una secuencia dada por el usuario, si existe. Los elementos que pertenecen a la subsecuencia se enmascaran, cambiando cada código por el código ’X’.
             //PARÁMETROS: 
             //  Secuencia: 'secuencia'
-            string secuencia = comando.substr(11);
+            string secuencia = comando.substr(12);
             cout << secuencia << endl;
             archivoNuevo.enmascarar(secuencia);
         }
@@ -93,7 +93,7 @@ int main(int argc, const char * argv[]) {
             //DESCRIPCIÓN:   Guarda en el archivo nombre_archivo las secuencias cargadas en memoria. Se debe tener en cuenta la justificación (de líneas) del archivo inicial.
             //PARÁMETROS: 
             //  Nombre del archivo: 'nombre_archivo'
-            string nombre_archivo = comando.substr(8);
+            string nombre_archivo = comando.substr(9);
             cout << nombre_archivo << endl;
             archivoNuevo.guardar(nombre_archivo);
         }
