@@ -2,8 +2,6 @@
 #define ArchivoFASTA_hpp
 
 #include <iostream>
-#include <string>
-#include <vector>
 #include <fstream>
 #include "Secuencia.hpp"
 

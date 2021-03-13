@@ -10,7 +10,6 @@
 
 #define CANTIDAD_BASES 16
 
-#include <stdio.h>
 #include <string>
 #include <vector>
 #include "Base.hpp"

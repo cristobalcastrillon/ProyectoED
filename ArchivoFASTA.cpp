@@ -25,7 +25,7 @@ bool ArchivoFASTA::cargarArchivo(std::string nombreArchivo){
     std::ifstream readFASTA(nombreArchivo);
 
     if(readFASTA.is_open()){
-        contadorSeq = -1;
+        contadorSeq = -1; //IMPORTANTE: Tal vez no es necesario para acceder a la posición (int) del último elemento del vector.
         Secuencia temp; //Ayuda a gestionar el parsing de secuencias.
         while(getline(readFASTA, linea)){
             if(linea.at(0) == '>'){
@@ -107,5 +107,5 @@ void ArchivoFASTA::enmascarar(std::string secuencia){
 }
 
 bool ArchivoFASTA::guardar(std::string nombreArchivo){
-    
+    std::ofstream 
 }
