@@ -70,34 +70,23 @@ void ArchivoFASTA::histograma(std::string descripcionSecuencia){
                         if(baseTemp == base){
                             int cantDeBase = secuenciaBases.at(k).getCantidad();
                             secuenciaBases.at(k).setCantidad(cantDeBase+1);
-
-                            //La siguiente línea es de prueba:
-                            std::cout << base << "\t" << secuenciaBases.at(k).getCantidad() << std::endl;
-
                             break; //Break out of the loop.
                         }
                     }
-                    //secuenciaTemp.setBases(secuenciaBases);
                 }
-
-                //La siguiente línea es de prueba:
-                std::cout << secuenciaTemp.getBases().at(0).getCantidad() << std::endl;
-
-                // for(int j = 0; j < lineasDescriptivas.size(); j++){
-                //     if(lineasDescriptivas.at(j) == descripcionSecuencia){
-                //         Secuencia secuenciaTemp = secLista.at(j);
-                //         std::vector<Base> secuenciaBases = secuenciaTemp.getBases();
-                //         for(int k = 0; k < CANTIDAD_BASES; k++){
-                //             int cantDeBase = secuenciaBases.at(k).getCantidad();
-                //             std::cout << secuenciaBases.at(k).getLetraBase() << "\t" << cantDeBase << std::endl;
-                //         }
-                //         break;
-                //     }
-                // }
+                secuenciaTemp.setBases(secuenciaBases);
+                for(int j = 0; j < lineasDescriptivas.size(); j++){
+                    if(lineasDescriptivas.at(j) == descripcionSecuencia){
+                        for(int k = 0; k < CANTIDAD_BASES; k++){
+                            int cantDeBase = secuenciaBases.at(k).getCantidad();
+                            std::cout << secuenciaBases.at(k).getLetraBase() << "\t" << cantDeBase << std::endl;
+                        }
+                        break;
+                    }
+                }
                 break; //Break out of the loop.
             }
         }
-        
     }
     catch(std::exception e){
         std::cout << "Secuencia inválida." << std::endl;
