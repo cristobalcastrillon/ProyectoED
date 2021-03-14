@@ -34,12 +34,19 @@ bool ArchivoFASTA::cargarArchivo(std::string nombreArchivo){
                 secLista.at(lineasDescriptivas.size()-1).appendSecuencia(linea);
             }
         }
+        conteoBasesXSecuencia();
         return true; //Se ha podido cargar el archivo en «memoria»
     }
     else{
         std::cout << "No se ha podido leer el archivo" << std::endl;
     }
     return false; //No se ha podido cargar el archivo en «memoria»
+}
+
+void ArchivoFASTA::conteoBasesXSecuencia(){
+    for(int i = 0; i < secLista.size(); i++){
+        secLista.at(i).conteoBases();
+    }
 }
 
 int ArchivoFASTA::conteoSecuencias(){
@@ -59,7 +66,6 @@ void ArchivoFASTA::histograma(std::string descripcionSecuencia){
     try{
         for(int i = 0; i < lineasDescriptivas.size(); i++){
             if(lineasDescriptivas.at(i) == descripcionSecuencia){
-                secLista.at(i).conteoBases();
                 for(int k = 0; k < CANTIDAD_BASES; k++){
                     int cantDeBase = secLista.at(i).getBases().at(k).getCantidad();
                     std::cout << secLista.at(i).getBases().at(k).getLetraBase() << "\t" << cantDeBase << std::endl;
@@ -76,7 +82,20 @@ void ArchivoFASTA::histograma(std::string descripcionSecuencia){
 
 void ArchivoFASTA::listarSecuencias(){
     try{
-
+        for(int i = 0; i < secLista.size(); i++){
+            int cantBasesSeq = 0;
+            //bool incompleta = false;
+            for(int k = 0; k < CANTIDAD_BASES; k++){
+                if(secLista.at(i).getBases().at(k).getCantidad() > 0){
+                    cantBasesSeq++;
+                }
+            }
+            if(secLista.at(i).getIncompleta()){
+                std::cout << "Secuencia '" << lineasDescriptivas.at(i) << "' contiene al menos " << cantBasesSeq << " bases." << std::endl;    
+                continue;
+            }
+            std::cout << "Secuencia '" << lineasDescriptivas.at(i) << "' contiene " << cantBasesSeq << " bases." << std::endl;
+        }
     }
     catch(std::exception e){
         std::cout << "No hay secuencias cargadas en memoria.";

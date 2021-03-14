@@ -24,6 +24,7 @@ int main(int argc, const char * argv[]) {
             //  Nombre del archivo: 'nombre_archivo'
             string nombre_archivo = comando.substr(7);
             if(archivoNuevo.cargarArchivo(nombre_archivo)){
+
                 switch(int cont = archivoNuevo.conteoSecuencias()){
                     case 1:
                         cout << "1 secuencia cargada correctamente desde " << nombre_archivo << endl;
@@ -44,10 +45,8 @@ int main(int argc, const char * argv[]) {
         {
             //DESCRIPCIÓN:  Imprime en n líneas (una para secuencia) la información básica (cantidad de bases) de cada secuencia. Si la secuencia es completa (i.e. no tiene el código ’-’) imprime el segundo mensaje, si no, el tercero.
             //PARÁMETROS: 
-            //  Descripción de la secuencia: 'descripcion_secuencia'
-            string descripcion_secuencia = comando.substr(18);
+            //  N/A
             //TODO: Implementar el método 'listarSecuencias()' 
-            //  OJO: No olvidar incluir parámetro 'descripcion_secuencia'.
             archivoNuevo.listarSecuencias();
         }
         if(comando.find("histograma") != string::npos)

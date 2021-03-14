@@ -17,6 +17,7 @@ class Secuencia {
 private:
     std::string secuencia;
     std::vector<Base> bases_seq;
+    bool incompleta;
 public:
     //Cada uno de los constructores debe garantizar que se cree una lista de las bases existentes (A,G,C,T,U).
     Secuencia();
@@ -28,6 +29,8 @@ public:
     void appendSecuencia(std::string linea);
     std::vector<Base> getBases();
     void setBases(std::vector<Base> secuenciaBases);
+    void setIncompleta(bool iC);
+    bool getIncompleta();
     
     //Método que cuenta la frecuencia (cantidad de veces que aparece en la secuencia) de cada base.
     void conteoBases();

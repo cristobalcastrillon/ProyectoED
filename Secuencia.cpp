@@ -96,6 +96,14 @@ void Secuencia::setBases(std::vector<Base> secuenciaBases){
     bases_seq = secuenciaBases;
 }
 
+void Secuencia::setIncompleta(bool iC){
+    incompleta = iC;
+}
+
+bool Secuencia::getIncompleta(){
+    return incompleta;
+}
+
 void Secuencia::conteoBases(){
     std::string secuencia = this->getSecuencia();
     std::vector<Base> secuenciaBases = this->getBases();
@@ -108,11 +116,10 @@ void Secuencia::conteoBases(){
                 int cantDeBase = secuenciaBases.at(k).getCantidad();
                 secuenciaBases.at(k).setCantidad(cantDeBase+1);
                 this->setBases(secuenciaBases);
-
-                //La siguiente línea es de prueba:
-                //std::cout << this->getBases().at(k).getLetraBase() << "\t" << this->getBases().at(k).getCantidad() << std::endl;
-
                 break; //Break out of the loop.
+            }
+            if(baseTemp == '-'){
+                setIncompleta(true);
             }
         }
     }
