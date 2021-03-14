@@ -4,6 +4,7 @@
 //
 //  Created by Cristóbal Castrillón Balcázar & Nicolás Pérez Fonseca on 14/02/21.
 //
+#include <iostream>
 
 #include "Secuencia.hpp"
 
@@ -95,4 +96,24 @@ void Secuencia::setBases(std::vector<Base> secuenciaBases){
     bases_seq = secuenciaBases;
 }
 
-void Secuencia::conteoBases(std::string secuencia){}
+void Secuencia::conteoBases(){
+    std::string secuencia = this->getSecuencia();
+    std::vector<Base> secuenciaBases = this->getBases();
+    char baseTemp;
+    for(int j = 0; j < secuencia.length(); j++){
+        baseTemp = secuencia.at(j);
+        for(int k = 0; k < CANTIDAD_BASES; k++){
+            char base = secuenciaBases.at(k).getLetraBase();
+            if(baseTemp == base){
+                int cantDeBase = secuenciaBases.at(k).getCantidad();
+                secuenciaBases.at(k).setCantidad(cantDeBase+1);
+                this->setBases(secuenciaBases);
+
+                //La siguiente línea es de prueba:
+                //std::cout << this->getBases().at(k).getLetraBase() << "\t" << this->getBases().at(k).getCantidad() << std::endl;
+
+                break; //Break out of the loop.
+            }
+        }
+    }
+}

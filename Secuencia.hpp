@@ -30,7 +30,7 @@ public:
     void setBases(std::vector<Base> secuenciaBases);
     
     //Método que cuenta la frecuencia (cantidad de veces que aparece en la secuencia) de cada base.
-    void conteoBases(std::string secuencia);
+    void conteoBases();
 };
 
 #endif /* Secuencia_hpp */
