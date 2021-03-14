@@ -23,16 +23,14 @@ bool ArchivoFASTA::cargarArchivo(std::string nombreArchivo){
     std::string linea;
     std::ifstream readFASTA(nombreArchivo);
     if(readFASTA.is_open()){
-        contadorSeq = -1; //IMPORTANTE: Tal vez no es necesario para acceder a la posición (int) del último elemento del vector.
         Secuencia temp; //Ayuda a gestionar el parsing de secuencias.
         while(getline(readFASTA, linea)){
             if(linea.at(0) == '>'){
                 lineasDescriptivas.push_back(linea);
-                contadorSeq++;
             }
             else{
                 secLista.push_back(temp);
-                secLista.at(contadorSeq).appendSecuencia(linea);
+                secLista.at(lineasDescriptivas.size()-1).appendSecuencia(linea);
             }
         }
         return true; //Se ha podido cargar el archivo en «memoria»
@@ -45,11 +43,10 @@ bool ArchivoFASTA::cargarArchivo(std::string nombreArchivo){
 
 int ArchivoFASTA::conteoSecuencias(){
     try{
-        //OJO: Este método no es fiel a la cantidad de secuencias que existen en realidad en memoria, al no contar el vector, pero sí servirse de la variable 'contadorSeq'.
-        if(!(contadorSeq+1)){
+        if(!(secLista.size())){
             throw std::runtime_error("Error");
         }
-        return contadorSeq+1;
+        return secLista.size();
     }
     catch(std::exception e ){
         std::cout << "No hay secuencias cargadas en memoria: ";
@@ -107,7 +104,7 @@ bool ArchivoFASTA::guardar(std::string nombreArchivo){
     try{
         std::ofstream writeFASTA(nombreArchivo);
         std::string contenidoArchivo;
-        for(int i = 0; i < contadorSeq+1; i++){
+        for(int i = 0; i < secLista.size(); i++){
             contenidoArchivo += lineasDescriptivas.at(i) + '\n';
             contenidoArchivo += secLista.at(i).getSecuencia() + '\n';
         }
