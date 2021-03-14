@@ -39,7 +39,6 @@ int main(int argc, const char * argv[]) {
             //PARÁMETROS: 
             //  N/A
             cout << archivoNuevo.conteoSecuencias() << " en memoria" << endl;
-            //FIX: Está imprimiendo "1 en memoria" cuando no hay ninguna secuencia "en memoria".
         }
         if(comando.find("listar_secuencias")!= string::npos)
         {
@@ -47,7 +46,8 @@ int main(int argc, const char * argv[]) {
             //PARÁMETROS: 
             //  Descripción de la secuencia: 'descripcion_secuencia'
             string descripcion_secuencia = comando.substr(18);
-            //TODO: Implementar el método 'listarSecuencias()' OJO: No olvidar incluir parámetro 'descripcion_secuencia'.
+            //TODO: Implementar el método 'listarSecuencias()' 
+            //  OJO: No olvidar incluir parámetro 'descripcion_secuencia'.
             archivoNuevo.listarSecuencias();
         }
         if(comando.find("histograma") != string::npos)

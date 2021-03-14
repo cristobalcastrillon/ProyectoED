@@ -20,6 +20,7 @@ void ArchivoFASTA::setSecuencia(std::string cadenaSecuencia){}
 
 bool ArchivoFASTA::cargarArchivo(std::string nombreArchivo){ 
     //'nombreArchivo' debe constar del título del archivo junto a su extensión (e.g. 'ejemplo.txt')
+    //si no está en el directorio del proyecto, se debe proporcionar la ruta completa del archivo.
     std::string linea;
     std::ifstream readFASTA(nombreArchivo);
     if(readFASTA.is_open()){
@@ -27,9 +28,9 @@ bool ArchivoFASTA::cargarArchivo(std::string nombreArchivo){
         while(getline(readFASTA, linea)){
             if(linea.at(0) == '>'){
                 lineasDescriptivas.push_back(linea);
+                secLista.push_back(temp);
             }
             else{
-                secLista.push_back(temp);
                 secLista.at(lineasDescriptivas.size()-1).appendSecuencia(linea);
             }
         }
@@ -56,25 +57,58 @@ int ArchivoFASTA::conteoSecuencias(){
 
 void ArchivoFASTA::histograma(std::string descripcionSecuencia){
     try{
-        for(int j = 0; j < lineasDescriptivas.size(); j++){
-            if(descripcionSecuencia == lineasDescriptivas.at(j)){
-                char itChar = ' ';
-                for(int i = 0; i < secLista.at(j).getSecuencia().size(); i++){
-                    itChar = secLista.at(j).getSecuencia().at(i);
-                    //La siguiente línea es de prueba
-                    std::cout << i << " caracter de la secuencia " << itChar << ' ';
-                    int tempInt = 0;
+        //La siguiente línea es de prueba:
+        std::cout << "Por lo menos entró" << std::endl;
+
+        for(int i = 0; i < lineasDescriptivas.size(); i++){
+            //La siguiente línea es de prueba:
+            std::cout << "Leyendo línea descriptiva " << i << std::endl;
+
+            if(lineasDescriptivas.at(i) == descripcionSecuencia){
+                //La siguiente línea es de prueba:
+                std::cout << "Encontró la línea cuya descripción es:" << descripcionSecuencia << std::endl;
+
+                Secuencia secuenciaTemp = secLista.at(i);
+                std::string secuenciaTempStr = secuenciaTemp.getSecuencia();
+                std::vector<Base> secuenciaBases = secuenciaTemp.getBases();
+                char baseTemp;
+
+                //La siguiente línea es de prueba:
+                std::cout << "secuenciaTempStr: " << secuenciaTempStr << std::endl;
+
+                for(int j = 0; j < secuenciaTempStr.length(); j++){
+                    baseTemp = secuenciaTempStr.at(j);
+
+                    //La siguiente línea es de prueba:
+                    std::cout << baseTemp << std::endl;
+
                     for(int k = 0; k < CANTIDAD_BASES; k++){
-                        if(itChar == secLista.at(j).getBases().at(k).getLetraBase()){
-                            //TODO: Aumentar la cantidad del caracter leído en el vector de Bases, propio de la Secuencia.
-                            tempInt = secLista.at(j).getBases().at(k).getCantidad()+1;
-                            secLista.at(j).getBases().at(k).setCantidad(tempInt);
-                            //La siguiente línea es de prueba
-                            std::cout << secLista.at(j).getBases().at(k).getCantidad() << std::endl;
-                            //FIX: No sé por qué está incrementando en uno para todas las bases, como si 'cantidad' fuera cantidad de caracteres en la secuencia...
+                        //La siguiente línea es de prueba:
+                        std::cout << "Entró al for 'k' 'CANTIDAD_BASES': " << k << std::endl;
+
+                        char base = secuenciaBases.at(k).getLetraBase();
+
+                        //La siguiente línea es de prueba:
+                        std::cout << "'baseTemp': " << baseTemp << "\t'base': " << base << std::endl;
+
+                        if(baseTemp == base){
+                            //La siguiente línea es de prueba:
+                            std::cout << "Encontró la base " << baseTemp << std::endl;
+
+                            int cantDeBase = secuenciaBases.at(k).getCantidad();
+                            secuenciaBases.at(k).setCantidad(cantDeBase+1);
+
+                            //La siguiente línea es de prueba:
+                            std::cout << base << "\t" << cantDeBase << std::endl;
+
+                            //La siguiente línea es de prueba:
+                            std::cout << secuenciaBases.at(k).getCantidad() << std::endl;
+
+                            break; //Break out of the loop.
                         }
                     }
-                }       
+                }
+                break; //Break out of the loop.
             }
         }
     }

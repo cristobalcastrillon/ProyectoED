@@ -8,30 +8,63 @@
 #include "Secuencia.hpp"
 
 Secuencia::Secuencia(){
-    this->setSecuencia("");
+    setSecuencia("");
     Base baseTemp;
     char letraBase;
     for(int i = 0; i < CANTIDAD_BASES; i++){
-        bases_seq.push_back(baseTemp);
         switch(i){
-            case 0: letraBase = 'A';
-            case 1: letraBase = 'C';
-            case 2: letraBase = 'G';
-            case 3: letraBase = 'T';
-            case 4: letraBase = 'U';
-            case 5: letraBase = 'R';
-            case 6: letraBase = 'Y';
-            case 7: letraBase = 'K';
-            case 8: letraBase = 'M';
-            case 9: letraBase = 'S';
-            case 10: letraBase = 'W';
-            case 11: letraBase = 'B';
-            case 12: letraBase = 'D';
-            case 13: letraBase = 'H';
-            case 14: letraBase = 'V';
-            case 15: letraBase = 'N';
+            case 0: 
+            letraBase = 'A';
+            break;
+            case 1: 
+            letraBase = 'C';
+            break;
+            case 2: 
+            letraBase = 'G';
+            break;
+            case 3: 
+            letraBase = 'T';
+            break;
+            case 4: 
+            letraBase = 'U';
+            break;
+            case 5: 
+            letraBase = 'R';
+            break;
+            case 6: 
+            letraBase = 'Y';
+            break;
+            case 7: 
+            letraBase = 'K';
+            break;
+            case 8: 
+            letraBase = 'M';
+            break;
+            case 9: 
+            letraBase = 'S';
+            break;
+            case 10: 
+            letraBase = 'W';
+            break;
+            case 11: 
+            letraBase = 'B';
+            break;
+            case 12: 
+            letraBase = 'D';
+            break;
+            case 13: 
+            letraBase = 'H';
+            break;
+            case 14: 
+            letraBase = 'V';
+            break;
+            case 15: 
+            letraBase = 'N';
+            break;
         }
-        bases_seq.at(i).setLetraBase(letraBase);
+        baseTemp.setLetraBase(letraBase);
+        baseTemp.setCantidad(0);
+        bases_seq.push_back(baseTemp);
     }
 }
 

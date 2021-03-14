@@ -7,13 +7,11 @@
 
 #include "Base.hpp"
 
-Base::Base(){
-    setCantidad(0);
-}
+Base::Base(){}
 
-Base::Base(char letra){
+Base::Base(char letra, int q){
     setLetraBase(letra);
-    setCantidad(0);
+    setCantidad(q);
 }
 
 char Base::getLetraBase(){
