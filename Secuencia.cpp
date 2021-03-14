@@ -91,4 +91,8 @@ std::vector<Base> Secuencia::getBases(){
     return bases_seq;
 }
 
+void Secuencia::setBases(std::vector<Base> secuenciaBases){
+    bases_seq = secuenciaBases;
+}
+
 void Secuencia::conteoBases(std::string secuencia){}
