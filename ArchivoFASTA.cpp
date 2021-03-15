@@ -1,5 +1,5 @@
 #include "ArchivoFASTA.hpp"
-#include <cstring>
+#include <string.h>
 
 //TODO: Implementar los métodos de la clase ArchivoFASTA.
 
@@ -110,31 +110,17 @@ void ArchivoFASTA::subsecuencia(std::string subseq){
     }
     else{
     	int contApariciones = 0;
-    	//Converting from string to char array subseq
-    	char subsecStr[subseq.length()];
-    	for(int i=0; i<sizeof(subsecStr);i++){
-    	    subsecStr[i]=subseq[i];
-    	}
+
     	for(int i=0;i<secLista.size();i++)
     	{
     		std::string secuencia=secLista.at(i).getSecuencia();
-    		//Converting from string to char array the current sequence
-    		char secStr[secuencia.length()];
-    		for(int j=0; j<sizeof(secStr);j++){
-    	        secStr[j]=secuencia[j];
-    	    }
     	    //Looking and couting number of occurrences of the given subsequence
-    	    char* ptr = strstr(secStr,subsecStr);
-    	    
-    	    std::cout<<secStr<<std::endl;
-    	    std::cout<<subsecStr<<std::endl;
-    	    if(ptr==NULL)
-    	        std::cout<<"ptr es NULL"<<std::endl;
-    	    
-    	    while(ptr != NULL){
+    	    std::size_t found = secuencia.find(subseq);
+    	    secuencia = secuencia.substr(found+subseq.length());
+    	    while(found != std::string::npos){
     	        contApariciones++;
-    	        ptr = strstr(ptr+1,subsecStr);
-    	        std::cout<<contApariciones<<std::endl;
+    	        found = secuencia.find(subseq);
+    	        secuencia = secuencia.substr(found+subseq.length());
     	    }
     	}
     	if(contApariciones==0){
