@@ -113,7 +113,7 @@ void ArchivoFASTA::subsecuencia(std::string subseq){
     	{
     		std::string secuencia=secLista.at(i).getSecuencia();
    			for(int j=0;j<secuencia.size();j++){
-   			    for(int k=j+1;k<=secuencia.length();k++){
+   			    for(int k=j+1;k<secuencia.length();k++){
    			        std::string t = secuencia.substr(j,k);
    			        if(t==subseq){
    			            contApariciones++;
