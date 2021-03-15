@@ -103,11 +103,67 @@ void ArchivoFASTA::listarSecuencias(){
 }
 
 void ArchivoFASTA::subsecuencia(std::string subseq){
-    
+    if(secLista.size() == 0){
+    	std::cout<<"No Hay ecuencias cargadas"<<std::endl;
+    	return;
+    }
+    else{
+    	int contApariciones = 0;
+    	for(int i=0;secLista.size();i++)
+    	{
+    		std::string secuencia=secLista.at(i).getSecuencia();
+   			for(int j=0;j<secuencia.size();j++){
+   			    for(int k=j+1;k<=secuencia.length();k++){
+   			        std::string t = secuencia.substr(j,k);
+   			        if(t==subseq){
+   			            contApariciones++;
+   			        }
+   			    }
+   			}
+    	}
+    	if(contApariciones==0){
+    		std::cout<<"La secuencia no existe"<<std::endl;
+    		return;
+    	}
+    	std::cout<<"La sebsecuencia se repite "<<contApariciones<<" veces"<<std::endl;
+    	return;
+    }
+    return;
 }
 
 void ArchivoFASTA::enmascarar(std::string secuencia){
+    if(secLista.size() == 0){
+    	std::cout<<"No Hay ecuencias cargadas"<<std::endl;
+    	return;
+    }
+    else{
+    	int contApariciones = 0;
+    	std::string mascara;
+    	for(int i=0;i<secuencia.length();i++){
+    	    mascara=mascara+"X";
+    	}
+    	for(int i=0;secLista.size();i++)
+    	{
+    		std::string secuencia=secLista.at(i).getSecuencia();
+   			for(int j=0;j<secuencia.size();j++){
+   			    for(int k=j+1;k<=secuencia.size();k++){
 
+   			        std::string::size_type pos = secLista.at(i).getSecuencia().find(secuencia,0);
+   			        if(pos<std::string::npos){
+   			            secLista.at(i).getSecuencia().replace(pos,secuencia.length(),mascara);
+   			           contApariciones++;
+   			        }
+   			    }
+   			}
+    	}
+    	if(contApariciones==0){
+    		std::cout<<"La secuencia no existe"<<std::endl;
+    		return;
+    	}
+    	std::cout<<contApariciones<<" secuencias ha sido enmascaradas"<<std::endl;
+    	return;
+    }
+    return;
 }
 
 bool ArchivoFASTA::guardar(std::string nombreArchivo){
