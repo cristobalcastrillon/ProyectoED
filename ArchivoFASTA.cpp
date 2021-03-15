@@ -109,17 +109,20 @@ void ArchivoFASTA::subsecuencia(std::string subseq){
     }
     else{
     	int contApariciones = 0;
+    	//Converting from string to char array subseq
+    	char subsecStr[sebsec.length()];
+    	for(int i=0; i<sizeof(subsecStr);i++){
+    	    subsecStr[i]=subseq[i];
+    	}
     	for(int i=0;secLista.size();i++)
     	{
     		std::string secuencia=secLista.at(i).getSecuencia();
-   			for(int j=0;j<secuencia.size();j++){
-   			    for(int k=j+1;k<secuencia.length();k++){
-   			        std::string t = secuencia.substr(j,k);
-   			        if(t==subseq){
-   			            contApariciones++;
-   			        }
-   			    }
-   			}
+    		//Converting from string to char array the current sequence
+    		char secStr[secuencia.length()];
+    		for(int j=0; j<sizeof(secStr);j++){
+    	        secStr[j]=secuencia[j];
+    	    }
+    	    
     	}
     	if(contApariciones==0){
     		std::cout<<"La secuencia no existe"<<std::endl;
