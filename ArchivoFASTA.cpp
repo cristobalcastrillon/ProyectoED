@@ -1,4 +1,5 @@
 #include "ArchivoFASTA.hpp"
+#include <cstring>
 
 //TODO: Implementar los métodos de la clase ArchivoFASTA.
 
@@ -110,11 +111,11 @@ void ArchivoFASTA::subsecuencia(std::string subseq){
     else{
     	int contApariciones = 0;
     	//Converting from string to char array subseq
-    	char subsecStr[sebsec.length()];
+    	char subsecStr[subseq.length()];
     	for(int i=0; i<sizeof(subsecStr);i++){
     	    subsecStr[i]=subseq[i];
     	}
-    	for(int i=0;secLista.size();i++)
+    	for(int i=0;i<secLista.size();i++)
     	{
     		std::string secuencia=secLista.at(i).getSecuencia();
     		//Converting from string to char array the current sequence
@@ -122,7 +123,19 @@ void ArchivoFASTA::subsecuencia(std::string subseq){
     		for(int j=0; j<sizeof(secStr);j++){
     	        secStr[j]=secuencia[j];
     	    }
+    	    //Looking and couting number of occurrences of the given subsequence
+    	    char* ptr = strstr(secStr,subsecStr);
     	    
+    	    std::cout<<secStr<<std::endl;
+    	    std::cout<<subsecStr<<std::endl;
+    	    if(ptr==NULL)
+    	        std::cout<<"ptr es NULL"<<std::endl;
+    	    
+    	    while(ptr != NULL){
+    	        contApariciones++;
+    	        ptr = strstr(ptr+1,subsecStr);
+    	        std::cout<<contApariciones<<std::endl;
+    	    }
     	}
     	if(contApariciones==0){
     		std::cout<<"La secuencia no existe"<<std::endl;
@@ -145,7 +158,7 @@ void ArchivoFASTA::enmascarar(std::string secuencia){
     	for(int i=0;i<secuencia.length();i++){
     	    mascara=mascara+"X";
     	}
-    	for(int i=0;secLista.size();i++)
+    	for(int i=0;i<secLista.size();i++)
     	{
     		std::string secuencia=secLista.at(i).getSecuencia();
    			for(int j=0;j<secuencia.size();j++){
