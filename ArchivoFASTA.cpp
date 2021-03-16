@@ -167,7 +167,7 @@ void ArchivoFASTA::enmascarar(std::string secuencia){
     		return;
     	}
     	if(contApariciones==1){
-    		std::cout<<"1 ecuencia ha sido enmascarada"<<std::endl;
+    		std::cout<<"1 secuencia ha sido enmascarada"<<std::endl;
     		return;
     	}
     	std::cout<<contApariciones<<" secuencias han sido enmascaradas"<<std::endl;
