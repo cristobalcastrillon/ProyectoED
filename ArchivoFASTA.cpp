@@ -114,7 +114,7 @@ void ArchivoFASTA::subsecuencia(std::string subseq){
     	for(int i=0;i<secLista.size();i++)
     	{
     		std::string secuencia=secLista.at(i).getSecuencia();
-    	    //Looking and couting number of occurrences of the given subsequence
+    	    //Looking for and couting number of occurrences of the given subsequence
     	    std::size_t found = secuencia.find(subseq);
     	    secuencia = secuencia.substr(found+subseq.length());
     	    while(found != std::string::npos){
@@ -140,29 +140,32 @@ void ArchivoFASTA::enmascarar(std::string secuencia){
     }
     else{
     	int contApariciones = 0;
-    	std::string mascara;
+        std::string mascara;
     	for(int i=0;i<secuencia.length();i++){
     	    mascara=mascara+"X";
     	}
     	for(int i=0;i<secLista.size();i++)
     	{
-    		std::string secuencia=secLista.at(i).getSecuencia();
-   			for(int j=0;j<secuencia.size();j++){
-   			    for(int k=j+1;k<=secuencia.size();k++){
-
-   			        std::string::size_type pos = secLista.at(i).getSecuencia().find(secuencia,0);
-   			        if(pos<std::string::npos){
-   			            secLista.at(i).getSecuencia().replace(pos,secuencia.length(),mascara);
-   			           contApariciones++;
-   			        }
-   			    }
-   			}
+    		std::string secuenciaStr=secLista.at(i).getSecuencia();
+    	    //Looking for and replacing all occurrences of the given sequence
+    	    std::size_t found = secuencia.find(secuencia);
+    	    while(found != std::string::npos||found==0){
+    	        contApariciones++;
+                secuenciaStr.replace(found,secuencia.length(),mascara);
+                found=secuenciaStr.find(secuencia,found+mascara.length());
+    	    }
+    	    //replacing the sequence string with the new one
+    	    secLista.at(i).setSecuencia(secuenciaStr);
     	}
     	if(contApariciones==0){
-    		std::cout<<"La secuencia no existe"<<std::endl;
+    		std::cout<<"No se enmascararon subsecuencias"<<std::endl;
     		return;
     	}
-    	std::cout<<contApariciones<<" secuencias ha sido enmascaradas"<<std::endl;
+    	if(contApariciones==1){
+    		std::cout<<"1 ecuencia ha sido enmascarada"<<std::endl;
+    		return;
+    	}
+    	std::cout<<contApariciones<<" secuencias han sido enmascaradas"<<std::endl;
     	return;
     }
     return;
