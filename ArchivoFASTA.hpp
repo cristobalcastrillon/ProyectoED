@@ -27,6 +27,7 @@ struct ArchivoFASTA {
     void subsecuencia(std::string subseq);
     void enmascarar(std::string secuencia);
     bool guardar(std::string nombreArchivo);
+    void ayuda();
 
 };
 

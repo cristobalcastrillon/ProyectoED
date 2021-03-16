@@ -82,6 +82,13 @@ int main(int argc, const char * argv[]) {
             string nombre_archivo = comando.substr(8);
             archivoNuevo.guardar(nombre_archivo);
         }
+        if(comando.find("ayuda") != string::npos)
+        {
+            //DESCRIPCIÓN:   Guarda en el archivo nombre_archivo las secuencias cargadas en memoria. Se debe tener en cuenta la justificación (de líneas) del archivo inicial.
+            //PARÁMETROS: 
+            //  Nombre del archivo: 'nombre_archivo'
+            archivoNuevo.ayuda();
+        }
         if(comando.find("salir") != string::npos)
         {
             //DESCRIPCIÓN:   Termina la ejecución de la aplicación.

@@ -197,3 +197,13 @@ bool ArchivoFASTA::guardar(std::string nombreArchivo){
         return false;
     }
 }
+
+void ArchivoFASTA::ayuda(){
+    std::cout << "cargar <archivo.fa>\tCarga un archivo FASTA." << std::endl;
+    std::cout << "conteo\tCuenta las secuencias presentes en memoria." << std::endl;
+    std::cout << "histograma <descripcion_secuencia>\tImprime la distribución de frecuencias para una secuencia dada." << std::endl;
+    std::cout << "listar_secuencias\tLista las secuencias presentes en memoria." << std::endl;
+    std::cout << "es_subsecuencia <subsecuencia>\tBusca las ocurrencias presentes en memoria de la subsecuencia dada." << std::endl;
+    std::cout << "enmascarar <subsecuencia>\tBusca las ocurrencias presentes en memoria de la subsecuencia dada y las enmascara con el caracter 'X'." << std::endl;
+    std::cout << "guardar <archivo.fa>\tGuarda las estructuras manipuladas en un archivo FASTA." << std::endl;
+}
