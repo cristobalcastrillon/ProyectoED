@@ -149,10 +149,10 @@ void ArchivoFASTA::enmascarar(std::string secuencia){
     		std::string secuenciaStr=secLista.at(i).getSecuencia();
     	    //Looking for and replacing all occurrences of the given sequence
     	    std::size_t found = secuencia.find(secuencia);
-    	    while(found != std::string::npos||found==0){
+    	    while(found != std::string::npos){
     	        contApariciones++;
                 secuenciaStr.replace(found,secuencia.length(),mascara);
-                found=secuenciaStr.find(secuencia,found+mascara.length());
+                found=secuenciaStr.find(secuencia,(found+mascara.length()));
     	    }
     	    //replacing the sequence string with the new one
     	    secLista.at(i).setSecuencia(secuenciaStr);
