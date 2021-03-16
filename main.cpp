@@ -17,6 +17,7 @@ int main(int argc, const char * argv[]) {
 
     while(1)
     {
+        std::cout << "$ ";
         getline(cin, comando);
         if(comando.find("cargar") != string::npos)
         {
