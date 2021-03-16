@@ -5,7 +5,7 @@
 #include <fstream>
 #include "Secuencia.hpp"
 
-class ArchivoFASTA {
+struct ArchivoFASTA {
     private:
     //Clase que guarda las subcadenas que componen el archivo (líneas descriptivas; secuencias).
     std::vector<std::string> lineasDescriptivas;

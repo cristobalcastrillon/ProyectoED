@@ -12,7 +12,7 @@
 #include <vector>
 #include <stdio.h>
 
-class Base {
+struct Base {
 //Clase utilizada para crear el vector de pares Base - Cantidad, útil para imprimir un _histograma_.
 private:
     char letraBase;

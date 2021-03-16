@@ -12,7 +12,7 @@
 
 #include "Base.hpp"
 
-class Secuencia {
+struct Secuencia {
 //Clase que define a una secuencia.
 private:
     std::string secuencia;
