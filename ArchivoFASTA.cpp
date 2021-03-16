@@ -17,7 +17,12 @@ std::string ArchivoFASTA::getSecuencia(int posicionS){
     return secLista.at(posicionS).getSecuencia();
 }
 
-void ArchivoFASTA::setSecuencia(std::string cadenaSecuencia){}
+void ArchivoFASTA::setSecuencia(std::string cadenaSecuencia){
+    //Añade una secuencia con el string dado (i.e. la secuencia) a la lista de secuencias
+    Secuencia secTemp;
+    secTemp.setSecuencia(cadenaSecuencia);
+    secLista.push_back(secTemp);
+}
 
 bool ArchivoFASTA::cargarArchivo(std::string nombreArchivo){ 
     //'nombreArchivo' debe constar del título del archivo junto a su extensión (e.g. 'ejemplo.txt')
