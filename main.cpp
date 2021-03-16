@@ -13,7 +13,8 @@ int main(int argc, const char * argv[]) {
 
     string comando;
     ArchivoFASTA archivoNuevo;
-    
+    int cont = 0; //Contador de secuencias
+
     while(1)
     {
         getline(cin, comando);
@@ -24,8 +25,7 @@ int main(int argc, const char * argv[]) {
             //  Nombre del archivo: 'nombre_archivo'
             string nombre_archivo = comando.substr(7);
             if(archivoNuevo.cargarArchivo(nombre_archivo)){
-
-                switch(int cont = archivoNuevo.conteoSecuencias()){
+                switch(cont = archivoNuevo.conteoSecuencias() - cont){
                     case 1:
                         cout << "1 secuencia cargada correctamente desde " << nombre_archivo << endl;
                         break;
