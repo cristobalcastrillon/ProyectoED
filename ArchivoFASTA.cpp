@@ -152,6 +152,7 @@ void ArchivoFASTA::enmascarar(std::string secuencia){
     	for(int i=0;i<secLista.size();i++)
     	{
     		std::string secuenciaStr=secLista.at(i).getSecuencia();
+    		std::string chapuza = secuenciaStr.substr(0,mascara.length());
     	    //Looking for and replacing all occurrences of the given sequence
     	    std::size_t found = secuencia.find(secuencia);
     	    while(found != std::string::npos){
@@ -159,15 +160,18 @@ void ArchivoFASTA::enmascarar(std::string secuencia){
                 secuenciaStr.replace(found,secuencia.length(),mascara);
                 found=secuenciaStr.find(secuencia,(found+mascara.length()));
     	    }
+    	    //fixing the error
+    	    secuenciaStr.replace(0,mascara.length(),chapuza);
     	    //replacing the sequence string with the new one
     	    secLista.at(i).setSecuencia(secuenciaStr);
     	}
+    	contApariciones-=secLista.size();
     	if(contApariciones==0){
     		std::cout<<"No se enmascararon subsecuencias"<<std::endl;
     		return;
     	}
     	if(contApariciones==1){
-    		std::cout<<"1 secuencia ha sido enmascarada"<<std::endl;
+    		std::cout<<"1 ecuencia ha sido enmascarada"<<std::endl;
     		return;
     	}
     	std::cout<<contApariciones<<" secuencias han sido enmascaradas"<<std::endl;
