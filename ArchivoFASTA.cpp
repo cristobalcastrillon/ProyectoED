@@ -110,7 +110,7 @@ void ArchivoFASTA::listarSecuencias(){
 
 void ArchivoFASTA::subsecuencia(std::string subseq){
     if(secLista.size() == 0){
-    	std::cout<<"No Hay ecuencias cargadas"<<std::endl;
+    	std::cout<<"No hay secuencias cargadas"<<std::endl;
     	return;
     }
     else{
@@ -140,7 +140,7 @@ void ArchivoFASTA::subsecuencia(std::string subseq){
 
 void ArchivoFASTA::enmascarar(std::string secuencia){
     if(secLista.size() == 0){
-    	std::cout<<"No Hay ecuencias cargadas"<<std::endl;
+    	std::cout<<"No hay secuencias cargadas"<<std::endl;
     	return;
     }
     else{
