@@ -29,6 +29,10 @@ struct ArchivoFASTA {
     bool guardar(std::string nombreArchivo);
     void ayuda();
 
+    //Comandos de la segunda entrega del proyecto:
+    bool codificar(std::string nombreArchivoFABin); //Codificación de Huffman
+    bool decodificar(std::string nombreArchivoFABin); //Decodificación de Huffman
+
 };
 
 #endif /* ArchivoFASTA_hpp */
