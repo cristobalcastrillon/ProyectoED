@@ -213,6 +213,24 @@ void ArchivoFASTA::ayuda(){
 bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
     try{
         //1. Codificar mediante algoritmo de Huffman
+        //  a. Histograma de Bases en el archivo:
+        Secuencia secuenciaTemp; //Secuencia (vacía) temporal para efectuar el conteo de bases del archivo COMPLETO.
+        std::vector<Base> basesMemoria = secuenciaTemp.getBases(); //Bases cargadas en memoria (archivo COMPLETO)
+        for(int i = 0; i < secLista.size(); i++){
+            std::vector<Base> basesTemp = secLista.at(i).getBases();
+            //La siguiente línea es de prueba...
+            std::cout << "Bases en secuencia: " << lineasDescriptivas.at(i) << ":" << std::endl;
+            //Conteo de Bases x Secuencia
+            for(int j = 0; j < basesTemp.size(); j++){
+                //La siguiente línea es de prueba...
+                std::cout << "En secuencia:\n" << basesTemp.at(j).getLetraBase() << '\t' << basesTemp.at(j).getCantidad() << std::endl;
+                basesMemoria.at(j).setCantidad(basesMemoria.at(j).getCantidad() + basesTemp.at(j).getCantidad());
+                //La siguiente línea es de prueba...
+                std::cout << "En memoria\n" << basesMemoria.at(j).getLetraBase() << '\t' << basesMemoria.at(j).getCantidad() << std::endl;
+            }
+        }
+        //  b. Crear árbol de Huffman:
+
         //2. Guardar en archivo .fabin
         return true;
     }
