@@ -210,6 +210,16 @@ void ArchivoFASTA::ayuda(){
     std::cout << "decodificar <nombre_archivo.fabin>\tDecodifica el contenido de un archivo binario de extensión .fabin y lo carga en memoria." << std::endl;
 }
 
-bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){}
+bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
+    try{
+        //1. Codificar mediante algoritmo de Huffman
+        //2. Guardar en archivo .fabin
+        return true;
+    }
+    catch(std::exception e){
+        std::cout << "No se pueden guardar las secuencias cargadas en " << nombreArchivoFABin << ".fabin" << std::endl;
+        return false;
+    }
+}
 
 bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin){}
