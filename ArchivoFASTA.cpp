@@ -206,6 +206,8 @@ void ArchivoFASTA::ayuda(){
     std::cout << "es_subsecuencia <subsecuencia>\tBusca las ocurrencias presentes en memoria de la subsecuencia dada." << std::endl;
     std::cout << "enmascarar <subsecuencia>\tBusca las ocurrencias presentes en memoria de la subsecuencia dada y las enmascara con el caracter 'X'." << std::endl;
     std::cout << "guardar <archivo.fa>\tGuarda las estructuras manipuladas en un archivo FASTA." << std::endl;
+    std::cout << "codificar <nombre_archivo.fabin>\tCodifica las secuencias y sus respectivos identificadores —lineas descriptivas— cargados en memoria, y los guarda en un archivo binario de extensión .fabin." << std::endl;
+    std::cout << "decodificar <nombre_archivo.fabin>\tDecodifica el contenido de un archivo binario de extensión .fabin y lo carga en memoria." << std::endl;
 }
 
 bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){}

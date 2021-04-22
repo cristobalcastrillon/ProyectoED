@@ -89,13 +89,29 @@ int main(int argc, const char * argv[]) {
             //  Nombre del archivo: 'nombre_archivo'
             archivoNuevo.ayuda();
         }
+        if(comando.find("codificar") != string::npos)
+        {
+            //DESCRIPCIÓN:   Codifica las secuencias y sus respectivos identificadores —lineas descriptivas— cargados en memoria, y los guarda en un archivo binario de extensión .fabin.
+            //PARÁMETROS: 
+            //  Nombre del archivo binario a guardar: 'nombre_archivoFABin'
+            string nombre_archivoFABin = comando.substr(10);
+            archivoNuevo.codificar(nombre_archivoFABin);
+        }
+        if(comando.find("decodificar") != string::npos)
+        {
+            //DESCRIPCIÓN:   Decodifica el contenido de un archivo binario de extensión .fabin y lo carga en memoria.
+            //PARÁMETROS: 
+            //  Nombre del archivo binario a leer: 'nombre_archivoFABin'
+            string nombre_archivoFABin = comando.substr(12);   
+            archivoNuevo.decodificar(nombre_archivoFABin);
+        }
         if(comando.find("salir") != string::npos)
         {
             //DESCRIPCIÓN:   Termina la ejecución de la aplicación.
             //PARÁMETROS: 
             //  N/A
             exit(0);
-        }
+        }        
     }
 
     return 0;
