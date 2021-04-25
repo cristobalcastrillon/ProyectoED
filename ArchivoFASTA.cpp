@@ -1,6 +1,7 @@
 #include "ArchivoFASTA.hpp"
 #include <string.h>
 #include <bitset>
+#include <map>
 
 //TODO: Implementar los métodos de la clase ArchivoFASTA.
 
@@ -222,17 +223,35 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         std::vector<Base> basesMemoria = secuenciaTemp.getBases(); //Bases cargadas en memoria (archivo COMPLETO)
         for(int i = 0; i < secLista.size(); i++){
             std::vector<Base> basesTemp = secLista.at(i).getBases();
-            //La siguiente línea es de prueba...
-            // std::cout << "Bases en secuencia: " << lineasDescriptivas.at(i) << ":" << std::endl;
             //Conteo de Bases x Secuencia
             for(int j = 0; j < basesTemp.size(); j++){
-                //La siguiente línea es de prueba...
-                // std::cout << "En secuencia:\n" << basesTemp.at(j).getLetraBase() << '\t' << basesTemp.at(j).getCantidad() << std::endl;
                 basesMemoria.at(j).setCantidad(basesMemoria.at(j).getCantidad() + basesTemp.at(j).getCantidad());
-                //La siguiente línea es de prueba...
-                // std::cout << "En memoria\n" << basesMemoria.at(j).getLetraBase() << '\t' << basesMemoria.at(j).getCantidad() << std::endl;
             }
         }
+
+        //histogramaCaracteres: mapa de pares caracter - frecuencia.
+        std::map<char, int> histogramaCaracteres;
+        for(int i = 0; i < CANTIDAD_BASES; i++){
+            histogramaCaracteres.insert(std::pair<char, int>(basesMemoria.at(i).getLetraBase(), basesMemoria.at(i).getCantidad()));
+        }
+        //TODO: Averiguar por qué throws la exception el siguiente chunk de code.
+        for(int i = 0; i < lineasDescriptivas.size(); i++){
+            for(int j = 0; j < lineasDescriptivas.at(i).size(); j++){
+                for(int k = 0; k < histogramaCaracteres.size(); k++){
+                    if(histogramaCaracteres.at(k) == lineasDescriptivas.at(i).at(j)){
+                        histogramaCaracteres.at(k) += 1;
+                    }
+                    else{
+                        histogramaCaracteres.insert(std::pair<char, int>(lineasDescriptivas.at(i).at(j), 1));
+                    }
+                }
+            }
+        }
+
+        //El siguiente ciclo es de prueba...
+        // for(int i = 0; i < histogramaCaracteres.size(); i++){
+        //     std::cout << histogramaCaracteres.at(i) << std::endl;
+        // }
 
         //  b. Crear árbol de Huffman:
 
