@@ -1,8 +1,6 @@
 #include "ArchivoFASTA.hpp"
 #include <string.h>
 #include <bitset>
-#include <map>
-#include <vector>
 
 //TODO: Implementar los métodos de la clase ArchivoFASTA.
 
@@ -224,8 +222,7 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         //String binario al que se va a concatenar cada uno de los campos binarios especificados en el formato.
         std::string stringBinario;
         //1. Codificar mediante algoritmo de Huffman
-        //  a. Histograma de Bases en el archivo: 
-        //TODO: AÑADIRLE LOS CARACTERES CORRESPONDIENTES A LAS LÍNEAS DESCRIPTIVAS.
+        //  a. Histograma de Bases en el archivo.
         Secuencia secuenciaTemp; //Secuencia (vacía) temporal para efectuar el conteo de bases del archivo COMPLETO.
         std::vector<Base> basesMemoria = secuenciaTemp.getBases(); //Bases cargadas en memoria (archivo COMPLETO).
 
@@ -262,11 +259,11 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
             }
         }
 
-        //this->ordenarHistogramaCaracteres(histogramaCaracteres);
+        //  b. Ordenar histograma.
 
-        //  b. Crear árbol de Huffman:
+        //  c. Crear árbol de Huffman.
 
-        //  c. Crear string binario con el formato especificado en el enunciado del proyecto (que se guarda en el archivo .fabin)
+        //  d. Crear string binario con el formato especificado en el enunciado del proyecto (que se guarda en el archivo .fabin)
         // 'n': número entero de 2 bytes que representa la cantidad de bases diferentes presentes en las secuencias cargadas en ese momento en memoria.
         int n = 0;
         //ci y fi son dos números entero de 1 y 8 bytes, respectivamente, que representan un código de la base de genoma y su frecuencia asociada
