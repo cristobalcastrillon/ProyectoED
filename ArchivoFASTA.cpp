@@ -1,5 +1,6 @@
 #include "ArchivoFASTA.hpp"
 #include <string.h>
+#include <bitset>
 
 //TODO: Implementar los métodos de la clase ArchivoFASTA.
 
@@ -212,24 +213,73 @@ void ArchivoFASTA::ayuda(){
 
 bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
     try{
+        //String binario al que se va a concatenar cada uno de los campos binarios especificados en el formato.
+        std::string stringBinario;
         //1. Codificar mediante algoritmo de Huffman
-        //  a. Histograma de Bases en el archivo:
+        //  a. Histograma de Bases en el archivo: 
+        //TODO: AÑADIRLE LOS CARACTERES CORRESPONDIENTES A LAS LÍNEAS DESCRIPTIVAS.
         Secuencia secuenciaTemp; //Secuencia (vacía) temporal para efectuar el conteo de bases del archivo COMPLETO.
         std::vector<Base> basesMemoria = secuenciaTemp.getBases(); //Bases cargadas en memoria (archivo COMPLETO)
         for(int i = 0; i < secLista.size(); i++){
             std::vector<Base> basesTemp = secLista.at(i).getBases();
             //La siguiente línea es de prueba...
-            std::cout << "Bases en secuencia: " << lineasDescriptivas.at(i) << ":" << std::endl;
+            // std::cout << "Bases en secuencia: " << lineasDescriptivas.at(i) << ":" << std::endl;
             //Conteo de Bases x Secuencia
             for(int j = 0; j < basesTemp.size(); j++){
                 //La siguiente línea es de prueba...
-                std::cout << "En secuencia:\n" << basesTemp.at(j).getLetraBase() << '\t' << basesTemp.at(j).getCantidad() << std::endl;
+                // std::cout << "En secuencia:\n" << basesTemp.at(j).getLetraBase() << '\t' << basesTemp.at(j).getCantidad() << std::endl;
                 basesMemoria.at(j).setCantidad(basesMemoria.at(j).getCantidad() + basesTemp.at(j).getCantidad());
                 //La siguiente línea es de prueba...
-                std::cout << "En memoria\n" << basesMemoria.at(j).getLetraBase() << '\t' << basesMemoria.at(j).getCantidad() << std::endl;
+                // std::cout << "En memoria\n" << basesMemoria.at(j).getLetraBase() << '\t' << basesMemoria.at(j).getCantidad() << std::endl;
             }
         }
+
         //  b. Crear árbol de Huffman:
+
+        //  c. Crear string binario con el formato especificado en el enunciado del proyecto (que se guarda en el archivo .fabin)
+        // 'n': número entero de 2 bytes que representa la cantidad de bases diferentes presentes en las secuencias cargadas en ese momento en memoria.
+        int n = 0;
+        //ci y fi son dos números entero de 1 y 8 bytes, respectivamente, que representan un código de la base de genoma y su frecuencia asociada
+        std::string c_f = "";
+        for(int i = 0; i < CANTIDAD_BASES; i++){
+            if(basesMemoria.at(i).getCantidad() > 0 ){
+                n++;
+                //TODO: desarrollar getCodigoHuffman
+                //   OJO: debe poder recibir como parámetro la cantidad de bits que se quieren usar para el código (en este caso 8 bits)
+                //   TODO: averiguar si se retornarían códigos de más de 8 bits, si es así, el parámetro es necesario, si no, se retorna un código de 8 bits.
+                //c_f += getCodigoHuffman(basesMemoria.at(i).getLetraBase()) + std::bitset<64>(basesMemoria.at(i).getCantidad(), 8);
+                c_f += std::bitset<64>(basesMemoria.at(i).getCantidad()).to_string();
+            }
+        }
+
+        std::string n_binary = std::bitset<16>(n).to_string();
+        stringBinario = n_binary + c_f;
+        
+        //ns (secLista.size()) es un número entero de 4 bytes que representa la cantidad de secuencias que hay en el archivo.
+        stringBinario += std::bitset<32>(secLista.size()).to_string();
+
+        for(int i = 0; i < lineasDescriptivas.size(); i++){
+            //li es un número entero de 2 bytes que representa el tamaño del nombre de la i-ésima secuencia.
+            stringBinario += std::bitset<16>(lineasDescriptivas.at(i).size()).to_string();
+            // for(int j = 0; j < lineasDescriptivas.at(i).size(); i++){
+            //     //sij es el caracter que se encuentra en la j-ésima posición del nombre de la i-ésima secuencia.
+            //     // stringBinario += getCodigoHuffman(lineasDescriptivas.at(i).at(j), 8);
+            // }
+        }
+
+        for(int i = 0; i < secLista.size(); i++){
+            //wi un número entero de 8 bytes que representa la longitud de la i-ésima secuencia.
+            stringBinario += std::bitset<64>(secLista.at(i).getSecuencia().size()).to_string();
+            //xi un número entero de 2 bytes que representa la indentación de la i-ésima secuencia.
+            //TODO: Averiguar cómo desarrollar una solución a 'xi'.
+            //binary_codei es la secuencia binaria que representa la i-ésima secuencia. Note que si la secuencia no es múltiplo de 8, se debe completar con los “0” necesarios.
+            // for(int j = 0; j < secLista.at(i).getSecuencia().size(); j++){
+            //     // stringBinario += getCodigoHuffman(secLista.at(i).getSecuencia().at(j), 8);
+            // }
+        }
+
+        //La siguiente línea es de prueba...
+        std::cout << stringBinario << std::endl;
 
         //2. Guardar en archivo .fabin
         return true;
