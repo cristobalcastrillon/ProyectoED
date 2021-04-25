@@ -2,6 +2,7 @@
 #include <string.h>
 #include <bitset>
 #include <map>
+#include <vector>
 
 //TODO: Implementar los métodos de la clase ArchivoFASTA.
 
@@ -212,6 +213,12 @@ void ArchivoFASTA::ayuda(){
     std::cout << "decodificar <nombre_archivo.fabin>\tDecodifica el contenido de un archivo binario de extensión .fabin y lo carga en memoria." << std::endl;
 }
 
+// void ArchivoFASTA::ordenarHistogramaCaracteres(std::map<char, int> histogramaCaracteres){
+//     for(std::map<char, int>::iterator it = histogramaCaracteres.begin(); it != histogramaCaracteres.end(); ++it){
+
+//     }
+// }
+
 bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
     try{
         //String binario al que se va a concatenar cada uno de los campos binarios especificados en el formato.
@@ -220,34 +227,42 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         //  a. Histograma de Bases en el archivo: 
         //TODO: AÑADIRLE LOS CARACTERES CORRESPONDIENTES A LAS LÍNEAS DESCRIPTIVAS.
         Secuencia secuenciaTemp; //Secuencia (vacía) temporal para efectuar el conteo de bases del archivo COMPLETO.
-        std::vector<Base> basesMemoria = secuenciaTemp.getBases(); //Bases cargadas en memoria (archivo COMPLETO)
+        std::vector<Base> basesMemoria = secuenciaTemp.getBases(); //Bases cargadas en memoria (archivo COMPLETO).
+
         for(int i = 0; i < secLista.size(); i++){
             std::vector<Base> basesTemp = secLista.at(i).getBases();
-            //Conteo de Bases x Secuencia
             for(int j = 0; j < basesTemp.size(); j++){
                 basesMemoria.at(j).setCantidad(basesMemoria.at(j).getCantidad() + basesTemp.at(j).getCantidad());
             }
         }
 
-        //histogramaCaracteres: mapa de pares caracter - frecuencia.
-        std::map<char, int> histogramaCaracteres;
+        //histogramaCaracteres: vector de pares caracter - frecuencia.
+        std::vector<std::pair<char, int> > histogramaCaracteres;
+
         for(int i = 0; i < CANTIDAD_BASES; i++){
             if(basesMemoria.at(i).getCantidad() > 0)
-                histogramaCaracteres.insert(std::pair<char, int>(basesMemoria.at(i).getLetraBase(), basesMemoria.at(i).getCantidad()));
+                histogramaCaracteres.push_back(std::pair<char, int>(basesMemoria.at(i).getLetraBase(), basesMemoria.at(i).getCantidad()));
         }
         for(int i = 0; i < lineasDescriptivas.size(); i++){
             for(int j = 0; j < lineasDescriptivas.at(i).size(); j++){
-                //OJO: Para los MAPAS toca iterar con un 'iterator'
-                for(std::map<char, int>::iterator it = histogramaCaracteres.begin(); it!=histogramaCaracteres.end(); ++it){
-                    if(it->first == lineasDescriptivas.at(i).at(j)){
-                        it->second += 1;
+                for(int k = 0; k < histogramaCaracteres.size(); k++){
+
+                    //La siguiente línea es de prueba...
+                    std::cout << "Entró" << k+1 << std::endl;
+                    if(histogramaCaracteres.at(k).first == lineasDescriptivas.at(i).at(j)){
+                        //La siguiente línea es de prueba...
+                        std::cout << "IGUAL" << k+1 << std::endl;
+                        histogramaCaracteres.at(k).second += 1;
                     }
-                    else{
-                        histogramaCaracteres.insert(std::pair<char, int>(lineasDescriptivas.at(i).at(j), 1));
-                    }
+                    //TODO: Averiguar por qué con el else, el ciclo no para.
+                    // else{
+                    //     histogramaCaracteres.push_back(std::pair<char, int>(lineasDescriptivas.at(i).at(j), 1));
+                    // }
                 }
             }
         }
+
+        //this->ordenarHistogramaCaracteres(histogramaCaracteres);
 
         //  b. Crear árbol de Huffman:
 
@@ -294,8 +309,8 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         }
 
         //El siguiente ciclo es de prueba...
-        for(std::map<char, int>::iterator it = histogramaCaracteres.begin(); it!=histogramaCaracteres.end(); ++it){
-            std::cout << it->first << '\t' << it->second << std::endl;
+        for(int i = 0; i < histogramaCaracteres.size(); i++){
+            std::cout << histogramaCaracteres.at(i).first << '\t' << histogramaCaracteres.at(i).second << std::endl;
         }
 
         //La siguiente línea es de prueba...
