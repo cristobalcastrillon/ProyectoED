@@ -232,14 +232,15 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         //histogramaCaracteres: mapa de pares caracter - frecuencia.
         std::map<char, int> histogramaCaracteres;
         for(int i = 0; i < CANTIDAD_BASES; i++){
-            histogramaCaracteres.insert(std::pair<char, int>(basesMemoria.at(i).getLetraBase(), basesMemoria.at(i).getCantidad()));
+            if(basesMemoria.at(i).getCantidad() > 0)
+                histogramaCaracteres.insert(std::pair<char, int>(basesMemoria.at(i).getLetraBase(), basesMemoria.at(i).getCantidad()));
         }
-        //TODO: Averiguar por qué throws la exception el siguiente chunk de code.
         for(int i = 0; i < lineasDescriptivas.size(); i++){
             for(int j = 0; j < lineasDescriptivas.at(i).size(); j++){
-                for(int k = 0; k < histogramaCaracteres.size(); k++){
-                    if(histogramaCaracteres.at(k) == lineasDescriptivas.at(i).at(j)){
-                        histogramaCaracteres.at(k) += 1;
+                //OJO: Para los MAPAS toca iterar con un 'iterator'
+                for(std::map<char, int>::iterator it = histogramaCaracteres.begin(); it!=histogramaCaracteres.end(); ++it){
+                    if(it->first == lineasDescriptivas.at(i).at(j)){
+                        it->second += 1;
                     }
                     else{
                         histogramaCaracteres.insert(std::pair<char, int>(lineasDescriptivas.at(i).at(j), 1));
@@ -247,11 +248,6 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
                 }
             }
         }
-
-        //El siguiente ciclo es de prueba...
-        // for(int i = 0; i < histogramaCaracteres.size(); i++){
-        //     std::cout << histogramaCaracteres.at(i) << std::endl;
-        // }
 
         //  b. Crear árbol de Huffman:
 
@@ -295,6 +291,11 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
             // for(int j = 0; j < secLista.at(i).getSecuencia().size(); j++){
             //     // stringBinario += getCodigoHuffman(secLista.at(i).getSecuencia().at(j), 8);
             // }
+        }
+
+        //El siguiente ciclo es de prueba...
+        for(std::map<char, int>::iterator it = histogramaCaracteres.begin(); it!=histogramaCaracteres.end(); ++it){
+            std::cout << it->first << '\t' << it->second << std::endl;
         }
 
         //La siguiente línea es de prueba...
