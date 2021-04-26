@@ -31,7 +31,6 @@ struct ArchivoFASTA {
     void ayuda();
 
     //Segunda entrega:
-    // void ordenarHistogramaCaracteres(std::map<char, int> histogramaCaracteres);
     bool codificar(std::string nombreArchivoFABin); //Codificación de Huffman
     bool decodificar(std::string nombreArchivoFABin); //Decodificación de Huffman
 

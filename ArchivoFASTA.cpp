@@ -211,11 +211,10 @@ void ArchivoFASTA::ayuda(){
     std::cout << "decodificar <nombre_archivo.fabin>\tDecodifica el contenido de un archivo binario de extensión .fabin y lo carga en memoria." << std::endl;
 }
 
-// void ArchivoFASTA::ordenarHistogramaCaracteres(std::map<char, int> histogramaCaracteres){
-//     for(std::map<char, int>::iterator it = histogramaCaracteres.begin(); it != histogramaCaracteres.end(); ++it){
-
-//     }
-// }
+//Función auxiliar para ordenar el vector 'histogramaCaracteres'
+bool sortbysec(const std::pair<char, int> &a, const std::pair<char, int> &b){
+    return (a.second < b.second);
+}
 
 bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
     try{
@@ -242,16 +241,20 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         }
         for(int i = 0; i < lineasDescriptivas.size(); i++){
             for(int j = 0; j < lineasDescriptivas.at(i).size(); j++){
+                bool found = false;
                 for(int k = 0; k < histogramaCaracteres.size(); k++){
                     if(histogramaCaracteres.at(k).first == lineasDescriptivas.at(i).at(j)){
-                        histogramaCaracteres.at(k).second += 1;
+                        histogramaCaracteres.at(k).second++;
+                        found = true;
                     }
                 }
-                histogramaCaracteres.push_back(std::pair<char, int>(lineasDescriptivas.at(i).at(j), 1));
+                if(found == false)
+                    histogramaCaracteres.push_back(std::pair<char, int>(lineasDescriptivas.at(i).at(j), 1));
             }
         }
 
         //  b. Ordenar histograma.
+        std::sort(histogramaCaracteres.begin(), histogramaCaracteres.end(), sortbysec);
 
         //  c. Crear árbol de Huffman.
 
