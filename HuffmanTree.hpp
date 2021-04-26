@@ -1,55 +1,64 @@
 #include "HuffmanNode.hpp"
 #include <iostream>
 #include <vector>
+#include <queue>
 
 bool sortbysec(const std::pair<char, int> &a, const std::pair<char, int> &b){
     return (a.second > b.second);
 }
 
+struct comp{
+    bool operator()(const HuffmanNode * a, const HuffmanNode * b){
+        return (a->frecuencia > b->frecuencia);
+    }
+};
+
 struct HuffmanTree{
         HuffmanNode * root;
-        std::vector<std::pair<char, int> > histogramaCaracteres;
+        std::priority_queue<HuffmanNode*, std::vector<HuffmanNode *>, comp> histoCopy;
 
         HuffmanTree(std::vector<std::pair <char, int> > histoCars){
-            std::vector<std::pair<char, int> > histoCopy = histoCars;
+            //Copiando los pares caracter - frecuencia del histograma...
+            for(int i = 0; i < histoCars.size(); i++){
+                HuffmanNode * huffPtr = new HuffmanNode(histoCars.at(i).first, histoCars.at(i).second);
+                histoCopy.push(huffPtr);
+                //La siguiente línea es de prueba...
+                std::cout << histoCopy.top()->caracter << '\t' << histoCopy.top()->frecuencia;
+            }
+ 
             while(histoCopy.size() > 1){
-                HuffmanNode * a = new HuffmanNode(histoCopy.at(histoCopy.size()-1).first, histoCopy.at(histoCopy.size()-1).second);
+                HuffmanNode * a = histoCopy.top();
+                histoCopy.pop();
                 //La siguiente línea es de prueba...
-                std::cout << a->caracter << '\t' << a->frecuencia << std::endl;
+                // std::cout << a->caracter << ':\t' << a->frecuencia << std::endl;
 
-                HuffmanNode * b = new HuffmanNode(histoCopy.at(histoCopy.size()-2).first, histoCopy.at(histoCopy.size()-2).second);
+                HuffmanNode * b = histoCopy.top();
+                histoCopy.pop();
                 //La siguiente línea es de prueba...
-                std::cout << b->caracter << '\t' << b->frecuencia << std::endl;
+                // std::cout << b->caracter << ':\t' << b->frecuencia << std::endl;
 
-                HuffmanNode * nuevo;
-                insertarParNodos(a, b, nuevo);
-                //TODO: Arreglar función insertar (NO inserta en el árbol hasta el momento)
+                HuffmanNode * nuevo = insertarParNodos(a, b);
                 //La siguiente línea es de prueba...
                 std::cout << "Insertó a y b." << std::endl;
 
-                std::pair<char, int> nuevoNodoHistograma;
-                nuevoNodoHistograma.first = NULL;
-                nuevoNodoHistograma.second = histoCopy.at(histoCopy.size()-1).second + histoCopy.at(histoCopy.size()-2).second;
-                for(int i = 0 ; i < 2; i++)
-                    histoCopy.pop_back();
-                histoCopy.push_back(nuevoNodoHistograma);
-                std::sort(histoCopy.begin(), histoCopy.end(), sortbysec);
+                histoCopy.push(nuevo);
             }
         }
 
-        HuffmanNode * insertarParNodos(HuffmanNode * a, HuffmanNode * b, HuffmanNode * root){
-            root->leftChild  = a;
-            root->rightChild = b;
-            root->frecuencia = a->frecuencia + b->frecuencia;
-            root->caracter = NULL;
-            return root;
+        HuffmanNode * insertarParNodos(HuffmanNode * a, HuffmanNode * b){
+            HuffmanNode * temp;
+            temp->leftChild  = a;
+            temp->rightChild = b;
+            temp->frecuencia = a->frecuencia + b->frecuencia;
+            temp->caracter = NULL;
+            return temp;
         }
 
         void inorder(HuffmanNode * nodo){
-        if(nodo == NULL)
-            return;
-        inorder(nodo->leftChild);
-        std::cout << nodo->frecuencia << '\t';
-        inorder(nodo->rightChild);
-    }
+            if(nodo == NULL)
+                return;
+            inorder(nodo->leftChild);
+            std::cout << nodo->frecuencia << '\t';
+            inorder(nodo->rightChild);
+        }
 };
