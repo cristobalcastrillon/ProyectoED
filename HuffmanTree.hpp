@@ -20,45 +20,32 @@ struct HuffmanTree{
             //Copiando los pares caracter - frecuencia del histograma...
             for(int i = 0; i < histoCars.size(); i++){
                 HuffmanNode * huffPtr = new HuffmanNode(histoCars.at(i).first, histoCars.at(i).second);
-                std::cout << "Recorriendo el array " << i << std::endl;
-                std::cout << huffPtr->caracter <<  '\t' << huffPtr->frecuencia << std::endl;
-                //TODO: Averiguar por qué se putea cuando se le hace push al priority_queue
                 histoCopy.push(huffPtr);
             }
  
             while(histoCopy.size() > 1){
+                std::cout << "Entró al while" << std::endl;
                 HuffmanNode * a = histoCopy.top();
                 histoCopy.pop();
                 //La siguiente línea es de prueba...
-                // std::cout << a->caracter << ':\t' << a->frecuencia << std::endl;
+                std::cout << a->caracter << '\t' << a->frecuencia << std::endl;
 
                 HuffmanNode * b = histoCopy.top();
                 histoCopy.pop();
                 //La siguiente línea es de prueba...
-                // std::cout << b->caracter << ':\t' << b->frecuencia << std::endl;
+                std::cout << b->caracter << '\t' << b->frecuencia << std::endl;
 
-                HuffmanNode * nuevo = insertarParNodos(a, b);
-                //La siguiente línea es de prueba...
-                std::cout << "Insertó a y b." << std::endl;
+                HuffmanNode * pater;
+                pater->leftChild = a;
+                pater->rightChild = b;
+                pater->frecuencia = a->frecuencia + b->frecuencia;
+                pater->caracter = '\0';
 
-                histoCopy.push(nuevo);
+                histoCopy.push(pater);
             }
+
+            HuffmanNode * root = histoCopy.top();
         }
 
-        HuffmanNode * insertarParNodos(HuffmanNode * a, HuffmanNode * b){
-            HuffmanNode * temp;
-            temp->leftChild  = a;
-            temp->rightChild = b;
-            temp->frecuencia = a->frecuencia + b->frecuencia;
-            temp->caracter = NULL;
-            return temp;
-        }
 
-        void inorder(HuffmanNode * nodo){
-            if(nodo == NULL)
-                return;
-            inorder(nodo->leftChild);
-            std::cout << nodo->frecuencia << '\t';
-            inorder(nodo->rightChild);
-        }
 };
