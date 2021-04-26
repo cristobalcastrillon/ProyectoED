@@ -243,19 +243,11 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         for(int i = 0; i < lineasDescriptivas.size(); i++){
             for(int j = 0; j < lineasDescriptivas.at(i).size(); j++){
                 for(int k = 0; k < histogramaCaracteres.size(); k++){
-
-                    //La siguiente línea es de prueba...
-                    std::cout << "Entró" << k+1 << std::endl;
                     if(histogramaCaracteres.at(k).first == lineasDescriptivas.at(i).at(j)){
-                        //La siguiente línea es de prueba...
-                        std::cout << "IGUAL" << k+1 << std::endl;
                         histogramaCaracteres.at(k).second += 1;
                     }
-                    //TODO: Averiguar por qué con el else, el ciclo no para.
-                    // else{
-                    //     histogramaCaracteres.push_back(std::pair<char, int>(lineasDescriptivas.at(i).at(j), 1));
-                    // }
                 }
+                histogramaCaracteres.push_back(std::pair<char, int>(lineasDescriptivas.at(i).at(j), 1));
             }
         }
 
