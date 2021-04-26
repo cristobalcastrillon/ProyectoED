@@ -14,16 +14,16 @@ struct comp{
 };
 
 struct HuffmanTree{
-        HuffmanNode * root;
         std::priority_queue<HuffmanNode*, std::vector<HuffmanNode *>, comp> histoCopy;
 
         HuffmanTree(std::vector<std::pair <char, int> > histoCars){
             //Copiando los pares caracter - frecuencia del histograma...
             for(int i = 0; i < histoCars.size(); i++){
                 HuffmanNode * huffPtr = new HuffmanNode(histoCars.at(i).first, histoCars.at(i).second);
+                std::cout << "Recorriendo el array " << i << std::endl;
+                std::cout << huffPtr->caracter <<  '\t' << huffPtr->frecuencia << std::endl;
+                //TODO: Averiguar por qué se putea cuando se le hace push al priority_queue
                 histoCopy.push(huffPtr);
-                //La siguiente línea es de prueba...
-                std::cout << histoCopy.top()->caracter << '\t' << histoCopy.top()->frecuencia;
             }
  
             while(histoCopy.size() > 1){
