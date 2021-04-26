@@ -1,4 +1,5 @@
 #include "ArchivoFASTA.hpp"
+#include "HuffmanTree.hpp"
 #include <string.h>
 #include <bitset>
 
@@ -211,13 +212,8 @@ void ArchivoFASTA::ayuda(){
     std::cout << "decodificar <nombre_archivo.fabin>\tDecodifica el contenido de un archivo binario de extensión .fabin y lo carga en memoria." << std::endl;
 }
 
-//Función auxiliar para ordenar el vector 'histogramaCaracteres'
-bool sortbysec(const std::pair<char, int> &a, const std::pair<char, int> &b){
-    return (a.second < b.second);
-}
-
 bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
-    try{
+    // try{
         //String binario al que se va a concatenar cada uno de los campos binarios especificados en el formato.
         std::string stringBinario;
         //1. Codificar mediante algoritmo de Huffman
@@ -257,6 +253,8 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         std::sort(histogramaCaracteres.begin(), histogramaCaracteres.end(), sortbysec);
 
         //  c. Crear árbol de Huffman.
+        HuffmanTree arbol(histogramaCaracteres);
+        //arbol.inorder(arbol.root);
 
         //  d. Crear string binario con el formato especificado en el enunciado del proyecto (que se guarda en el archivo .fabin)
         // 'n': número entero de 2 bytes que representa la cantidad de bases diferentes presentes en las secuencias cargadas en ese momento en memoria.
@@ -310,11 +308,11 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
 
         //2. Guardar en archivo .fabin
         return true;
-    }
-    catch(std::exception e){
-        std::cout << "No se pueden guardar las secuencias cargadas en " << nombreArchivoFABin << ".fabin" << std::endl;
-        return false;
-    }
+    // }
+    // catch(std::exception e){
+    //     std::cout << "No se pueden guardar las secuencias cargadas en " << nombreArchivoFABin << ".fabin" << std::endl;
+    //     return false;
+    // }
 }
 
 bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin){}
