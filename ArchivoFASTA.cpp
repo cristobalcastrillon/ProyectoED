@@ -262,7 +262,7 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         for(int i = 0; i < CANTIDAD_BASES; i++){
             if(basesMemoria.at(i).getCantidad() > 0 ){
                 n++;
-                c_f += arbol.huffmanCode[basesMemoria.at(i).getLetraBase()] + std::bitset<64>(basesMemoria.at(i).getCantidad(), 8);
+                c_f += arbol.huffmanCode[basesMemoria.at(i).getLetraBase()] + std::bitset<64>(basesMemoria.at(i).getCantidad()).to_string();
             }
         }
 
