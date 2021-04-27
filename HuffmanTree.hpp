@@ -12,7 +12,8 @@ struct comp{
 };
 
 struct HuffmanTree{
-        std::priority_queue<HuffmanNode*, std::vector<HuffmanNode *>, comp> histoCopy;
+        std::priority_queue<HuffmanNode*, std::vector<HuffmanNode*>, comp> histoCopy;
+        std::unordered_map<char, std::string> huffmanCode;
 
         HuffmanTree(std::vector<std::pair <char, int> > histoCars){
             //Copiando los pares caracter - frecuencia del histograma...
@@ -22,67 +23,43 @@ struct HuffmanTree{
             }
 
             //Creando el árbol (min heap)...
-            while(histoCopy.size() > 1){
-                imprimirQueue(histoCopy);
+            while(histoCopy.size() != 1){
+                HuffmanNode * left = histoCopy.top(); histoCopy.pop();
+                HuffmanNode * right = histoCopy.top(); histoCopy.pop();
+                int sum = left->frecuencia + right->frecuencia;        
 
-                HuffmanNode * pater;
-                pater->leftChild = histoCopy.top();
-                histoCopy.pop();
-                pater->rightChild = histoCopy.top();
-                histoCopy.pop();
-                pater->frecuencia = (pater->leftChild->frecuencia + pater->rightChild->frecuencia);
-                pater->caracter = '\0';
-
-                // std::cout << "Left: " << pater->leftChild->caracter << ' ' << pater->leftChild->frecuencia << '\t';
-                // std::cout << "Right: " << pater->rightChild->caracter << ' ' << pater->rightChild->frecuencia << '\t';
-                // std::cout << "Pater: " << pater->caracter << ' ' << pater->frecuencia << std::endl;
-
-                histoCopy.push(pater);
+                histoCopy.push(getNode('\0', sum, left, right));
             }
 
             HuffmanNode * root = histoCopy.top();
-            //La siguiente línea es de prueba...
-            //preorder(root);
 
-            std::unordered_map<char, std::string> huffmanCode;
-            //TODO: Averiguar por qué no llega a las hojas con 'codificar'
-            //this->codificar(root, "", huffmanCode);
-
-            // for(int i = 0; i < histoCars.size(); i++){
-            //     std::cout << huffmanCode.at(histoCars.at(i).first) << std::endl;
-            // }
+            codificar(root, "", this->huffmanCode);
         }
 
-        void imprimirQueue(std::priority_queue<HuffmanNode*, std::vector<HuffmanNode *>, comp> histoCopy){
-            while(histoCopy.size()>0){
-                std::cout << histoCopy.top()->frecuencia << ' ';
-                histoCopy.pop();
-            }
-            std::cout << '\n';
+        HuffmanNode* getNode(char ch, int freq, HuffmanNode* left, HuffmanNode* right)
+        {
+            HuffmanNode* node = new HuffmanNode();
+
+            node->caracter = ch;
+            node->frecuencia = freq;
+            node->leftChild = left;
+            node->rightChild = right;
+
+            return node;
         }
 
         void codificar(HuffmanNode* root, std::string str, std::unordered_map<char, std::string> &huffmanCode){
             if (!root){
-                std::cout << "Retornó en nullptr" << std::endl;
                 return;
             }
 
             if (root->leftChild == NULL && root->rightChild == NULL){
-                std::cout << "Retornó en hoja" << std::endl;
-                huffmanCode.at(root->caracter) = str;
+                huffmanCode[root->caracter] = str;
+                //La siguiente línea es de prueba...
+                //std::cout << root->caracter << '\t' << str << std::endl;
             }
-
-            std::cout << "Entró" << std::endl;
 
             codificar(root->leftChild, str + "0", huffmanCode);
             codificar(root->rightChild, str + "1", huffmanCode);
-        }
-
-        void preorder(HuffmanNode * nodo){
-            if(nodo == NULL)
-                return;
-            std::cout << nodo->caracter << '\t' << nodo->frecuencia << std::endl;
-            preorder(nodo->leftChild);
-            preorder(nodo->rightChild);
         }
 };

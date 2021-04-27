@@ -212,7 +212,7 @@ bool sortbysec(const std::pair<char, int> &a, const std::pair<char, int> &b){
 }
 
 bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
-    // try{
+    try{
         //String binario al que se va a concatenar cada uno de los campos binarios especificados en el formato.
         std::string stringBinario;
         //1. Codificar mediante algoritmo de Huffman
@@ -253,7 +253,6 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
 
         //  c. Crear árbol de Huffman.
         HuffmanTree arbol(histogramaCaracteres);
-        //arbol.inorder(arbol.root);
 
         //  d. Crear string binario con el formato especificado en el enunciado del proyecto (que se guarda en el archivo .fabin)
         // 'n': número entero de 2 bytes que representa la cantidad de bases diferentes presentes en las secuencias cargadas en ese momento en memoria.
@@ -266,8 +265,7 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
                 //TODO: desarrollar getCodigoHuffman
                 //   OJO: debe poder recibir como parámetro la cantidad de bits que se quieren usar para el código (en este caso 8 bits)
                 //   TODO: averiguar si se retornarían códigos de más de 8 bits, si es así, el parámetro es necesario, si no, se retorna un código de 8 bits.
-                //c_f += getCodigoHuffman(basesMemoria.at(i).getLetraBase()) + std::bitset<64>(basesMemoria.at(i).getCantidad(), 8);
-                c_f += std::bitset<64>(basesMemoria.at(i).getCantidad()).to_string();
+                c_f += arbol.huffmanCode[basesMemoria.at(i).getLetraBase()] + std::bitset<64>(basesMemoria.at(i).getCantidad(), 8);
             }
         }
 
@@ -280,10 +278,10 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         for(int i = 0; i < lineasDescriptivas.size(); i++){
             //li es un número entero de 2 bytes que representa el tamaño del nombre de la i-ésima secuencia.
             stringBinario += std::bitset<16>(lineasDescriptivas.at(i).size()).to_string();
-            // for(int j = 0; j < lineasDescriptivas.at(i).size(); i++){
-            //     //sij es el caracter que se encuentra en la j-ésima posición del nombre de la i-ésima secuencia.
-            //     // stringBinario += getCodigoHuffman(lineasDescriptivas.at(i).at(j), 8);
-            // }
+            for(int j = 0; j < lineasDescriptivas.at(i).size(); i++){
+                //sij es el caracter que se encuentra en la j-ésima posición del nombre de la i-ésima secuencia.
+                stringBinario += arbol.huffmanCode[lineasDescriptivas.at(i).at(j)];
+            }
         }
 
         for(int i = 0; i < secLista.size(); i++){
@@ -292,26 +290,26 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
             //xi un número entero de 2 bytes que representa la indentación de la i-ésima secuencia.
             //TODO: Averiguar cómo desarrollar una solución a 'xi'.
             //binary_codei es la secuencia binaria que representa la i-ésima secuencia. Note que si la secuencia no es múltiplo de 8, se debe completar con los “0” necesarios.
-            // for(int j = 0; j < secLista.at(i).getSecuencia().size(); j++){
-            //     // stringBinario += getCodigoHuffman(secLista.at(i).getSecuencia().at(j), 8);
-            // }
+            for(int j = 0; j < secLista.at(i).getSecuencia().size(); j++){
+                stringBinario += arbol.huffmanCode[secLista.at(i).getSecuencia().at(j)];
+            }
         }
 
         //El siguiente ciclo es de prueba...
-        for(int i = 0; i < histogramaCaracteres.size(); i++){
-            std::cout << histogramaCaracteres.at(i).first << '\t' << histogramaCaracteres.at(i).second << std::endl;
-        }
+        // for(int i = 0; i < histogramaCaracteres.size(); i++){
+        //     std::cout << histogramaCaracteres.at(i).first << '\t' << histogramaCaracteres.at(i).second << std::endl;
+        // }
 
         //La siguiente línea es de prueba...
         std::cout << stringBinario << std::endl;
 
         //2. Guardar en archivo .fabin
         return true;
-    // }
-    // catch(std::exception e){
-    //     std::cout << "No se pueden guardar las secuencias cargadas en " << nombreArchivoFABin << ".fabin" << std::endl;
-    //     return false;
-    // }
+    }
+    catch(std::exception e){
+        std::cout << "No se pueden guardar las secuencias cargadas en " << nombreArchivoFABin << ".fabin" << std::endl;
+        return false;
+    }
 }
 
 bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin){}
