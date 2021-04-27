@@ -212,7 +212,7 @@ bool sortbysec(const std::pair<char, int> &a, const std::pair<char, int> &b){
 }
 
 bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
-    try{
+    // try{
         //String binario al que se va a concatenar cada uno de los campos binarios especificados en el formato.
         std::string stringBinario;
         //1. Codificar mediante algoritmo de Huffman
@@ -275,7 +275,7 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         for(int i = 0; i < lineasDescriptivas.size(); i++){
             //li es un número entero de 2 bytes que representa el tamaño del nombre de la i-ésima secuencia.
             stringBinario += std::bitset<16>(lineasDescriptivas.at(i).size()).to_string();
-            for(int j = 0; j < lineasDescriptivas.at(i).size(); i++){
+            for(int j = 0; j < lineasDescriptivas.at(i).size(); j++){
                 //sij es el caracter que se encuentra en la j-ésima posición del nombre de la i-ésima secuencia.
                 stringBinario += arbol.huffmanCode[lineasDescriptivas.at(i).at(j)];
             }
@@ -302,11 +302,11 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
 
         //2. Guardar en archivo .fabin
         return true;
-    }
-    catch(std::exception e){
-        std::cout << "No se pueden guardar las secuencias cargadas en " << nombreArchivoFABin << ".fabin" << std::endl;
-        return false;
-    }
+    // }
+    // catch(std::exception e){
+    //     std::cout << "No se pueden guardar las secuencias cargadas en " << nombreArchivoFABin << ".fabin" << std::endl;
+    //     return false;
+    // }
 }
 
 bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin){}
