@@ -5,13 +5,9 @@
 #include <unordered_map>
 #include <string>
 
-bool sortbysec(const std::pair<char, int> &a, const std::pair<char, int> &b){
-    return (a.second > b.second);
-}
-
 struct comp{
     bool operator()(const HuffmanNode * a, const HuffmanNode * b){
-        return (a->frecuencia > b->frecuencia);
+        return (a->frecuencia >= b->frecuencia);
     }
 };
 
@@ -25,7 +21,7 @@ struct HuffmanTree{
                 histoCopy.push(huffPtr);
             }
 
-            //Creando el árbol (heap)...
+            //Creando el árbol (min heap)...
             while(histoCopy.size() > 1){
                 HuffmanNode * a = histoCopy.top();
                 histoCopy.pop();
