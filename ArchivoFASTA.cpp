@@ -212,7 +212,7 @@ bool sortbysec(const std::pair<char, int> &a, const std::pair<char, int> &b){
 }
 
 bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
-    // try{
+    try{
         //String binario al que se va a concatenar cada uno de los campos binarios especificados en el formato.
         std::string stringBinario;
         //1. Codificar mediante algoritmo de Huffman
@@ -301,12 +301,15 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         std::cout << stringBinario << std::endl;
 
         //2. Guardar en archivo .fabin
+        std::ofstream writeFABin(nombreArchivoFABin);
+        writeFABin << stringBinario;
+        writeFABin.close();
         return true;
-    // }
-    // catch(std::exception e){
-    //     std::cout << "No se pueden guardar las secuencias cargadas en " << nombreArchivoFABin << ".fabin" << std::endl;
-    //     return false;
-    // }
+    }
+    catch(std::exception e){
+        std::cout << "No se pueden guardar las secuencias cargadas en " << nombreArchivoFABin << ".fabin" << std::endl;
+        return false;
+    }
 }
 
 bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin){}
