@@ -262,9 +262,6 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         for(int i = 0; i < CANTIDAD_BASES; i++){
             if(basesMemoria.at(i).getCantidad() > 0 ){
                 n++;
-                //TODO: desarrollar getCodigoHuffman
-                //   OJO: debe poder recibir como parámetro la cantidad de bits que se quieren usar para el código (en este caso 8 bits)
-                //   TODO: averiguar si se retornarían códigos de más de 8 bits, si es así, el parámetro es necesario, si no, se retorna un código de 8 bits.
                 c_f += arbol.huffmanCode[basesMemoria.at(i).getLetraBase()] + std::bitset<64>(basesMemoria.at(i).getCantidad(), 8);
             }
         }
