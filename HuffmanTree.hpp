@@ -58,7 +58,7 @@ struct HuffmanTree{
                 return;
             }
 
-            if (!root->leftChild && !root->rightChild) {
+            if (root->leftChild != NULL && root->rightChild != NULL){
                 std::cout << "Retornó en hoja" << std::endl;
                 huffmanCode.at(root->caracter) = str;
             }

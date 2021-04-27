@@ -1,9 +1,4 @@
 #include "ArchivoFASTA.hpp"
-#include "HuffmanTree.hpp"
-#include <string.h>
-#include <bitset>
-
-//TODO: Implementar los métodos de la clase ArchivoFASTA.
 
 ArchivoFASTA::ArchivoFASTA(){
 

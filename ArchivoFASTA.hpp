@@ -3,6 +3,10 @@
 
 #include <iostream>
 #include <fstream>
+#include <string.h>
+#include <bitset>
+#include <algorithm>
+#include "HuffmanTree.hpp"
 #include "Secuencia.hpp"
 
 struct ArchivoFASTA {
