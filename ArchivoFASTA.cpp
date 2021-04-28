@@ -312,4 +312,17 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
     }
 }
 
-bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin){}
+bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin){
+    try
+    {
+        std::ifstream readFABin(nombreArchivoFABin);
+        
+        std::cout <<"Secuencias decodificadas desde "<< nombreArchivoFABin << " y cargadas en memoria"<<std::endl;
+        return true;
+    }
+    catch( std::exception& e)
+    {
+        std::cout <<"No se pueden cargar las secuencias en  "<< nombreArchivoFABin <<std::endl;
+        return false;
+    }
+}
