@@ -15,6 +15,8 @@ struct HuffmanTree{
         std::priority_queue<HuffmanNode*, std::vector<HuffmanNode*>, comp> histoCopy;
         std::unordered_map<char, std::string> huffmanCode;
 
+        HuffmanTree(){} 
+
         HuffmanTree(std::vector<std::pair <char, int> > histoCars){
             //Copiando los pares caracter - frecuencia del histograma...
             for(int i = 0; i < histoCars.size(); i++){

@@ -1,4 +1,5 @@
 #include "ArchivoFASTA.hpp"
+#include <string>
 
 ArchivoFASTA::ArchivoFASTA(){
 
@@ -211,7 +212,7 @@ bool sortbysec(const std::pair<char, int> &a, const std::pair<char, int> &b){
     return (a.second > b.second);
 }
 
-bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
+HuffmanTree* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
     try{
         //String binario al que se va a concatenar cada uno de los campos binarios especificados en el formato.
         std::string stringBinario;
@@ -262,7 +263,7 @@ bool ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         for(int i = 0; i < CANTIDAD_BASES; i++){
             if(basesMemoria.at(i).getCantidad() > 0 ){
                 n++;
-                c_f += arbol.huffmanCode[basesMemoria.at(i).getLetraBase()] + std::bitset<64>(basesMemoria.at(i).getCantidad()).to_string();
+                c_f += std::bitset<8>(arbol.huffmanCode[basesMemoria.at(i).getLetraBase()] ).to_string() + std::bitset<64>(basesMemoria.at(i).getCantidad()).to_string();
             }
         }
 
@@ -316,7 +317,21 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin){
     try
     {
         std::ifstream readFABin(nombreArchivoFABin);
-        
+        std::string linea;
+        //n cantidad de secuencias
+        int n_int=0;
+        std::string n_str = linea.substr(0,15);
+        n_int=stoi(n_str);
+        int n=binaryToDecimal(n_int);
+        //un código de la base de genoma (representación binaria de cada letra)
+        int ci=0;
+        std::string ci_str = linea;
+        //frecuencia asociada al código ()
+        int fi=0;
+        //ns Cantidad de secuencias
+        int ns;
+
+        readFABin.close();
         std::cout <<"Secuencias decodificadas desde "<< nombreArchivoFABin << " y cargadas en memoria"<<std::endl;
         return true;
     }
@@ -325,4 +340,26 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin){
         std::cout <<"No se pueden cargar las secuencias en  "<< nombreArchivoFABin <<std::endl;
         return false;
     }
+}
+
+// Function to convert binary to decimal
+int binaryToDecimal(int n)
+{
+    int num = n;
+    int dec_value = 0;
+ 
+    // Initializing base value to 1, i.e 2^0
+    int base = 1;
+ 
+    int temp = num;
+    while (temp) {
+        int last_digit = temp % 10;
+        temp = temp / 10;
+ 
+        dec_value += last_digit * base;
+ 
+        base = base * 2;
+    }
+ 
+    return dec_value;
 }

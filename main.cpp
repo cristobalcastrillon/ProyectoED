@@ -13,6 +13,7 @@ int main(int argc, const char * argv[]) {
 
     string comando;
     ArchivoFASTA archivoNuevo;
+    HuffmanNode* arbol;//la raíz del arbol
     int cont = 0; //Contador de secuencias
 
     while(1)
@@ -95,7 +96,7 @@ int main(int argc, const char * argv[]) {
             //PARÁMETROS: 
             //  Nombre del archivo binario a guardar: 'nombre_archivoFABin'
             string nombre_archivoFABin = comando.substr(10);
-            archivoNuevo.codificar(nombre_archivoFABin);
+            arbol=archivoNuevo.codificar(nombre_archivoFABin);
         }
         if(comando.find("decodificar") != string::npos)
         {
