@@ -212,7 +212,7 @@ bool sortbysec(const std::pair<char, int> &a, const std::pair<char, int> &b){
     return (a.second > b.second);
 }
 
-HuffmanTree* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
+HuffmanNode* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
     try{
         //String binario al que se va a concatenar cada uno de los campos binarios especificados en el formato.
         std::string stringBinario;
@@ -253,7 +253,7 @@ HuffmanTree* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         std::sort(histogramaCaracteres.begin(), histogramaCaracteres.end(), sortbysec);
 
         //  c. Crear árbol de Huffman.
-        HuffmanTree arbol(histogramaCaracteres);
+        HuffmanTree * arbol = new HuffmanTree(histogramaCaracteres);
 
         //  d. Crear string binario con el formato especificado en el enunciado del proyecto (que se guarda en el archivo .fabin)
         // 'n': número entero de 2 bytes que representa la cantidad de bases diferentes presentes en las secuencias cargadas en ese momento en memoria.
@@ -263,7 +263,7 @@ HuffmanTree* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         for(int i = 0; i < CANTIDAD_BASES; i++){
             if(basesMemoria.at(i).getCantidad() > 0 ){
                 n++;
-                c_f += std::bitset<8>(arbol.huffmanCode[basesMemoria.at(i).getLetraBase()] ).to_string() + std::bitset<64>(basesMemoria.at(i).getCantidad()).to_string();
+                c_f += std::bitset<8>(arbol->huffmanCode[basesMemoria.at(i).getLetraBase()] ).to_string() + std::bitset<64>(basesMemoria.at(i).getCantidad()).to_string();
             }
         }
 
@@ -278,7 +278,7 @@ HuffmanTree* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
             stringBinario += std::bitset<16>(lineasDescriptivas.at(i).size()).to_string();
             for(int j = 0; j < lineasDescriptivas.at(i).size(); j++){
                 //sij es el caracter que se encuentra en la j-ésima posición del nombre de la i-ésima secuencia.
-                stringBinario += arbol.huffmanCode[lineasDescriptivas.at(i).at(j)];
+                stringBinario += arbol->huffmanCode[lineasDescriptivas.at(i).at(j)];
             }
         }
 
@@ -289,7 +289,7 @@ HuffmanTree* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
             //TODO: Averiguar cómo desarrollar una solución a 'xi'.
             //binary_codei es la secuencia binaria que representa la i-ésima secuencia. Note que si la secuencia no es múltiplo de 8, se debe completar con los “0” necesarios.
             for(int j = 0; j < secLista.at(i).getSecuencia().size(); j++){
-                stringBinario += arbol.huffmanCode[secLista.at(i).getSecuencia().at(j)];
+                stringBinario += arbol->huffmanCode[secLista.at(i).getSecuencia().at(j)];
             }
         }
 
@@ -305,40 +305,11 @@ HuffmanTree* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         std::ofstream writeFABin(nombreArchivoFABin);
         writeFABin << stringBinario;
         writeFABin.close();
-        return true;
+        return arbol->histoCopy.top();
     }
     catch(std::exception e){
         std::cout << "No se pueden guardar las secuencias cargadas en " << nombreArchivoFABin << ".fabin" << std::endl;
-        return false;
-    }
-}
-
-bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin){
-    try
-    {
-        std::ifstream readFABin(nombreArchivoFABin);
-        std::string linea;
-        //n cantidad de secuencias
-        int n_int=0;
-        std::string n_str = linea.substr(0,15);
-        n_int=stoi(n_str);
-        int n=binaryToDecimal(n_int);
-        //un código de la base de genoma (representación binaria de cada letra)
-        int ci=0;
-        std::string ci_str = linea;
-        //frecuencia asociada al código ()
-        int fi=0;
-        //ns Cantidad de secuencias
-        int ns;
-
-        readFABin.close();
-        std::cout <<"Secuencias decodificadas desde "<< nombreArchivoFABin << " y cargadas en memoria"<<std::endl;
-        return true;
-    }
-    catch( std::exception& e)
-    {
-        std::cout <<"No se pueden cargar las secuencias en  "<< nombreArchivoFABin <<std::endl;
-        return false;
+        return NULL;
     }
 }
 
@@ -362,4 +333,33 @@ int binaryToDecimal(int n)
     }
  
     return dec_value;
+}
+
+bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin, HuffmanNode * arbol){
+    try
+    {
+        std::ifstream readFABin(nombreArchivoFABin);
+        std::string linea;
+        //n cantidad de secuencias
+        int n_int=0;
+        std::string n_str = linea.substr(0,15);
+        n_int=stoi(n_str);
+        int n = binaryToDecimal(n_int);
+        //un código de la base de genoma (representación binaria de cada letra)
+        int ci=0;
+        std::string ci_str = linea;
+        //frecuencia asociada al código ()
+        int fi=0;
+        //ns Cantidad de secuencias
+        int ns;
+
+        readFABin.close();
+        std::cout <<"Secuencias decodificadas desde "<< nombreArchivoFABin << " y cargadas en memoria"<<std::endl;
+        return true;
+    }
+    catch( std::exception& e)
+    {
+        std::cout <<"No se pueden cargar las secuencias en  "<< nombreArchivoFABin <<std::endl;
+        return false;
+    }
 }

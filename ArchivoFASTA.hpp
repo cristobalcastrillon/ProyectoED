@@ -35,8 +35,8 @@ struct ArchivoFASTA {
     void ayuda();
 
     //Segunda entrega:
-    bool codificar(std::string nombreArchivoFABin); //Codificación de Huffman
-    bool decodificar(std::string nombreArchivoFABin); //Decodificación de Huffman
+    HuffmanNode * codificar(std::string nombreArchivoFABin); //Codificación de Huffman
+    bool decodificar(std::string nombreArchivoFABin, HuffmanNode * arbol); //Decodificación de Huffman
 
 };
 
