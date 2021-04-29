@@ -263,7 +263,8 @@ HuffmanNode* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         for(int i = 0; i < CANTIDAD_BASES; i++){
             if(basesMemoria.at(i).getCantidad() > 0 ){
                 n++;
-                c_f += std::bitset<8>(arbol->huffmanCode[basesMemoria.at(i).getLetraBase()] ).to_string() + std::bitset<64>(basesMemoria.at(i).getCantidad()).to_string();
+                std::bitset<8> bits(arbol->huffmanCode[basesMemoria.at(i).getLetraBase()]);
+                c_f += bits.to_string() + std::bitset<64>(basesMemoria.at(i).getCantidad()).to_string();
             }
         }
 
@@ -307,6 +308,16 @@ HuffmanNode* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         writeFABin.close();
         return arbol->histoCopy.top();
     }
+        //La siguiente línea es de prueba...
+        std::cout << stringBinario << std::endl;
+
+        //2. Guardar en archivo .fabin
+        std::ofstream writeFABin(nombreArchivoFABin);
+        writeFABin << stringBinario;
+        writeFABin.close();
+        return arbol->histoCopy.top();
+    }
+    catch(std::exception e){
     catch(std::exception e){
         std::cout << "No se pueden guardar las secuencias cargadas en " << nombreArchivoFABin << ".fabin" << std::endl;
         return NULL;
@@ -340,18 +351,32 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin, HuffmanNode * arb
     {
         std::ifstream readFABin(nombreArchivoFABin);
         std::string linea;
-        //n cantidad de secuencias
+        int index;
+        //n cantidad de carcateres
         int n_int=0;
-        std::string n_str = linea.substr(0,15);
+        index=15;
+        std::string n_str = linea.substr(0,index);
         n_int=stoi(n_str);
         int n = binaryToDecimal(n_int);
-        //un código de la base de genoma (representación binaria de cada letra)
-        int ci=0;
-        std::string ci_str = linea;
-        //frecuencia asociada al código ()
-        int fi=0;
+        //leyendo ci y fi
+        int ci_fi = 9*n;
+        index=index+ci_fi;
         //ns Cantidad de secuencias
-        int ns;
+
+        std::string ns_str = linea.substr(index,index+32);
+        index= index+32;
+        int ns_int = stoi(ns_str);
+        int ns = binaryToDecimal(ns_int);
+        for (int i =0; i<ns;i++)
+        {
+            //li
+            std::string tamannoNombreSeq_str = linea.substr(index,index+16);
+            int tamannoNombreSeq_int = stoi(tamannoNombreSeq_str);
+            int tamannoNombreSeq = binaryToDecimal(tamannoNombreSeq_int);
+            index=index+16;
+            //sij
+            //std::string nombreSeq = linea.substr();
+        }
 
         readFABin.close();
         std::cout <<"Secuencias decodificadas desde "<< nombreArchivoFABin << " y cargadas en memoria"<<std::endl;
