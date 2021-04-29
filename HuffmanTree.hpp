@@ -20,7 +20,7 @@ struct HuffmanTree
 
     HuffmanTree() {}
 
-    HuffmanTree(std::vector<std::pair<char, int>> histoCars)
+    HuffmanTree(std::vector<std::pair<char, int> > histoCars)
     {
         //Copiando los pares caracter - frecuencia del histograma...
         for (int i = 0; i < histoCars.size(); i++)
@@ -75,27 +75,27 @@ struct HuffmanTree
         codificar(root->leftChild, str + "0", huffmanCode);
         codificar(root->rightChild, str + "1", huffmanCode);
     }
-/*
-    std::string decode(HuffmanNode *root, int &index, std::string str)
-    {
-        std::string retorno;
-        if (root == nullptr)
-        {
-            return;
-        }
 
-        // found a leaf node
-        if (!root->leftChild && !root->rightChild)
-        {
-            retorno= retorno + root->caracter;
-            return;
-        }
+    // std::string decodificar(HuffmanNode * root, int &index, std::string str)
+    // {
+    //     std::string retorno;
+    //     if (root == nullptr)
+    //     {
+    //         return NULL;
+    //     }
 
-        index++;
+    //     //Encontró una hoja
+    //     if (root->leftChild == NULL && root->rightChild == NULL)
+    //     {
+    //         retorno += root->caracter;
+    //         return retorno;
+    //     }
 
-        if (str[index] == '0')
-            decode(root->leftChild, index, str);
-        else
-            decode(root->rightChild, index, str);
-    }*/
+    //     index++;
+
+    //     if (str[index] == '0')
+    //         decodificar(root->leftChild, index, str);
+    //     else
+    //         decodificar(root->rightChild, index, str);
+    // }
 };
