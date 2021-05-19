@@ -256,61 +256,83 @@ HuffmanNode* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         HuffmanTree * arbol = new HuffmanTree(histogramaCaracteres);
 
         //Codificación del string SIN FORMATO:
-        std::string stringArchivo = "";
-        for(int i = 0; i < lineasDescriptivas.size(); i++)
-        {
-            stringArchivo += lineasDescriptivas.at(i) + secLista.at(i).getSecuencia();
-        }
+        // std::string stringArchivo = "";
+        // for(int i = 0; i < lineasDescriptivas.size(); i++)
+        // {
+        //     stringArchivo += lineasDescriptivas.at(i) + secLista.at(i).getSecuencia();
+        // }
 
-        for(int i = 0; i < stringArchivo.size(); i++){
-            stringBinario += arbol->huffmanCode[stringArchivo.at(i)];
-        }
+        // for(int i = 0; i < stringArchivo.size(); i++){
+        //     stringBinario += arbol->huffmanCode[stringArchivo.at(i)];
+        // }
 
         //  d. Crear string binario con el formato especificado en el enunciado del proyecto (que se guarda en el archivo .fabin)
         // 'n': número entero de 2 bytes que representa la cantidad de bases diferentes presentes en las secuencias cargadas en ese momento en memoria.
-        // int n = 0;
-        // //ci y fi son dos números entero de 1 y 8 bytes, respectivamente, que representan un código de la base de genoma y su frecuencia asociada
-        // std::string c_f = "";
-        // for(int i = 0; i < CANTIDAD_BASES; i++){
-        //     if(basesMemoria.at(i).getCantidad() > 0 ){
-        //         n++;
-        //         std::bitset<8> bits(arbol->huffmanCode[basesMemoria.at(i).getLetraBase()]);
-        //         c_f += bits.to_string() + std::bitset<64>(basesMemoria.at(i).getCantidad()).to_string();
-        //     }
-        // }
+        int n = 0;
+        //ci y fi son dos números entero de 1 y 8 bytes, respectivamente, que representan un código de la base de genoma y su frecuencia asociada
+        std::string c_f = "";
+        for(int i = 0; i < CANTIDAD_BASES; i++){
+            if(basesMemoria.at(i).getCantidad() > 0 ){
+                n++;
+                std::bitset<8> bits(arbol->huffmanCode[basesMemoria.at(i).getLetraBase()]);
+                c_f += bits.to_string() + std::bitset<64>(basesMemoria.at(i).getCantidad()).to_string();
+            }
+        }
 
-        // std::string n_binary = std::bitset<16>(n).to_string();
-        // stringBinario = n_binary + c_f;
+        std::string n_binary = std::bitset<16>(n).to_string();
+        stringBinario = n_binary + c_f;
         
-        // //ns (secLista.size()) es un número entero de 4 bytes que representa la cantidad de secuencias que hay en el archivo.
-        // stringBinario += std::bitset<32>(secLista.size()).to_string();
+        //ns (secLista.size()) es un número entero de 4 bytes que representa la cantidad de secuencias que hay en el archivo.
+        stringBinario += std::bitset<32>(secLista.size()).to_string();
 
-        // for(int i = 0; i < lineasDescriptivas.size(); i++){
-        //     //li es un número entero de 2 bytes que representa el tamaño del nombre de la i-ésima secuencia.
-        //     stringBinario += std::bitset<16>(lineasDescriptivas.at(i).size()).to_string();
-        //     for(int j = 0; j < lineasDescriptivas.at(i).size(); j++){
-        //         //sij es el caracter que se encuentra en la j-ésima posición del nombre de la i-ésima secuencia.
-        //         stringBinario += arbol->huffmanCode[lineasDescriptivas.at(i).at(j)];
-        //     }
-        // }
+        for(int i = 0; i < lineasDescriptivas.size(); i++){
+            //li es un número entero de 2 bytes que representa el tamaño del nombre de la i-ésima secuencia.
+            stringBinario += std::bitset<16>(lineasDescriptivas.at(i).size()).to_string();
+            for(int j = 0; j < lineasDescriptivas.at(i).size(); j++){
+                //sij es el caracter que se encuentra en la j-ésima posición del nombre de la i-ésima secuencia.
 
-        // for(int i = 0; i < secLista.size(); i++){
-        //     //wi un número entero de 8 bytes que representa la longitud de la i-ésima secuencia.
-        //     stringBinario += std::bitset<64>(secLista.at(i).getSecuencia().size()).to_string();
-        //     //xi un número entero de 2 bytes que representa la indentación de la i-ésima secuencia.
-        //     //TODO: Averiguar cómo desarrollar una solución a 'xi'.
-        //     //binary_codei es la secuencia binaria que representa la i-ésima secuencia. Note que si la secuencia no es múltiplo de 8, se debe completar con los “0” necesarios.
-        //     for(int j = 0; j < secLista.at(i).getSecuencia().size(); j++){
-        //         stringBinario += arbol->huffmanCode[secLista.at(i).getSecuencia().at(j)];
-        //     }
-        // }
+                //LA SIGUIENTES LÍNEAS SON DE PRUEBA:
+                //Cada caracter de la línea descriptiva está codificado en ocho (8) bits
+                std::bitset<8> bits(arbol->huffmanCode[lineasDescriptivas.at(i).at(j)]);
+                stringBinario += bits.to_string();
 
-        //El siguiente ciclo es de prueba...
+                //LA SIGUIENTE LÍNEA ES LA DE PRODUCCIÓN!
+                //Cada caracter está codificado en una cantidad de bits variable, de acuerdo al algo. de Huffman
+                //stringBinario += arbol->huffmanCode[lineasDescriptivas.at(i).at(j)];
+            }
+        }
+
+        for(int i = 0; i < secLista.size(); i++){
+            //wi un número entero de 8 bytes que representa la longitud de la i-ésima secuencia.
+            stringBinario += std::bitset<64>(secLista.at(i).getSecuencia().size()).to_string();
+
+            //LA SIGUIENTE LÍNEA ES DE PRUEBA...
+            stringBinario += '\n';
+
+            //xi un número entero de 2 bytes que representa la indentación de la i-ésima secuencia.
+            //TODO: Averiguar cómo desarrollar una solución a 'xi'.
+            //binary_codei es la secuencia binaria que representa la i-ésima secuencia. Note que si la secuencia no es múltiplo de 8, se debe completar con los “0” necesarios.
+            std::string binary_code = "";
+            for(int j = 0; j < secLista.at(i).getSecuencia().size(); j++){
+                binary_code += arbol->huffmanCode[secLista.at(i).getSecuencia().at(j)];    
+            }
+            while(binary_code.size() % 8 != 0){
+                
+                //LA SIGUIENTE LÍNEA ES DE PRUEBA...
+                std::cout << "BINARY CODE REMAINDER: " << binary_code.size() % 8 << std::endl;
+
+                binary_code += '0';
+            }
+
+            stringBinario += binary_code + '\n';
+        }
+
+        //EL SIGUIENTE CICLO ES DE PRUEBA...
         // for(int i = 0; i < histogramaCaracteres.size(); i++){
         //     std::cout << histogramaCaracteres.at(i).first << '\t' << histogramaCaracteres.at(i).second << std::endl;
         // }
 
-        //La siguiente línea es de prueba...
+        //LA SIGUIENTE LÍNEA ES DE PRUEBA...
         std::cout << stringBinario << std::endl;
 
         //2. Guardar en archivo .fabin
@@ -414,15 +436,15 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin, HuffmanNode * arb
             decode(arbol, index, archivoComp, paraArchivo);
         }
 
-        std::cout << paraArchivo;
+        std::cout << paraArchivo << std::endl;
 
         readFABin.close();
         //std::cout <<"Secuencias decodificadas desde "<< nombreArchivoFABin << " y cargadas en memoria"<<std::endl;
         return true;
     }
-    catch( std::exception e)
+    catch(std::exception e)
     {
-        std::cout <<"No se pueden cargar las secuencias en  "<< nombreArchivoFABin <<std::endl;
+        std::cout << "No se pueden cargar las secuencias en  " << nombreArchivoFABin << std::endl;
         return false;
     }
 }
