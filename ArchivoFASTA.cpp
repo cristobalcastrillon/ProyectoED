@@ -279,6 +279,9 @@ HuffmanNode* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
             for(int j = 0; j < lineasDescriptivas.at(i).size(); j++){
                 //sij es el caracter que se encuentra en la j-ésima posición del nombre de la i-ésima secuencia.
 
+                //TODO: Las dos variantes son incorrectas:
+                //SE DEBE HALLAR EL VALOR ASCII DE CADA CARACTER DE CADA LÍNEA DESCRIPTIVA, Y ESO (EN BINARIO) ES LO QUE SE GUARDA EN EL ARCHIVO
+                
                 //LA SIGUIENTES LÍNEAS SON DE PRUEBA:
                 //Cada caracter de la línea descriptiva está codificado en ocho (8) bits
                 std::bitset<8> bits(arbol->huffmanCode[lineasDescriptivas.at(i).at(j)]);
@@ -286,7 +289,7 @@ HuffmanNode* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
 
                 //LA SIGUIENTE LÍNEA ES LA DE PRODUCCIÓN!
                 //Cada caracter está codificado en una cantidad de bits variable, de acuerdo al algo. de Huffman
-                //stringBinario += arbol->huffmanCode[lineasDescriptivas.at(i).at(j)];
+                // stringBinario += arbol->huffmanCode[lineasDescriptivas.at(i).at(j)];
             }
         }
 
@@ -321,8 +324,11 @@ HuffmanNode* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         std::fstream writeFABin(nombreArchivoFABin, std::fstream::binary | std::fstream::out | std::fstream::trunc);
         
         if(writeFABin.is_open()){
-            for(int i = 0; i < stringBinario.size(); i++)
-                writeFABin.put(stringBinario[i]);
+            for(int i = 0; i < stringBinario.size(); i += 8){
+                std::string subString = stringBinario.substr(i, 8);
+                int entero = stoi(subString, 0, 2);
+                writeFABin.put(entero);
+            }
             writeFABin.close();
         }
 
