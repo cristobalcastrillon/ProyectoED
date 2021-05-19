@@ -1,5 +1,4 @@
 #include "ArchivoFASTA.hpp"
-#include <string>
 
 ArchivoFASTA::ArchivoFASTA(){
 
@@ -255,17 +254,6 @@ HuffmanNode* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         //  c. Crear árbol de Huffman.
         HuffmanTree * arbol = new HuffmanTree(histogramaCaracteres);
 
-        //Codificación del string SIN FORMATO:
-        // std::string stringArchivo = "";
-        // for(int i = 0; i < lineasDescriptivas.size(); i++)
-        // {
-        //     stringArchivo += lineasDescriptivas.at(i) + secLista.at(i).getSecuencia();
-        // }
-
-        // for(int i = 0; i < stringArchivo.size(); i++){
-        //     stringBinario += arbol->huffmanCode[stringArchivo.at(i)];
-        // }
-
         //  d. Crear string binario con el formato especificado en el enunciado del proyecto (que se guarda en el archivo .fabin)
         // 'n': número entero de 2 bytes que representa la cantidad de bases diferentes presentes en las secuencias cargadas en ese momento en memoria.
         int n = 0;
@@ -306,25 +294,17 @@ HuffmanNode* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
             //wi un número entero de 8 bytes que representa la longitud de la i-ésima secuencia.
             stringBinario += std::bitset<64>(secLista.at(i).getSecuencia().size()).to_string();
 
-            //LA SIGUIENTE LÍNEA ES DE PRUEBA...
-            stringBinario += '\n';
-
             //xi un número entero de 2 bytes que representa la indentación de la i-ésima secuencia.
             //TODO: Averiguar cómo desarrollar una solución a 'xi'.
             //binary_codei es la secuencia binaria que representa la i-ésima secuencia. Note que si la secuencia no es múltiplo de 8, se debe completar con los “0” necesarios.
             std::string binary_code = "";
-            for(int j = 0; j < secLista.at(i).getSecuencia().size(); j++){
+            for(int j = 0; j < secLista.at(i).getSecuencia().size(); j++)
                 binary_code += arbol->huffmanCode[secLista.at(i).getSecuencia().at(j)];    
-            }
-            while(binary_code.size() % 8 != 0){
-                
-                //LA SIGUIENTE LÍNEA ES DE PRUEBA...
-                std::cout << "BINARY CODE REMAINDER: " << binary_code.size() % 8 << std::endl;
-
+            
+            while(binary_code.size() % 8 != 0)
                 binary_code += '0';
-            }
 
-            stringBinario += binary_code + '\n';
+            stringBinario += binary_code;
         }
 
         //EL SIGUIENTE CICLO ES DE PRUEBA...
@@ -335,10 +315,17 @@ HuffmanNode* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         //LA SIGUIENTE LÍNEA ES DE PRUEBA...
         std::cout << stringBinario << std::endl;
 
+        //TODO: Averiguar por qué no está guardando como binario 
         //2. Guardar en archivo .fabin
-        std::ofstream writeFABin(nombreArchivoFABin);
-        writeFABin << stringBinario;
-        writeFABin.close();
+        nombreArchivoFABin += ".fabin";
+        std::fstream writeFABin(nombreArchivoFABin, std::fstream::binary | std::fstream::out | std::fstream::trunc);
+        
+        if(writeFABin.is_open()){
+            for(int i = 0; i < stringBinario.size(); i++)
+                writeFABin.put(stringBinario[i]);
+            writeFABin.close();
+        }
+
         return arbol->histoCopy.top();
     }
     catch(std::exception e){
