@@ -234,19 +234,6 @@ HuffmanNode* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
             if(basesMemoria.at(i).getCantidad() > 0)
                 histogramaCaracteres.push_back(std::pair<char, int>(basesMemoria.at(i).getLetraBase(), basesMemoria.at(i).getCantidad()));
         }
-        for(int i = 0; i < lineasDescriptivas.size(); i++){
-            for(int j = 0; j < lineasDescriptivas.at(i).size(); j++){
-                bool found = false;
-                for(int k = 0; k < histogramaCaracteres.size(); k++){
-                    if(histogramaCaracteres.at(k).first == lineasDescriptivas.at(i).at(j)){
-                        histogramaCaracteres.at(k).second++;
-                        found = true;
-                    }
-                }
-                if(found == false)
-                    histogramaCaracteres.push_back(std::pair<char, int>(lineasDescriptivas.at(i).at(j), 1));
-            }
-        }
 
         //  b. Ordenar histograma.
         std::sort(histogramaCaracteres.begin(), histogramaCaracteres.end(), sortbysec);
@@ -262,8 +249,9 @@ HuffmanNode* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
         for(int i = 0; i < CANTIDAD_BASES; i++){
             if(basesMemoria.at(i).getCantidad() > 0 ){
                 n++;
-                std::bitset<8> bits(arbol->huffmanCode[basesMemoria.at(i).getLetraBase()]);
-                c_f += bits.to_string() + std::bitset<64>(basesMemoria.at(i).getCantidad()).to_string();
+                //valEntero : código ASCII para el caracter
+                int valEntero = int(basesMemoria.at(i).getLetraBase());
+                c_f += std::bitset<8>(valEntero).to_string() + std::bitset<64>(basesMemoria.at(i).getCantidad()).to_string();
             }
         }
 
@@ -278,18 +266,9 @@ HuffmanNode* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
             stringBinario += std::bitset<16>(lineasDescriptivas.at(i).size()).to_string();
             for(int j = 0; j < lineasDescriptivas.at(i).size(); j++){
                 //sij es el caracter que se encuentra en la j-ésima posición del nombre de la i-ésima secuencia.
-
-                //TODO: Las dos variantes son incorrectas:
-                //SE DEBE HALLAR EL VALOR ASCII DE CADA CARACTER DE CADA LÍNEA DESCRIPTIVA, Y ESO (EN BINARIO) ES LO QUE SE GUARDA EN EL ARCHIVO
-                
-                //LA SIGUIENTES LÍNEAS SON DE PRUEBA:
-                //Cada caracter de la línea descriptiva está codificado en ocho (8) bits
-                std::bitset<8> bits(arbol->huffmanCode[lineasDescriptivas.at(i).at(j)]);
-                stringBinario += bits.to_string();
-
-                //LA SIGUIENTE LÍNEA ES LA DE PRODUCCIÓN!
-                //Cada caracter está codificado en una cantidad de bits variable, de acuerdo al algo. de Huffman
-                // stringBinario += arbol->huffmanCode[lineasDescriptivas.at(i).at(j)];
+                //valEntero : código ASCII para el caracter
+                int valEntero = int(lineasDescriptivas.at(i).at(j));
+                stringBinario += std::bitset<8>(valEntero).to_string();
             }
         }
 
