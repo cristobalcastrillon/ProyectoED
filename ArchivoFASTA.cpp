@@ -277,7 +277,7 @@ HuffmanNode* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
             stringBinario += std::bitset<64>(secLista.at(i).getSecuencia().size()).to_string();
 
             //xi un número entero de 2 bytes que representa la indentación de la i-ésima secuencia.
-            //TODO: Averiguar cómo desarrollar una solución a 'xi'.
+            std::string xi = std::bitset<16>(0).to_string();
             //binary_codei es la secuencia binaria que representa la i-ésima secuencia. Note que si la secuencia no es múltiplo de 8, se debe completar con los “0” necesarios.
             std::string binary_code = "";
             for(int j = 0; j < secLista.at(i).getSecuencia().size(); j++)
@@ -286,7 +286,7 @@ HuffmanNode* ArchivoFASTA::codificar(std::string nombreArchivoFABin){
             while(binary_code.size() % 8 != 0)
                 binary_code += '0';
 
-            stringBinario += binary_code;
+            stringBinario += xi + binary_code;
         }
 
         //EL SIGUIENTE CICLO ES DE PRUEBA...

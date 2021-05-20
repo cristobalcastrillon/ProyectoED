@@ -79,6 +79,7 @@
         "stop_token": "cpp",
         "__tree": "cpp",
         "map": "cpp",
-        "semaphore": "cpp"
+        "semaphore": "cpp",
+        "filesystem": "cpp"
     }
 }
