@@ -104,7 +104,7 @@ int main(int argc, const char * argv[]) {
             //PARÁMETROS: 
             //  Nombre del archivo binario a leer: 'nombre_archivoFABin'
             string nombre_archivoFABin = comando.substr(12);   
-            archivoNuevo.decodificar(nombre_archivoFABin, arbol);
+            archivoNuevo.decodificar(nombre_archivoFABin);
         }
         if(comando.find("salir") != string::npos)
         {
