@@ -271,13 +271,11 @@ HuffmanNode *ArchivoFASTA::codificar(std::string nombreArchivoFABin)
         {
             std::vector<Base> basesTemp = secLista.at(i).getBases();
             for (int j = 0; j < basesTemp.size(); j++)
-            {
                 basesMemoria.at(j).setCantidad(basesMemoria.at(j).getCantidad() + basesTemp.at(j).getCantidad());
-            }
         }
 
         //histogramaCaracteres: vector de pares caracter - frecuencia.
-        std::vector<std::pair<char, int>> histogramaCaracteres;
+        std::vector<std::pair<char, int> > histogramaCaracteres;
 
         for (int i = 0; i < CANTIDAD_BASES; i++)
         {
@@ -372,7 +370,7 @@ HuffmanNode *ArchivoFASTA::codificar(std::string nombreArchivoFABin)
     }
     catch (std::exception e)
     {
-        std::cout << "No se pueden guardar las secuencias cargadas en " << nombreArchivoFABin << ".fabin" << std::endl;
+        std::cout << "No se puede guardar las secuencias cargadas en " << nombreArchivoFABin << ".fabin" << std::endl;
         return NULL;
     }
 }
@@ -431,23 +429,23 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin)
         readFABin.open(nombreArchivoFABin, std::ios::binary | std::ios::in);
         std::string stringBinario = "";
         std::bitset<8> buffer;
-        while(readFABin.read((char*)&buffer,1))
+        while(readFABin.read((char*)&buffer, 1))
         {
             stringBinario = stringBinario + buffer.to_string();
         }
         readFABin.close();
         std::cout << "Extrae datos" << std::endl;
         //Reconstruyendo el árbol de Huffman
-        int index=15;
+        int index = 15;
         //leyendo n
-        int n = binaryToDecimal(stoi(stringBinario.substr(0,index)));
+        int n = binaryToDecimal(stoi(stringBinario.substr(0, index)));
         index++;
-        std::cout << "n=" << n << std::endl;
+        std::cout << "n = " << n << std::endl;
         //leyendo ci y fi
-        std::vector<std::pair<char, int>> histogramaCaracteres;
+        std::vector<std::pair<char, int> > histogramaCaracteres;
         char ci;
         int fi;
-        for(int i=0;i<n;i++)
+        for(int i = 0; i < n; i++)
         {
             //Sacando ci
             ci=(char)binaryToDecimal(stoi(stringBinario.substr(index,index+8)));
