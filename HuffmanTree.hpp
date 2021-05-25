@@ -76,26 +76,26 @@ struct HuffmanTree
         codificar(root->rightChild, str + "1", huffmanCode);
     }
 
-    // std::string decodificar(HuffmanNode * root, int &index, std::string str)
-    // {
-    //     std::string retorno;
-    //     if (root == nullptr)
-    //     {
-    //         return NULL;
-    //     }
+    std::string decodificar(HuffmanNode * root, int &index, std::string str)
+    {
+        std::string retorno;
+        if (root == nullptr)
+        {
+            return NULL;
+        }
 
-    //     //Encontró una hoja
-    //     if (root->leftChild == NULL && root->rightChild == NULL)
-    //     {
-    //         retorno += root->caracter;
-    //         return retorno;
-    //     }
+        //Encontró una hoja
+        if (root->leftChild == NULL && root->rightChild == NULL)
+        {
+            retorno += root->caracter;
+            return retorno;
+        }
 
-    //     index++;
+        index++;
 
-    //     if (str[index] == '0')
-    //         decodificar(root->leftChild, index, str);
-    //     else
-    //         decodificar(root->rightChild, index, str);
-    // }
+        if (str[index] == '0')
+            decodificar(root->leftChild, index, str);
+        else
+            decodificar(root->rightChild, index, str);
+    }
 };

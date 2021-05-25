@@ -425,6 +425,7 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin)
 {
     try
     {
+        //Extrayendo los datos del archivo binario...
         std::ifstream readFABin;
         readFABin.open(nombreArchivoFABin, std::ios::binary | std::ios::in);
         std::string stringBinario = "";
@@ -434,39 +435,47 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin)
             stringBinario = stringBinario + buffer.to_string();
         }
         readFABin.close();
-        std::cout << "Extrae datos" << std::endl;
-        //Reconstruyendo el árbol de Huffman
-        int index = 15;
+
+        //Guardando cada campo del formato...
         //leyendo n
-        int n = binaryToDecimal(stoi(stringBinario.substr(0, index)));
-        index++;
+        int n = binaryToDecimal(stoi(stringBinario.substr(0, 16)));
+        int index = 17;
         std::cout << "n = " << n << std::endl;
         //leyendo ci y fi
         std::vector<std::pair<char, int> > histogramaCaracteres;
         char ci;
         int fi;
+        //ESTE FOR ESTÁ MAL: LO QUE SE TIENE QUE HACER ES BUSCAR LA CANTIDAD DE REPETICIONES PARA CADA UNA DE LAS BASES (A,C,G,T,U...) SON 16 EN TOTAL
         for(int i = 0; i < n; i++)
         {
             //Sacando ci
-            ci=(char)binaryToDecimal(stoi(stringBinario.substr(index,index+8)));
-            index+=8;
-            index++;
+            ci = (char)binaryToDecimal(stoi(stringBinario.substr(index, 8)));
+            index += 9;
             //Sacando fi
-            fi=binaryToDecimal(stoi(stringBinario.substr(index,index+64)));
-            index+=64;
-            index++;
-            histogramaCaracteres.push_back(std::pair<char,int>(ci,fi));
+            fi = binaryToDecimal(stoi(stringBinario.substr(index, 64)));
+            index += 65;
+            histogramaCaracteres.push_back(std::pair<char,int>(ci, fi));
         }
+
+        //LOOP DE PRUEBA...
+        for(int i = 0; i < histogramaCaracteres.size(); i++){
+            std::cout << "Character: " << histogramaCaracteres.at(i).first << "\tFrequency: " << histogramaCaracteres.at(i).second << std::endl;
+        }
+
         std::sort(histogramaCaracteres.begin(), histogramaCaracteres.end(), sortbysec);
-        //Creando el arbol de Huffman
+        //Creando el árbol de Huffman
         HuffmanTree *arbol = new HuffmanTree(histogramaCaracteres);
         //Leyendo ns
-        int ns = binaryToDecimal(stoi(stringBinario.substr(index,index+32)));
+        int ns = binaryToDecimal(stoi(stringBinario.substr(index, 32)));
         index++;
 
+        //Siguientes dos líneas: versión de Nicolás
         std::string decoded;
-        //NO SE COMO SACAR LA RAIZ DEL ARBOL
-        decode(arbol,index,stringBinario,decoded);
+        decode(arbol->histoCopy.top(), index, stringBinario, decoded);
+
+        //Siguiente línea: versión usando el 'decodificar' que tenemos en HuffmanTree
+        // std::string decoded2 = arbol->decodificar(arbol->histoCopy.top(), index, stringBinario);
+
         std::cout << "Secuencias decodificadas desde " << nombreArchivoFABin << " y cargadas en memoria" << std::endl;
         return true;
     }
