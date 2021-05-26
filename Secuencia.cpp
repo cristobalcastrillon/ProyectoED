@@ -103,7 +103,26 @@ bool Secuencia::getIncompleta(){
     return incompleta;
 }
 
-void Secuencia::construirGrafo(){}
+void Secuencia::construirGrafo(){
+    for (int i = 0; i < this->matrizSecuencia.size(); i++)
+    {
+        for (int j = 0; j < this->matrizSecuencia.at(i).size(); j++)
+        {
+            if (i - 1 != 0)
+                //superior
+                this->grafoSecuencia.insertarArista(this->matrizSecuencia.at(i).at(j), this->matrizSecuencia.at(i - 1).at(j));
+            if (i + 1 != this->matrizSecuencia.size())
+                //inferior
+                this->grafoSecuencia.insertarArista(this->matrizSecuencia.at(i).at(j), this->matrizSecuencia.at(i + 1).at(j));
+            if (j != this->matrizSecuencia.at(i).size())
+                //izquierdo
+                this->grafoSecuencia.insertarArista(this->matrizSecuencia.at(i).at(j), this->matrizSecuencia.at(i).at(j + 1));
+            if (j - 1 != 0)
+                //derecho
+                this->grafoSecuencia.insertarArista(this->matrizSecuencia.at(i).at(j), this->matrizSecuencia.at(i).at(j - 1));
+        }
+    }
+}
 
 void Secuencia::setMatriz(std::vector<std::vector<char> > matriz){
     this->matrizSecuencia = matriz;

@@ -1,4 +1,5 @@
 #include "ArchivoFASTA.hpp"
+#include "Grafo.hpp"
 #include <sstream>
 
 //-------------------------------------------------------------PRIMERA ENTREGA------------------------------------------------------------------
@@ -277,7 +278,7 @@ HuffmanNode *ArchivoFASTA::codificar(std::string nombreArchivoFABin)
         }
 
         //histogramaCaracteres: vector de pares caracter - frecuencia.
-        std::vector<std::pair<char, int> > histogramaCaracteres;
+        std::vector<std::pair<char, int>> histogramaCaracteres;
 
         for (int i = 0; i < CANTIDAD_BASES; i++)
         {
@@ -431,7 +432,7 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin)
         readFABin.open(nombreArchivoFABin, std::ios::binary | std::ios::in);
         std::string stringBinario = "";
         std::bitset<8> buffer;
-        while(readFABin.read((char*)&buffer, 1))
+        while (readFABin.read((char *)&buffer, 1))
         {
             stringBinario = stringBinario + buffer.to_string();
         }
@@ -443,11 +444,11 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin)
         int index = 17;
         std::cout << "n = " << n << std::endl;
         //leyendo ci y fi
-        std::vector<std::pair<char, int> > histogramaCaracteres;
+        std::vector<std::pair<char, int>> histogramaCaracteres;
         char ci;
         int fi;
         //ESTE FOR ESTÁ MAL: LO QUE SE TIENE QUE HACER ES BUSCAR LA CANTIDAD DE REPETICIONES PARA CADA UNA DE LAS BASES (A,C,G,T,U...) SON 16 EN TOTAL
-        for(int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++)
         {
             //Sacando ci
             ci = (char)binaryToDecimal(stoi(stringBinario.substr(index, 8)));
@@ -455,11 +456,12 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin)
             //Sacando fi
             fi = binaryToDecimal(stoi(stringBinario.substr(index, 64)));
             index += 65;
-            histogramaCaracteres.push_back(std::pair<char,int>(ci, fi));
+            histogramaCaracteres.push_back(std::pair<char, int>(ci, fi));
         }
 
         //LOOP DE PRUEBA...
-        for(int i = 0; i < histogramaCaracteres.size(); i++){
+        for (int i = 0; i < histogramaCaracteres.size(); i++)
+        {
             std::cout << "Character: " << histogramaCaracteres.at(i).first << "\tFrequency: " << histogramaCaracteres.at(i).second << std::endl;
         }
 
@@ -485,19 +487,23 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin)
     {
         std::cout << "No se puede cargar las secuencias en  " << nombreArchivoFABin << std::endl;
         return false;
-    }    
+    }
 }
 
 //-------------------------------------------------------------TERCERA ENTREGA------------------------------------------------------------------
-void ArchivoFASTA::armarMatrizSecuencia(std::vector<std::vector<char> > &matriz, std::string descripcion_secuencia){
+void ArchivoFASTA::armarMatrizSecuencia(std::vector<std::vector<char>> &matriz, std::string descripcion_secuencia)
+{
     //Método para armar una matriz que contiene la secuencia, a partir de la descripción de la misma.
     //La matriz que se arma, se guarda en la Secuencia correspondiente, de esta manera se garantiza que cada Secuencia puede tener una matriz en la misma instancia del programa
-    for(int i = 0; i < lineasDescriptivas.size(); i++){
-        if(lineasDescriptivas.at(i) == descripcion_secuencia){
+    for (int i = 0; i < lineasDescriptivas.size(); i++)
+    {
+        if (lineasDescriptivas.at(i) == descripcion_secuencia)
+        {
             std::string secuencia = secLista.at(i).getSecuencia();
             std::istringstream ss(secuencia);
             std::string linea;
-            while(std::getline(ss, linea, '\n')){
+            while (std::getline(ss, linea, '\n'))
+            {
                 std::vector<char> lineaMat;
                 std::copy(linea.begin(), linea.end(), std::back_inserter(lineaMat));
                 matriz.push_back(lineaMat);
@@ -510,17 +516,19 @@ void ArchivoFASTA::armarMatrizSecuencia(std::vector<std::vector<char> > &matriz,
             }
             //Se crea la matriz para (dentro de) la estructura Secuencia:
             secLista.at(i).setMatriz(matriz);
-        }   
+        }
     }
 
     int maxSize = 0;
-    for(int i = 0; i < matriz.size(); i++){
-        if(matriz.at(i).size() > maxSize)
+    for (int i = 0; i < matriz.size(); i++)
+    {
+        if (matriz.at(i).size() > maxSize)
             maxSize = matriz.at(i).size();
     }
-    
-    for(int i = 0; i < matriz.size(); i++){
-        while(matriz.at(i).size() < maxSize)
+
+    for (int i = 0; i < matriz.size(); i++)
+    {
+        while (matriz.at(i).size() < maxSize)
             matriz.at(i).push_back(NULL);
     }
 
@@ -532,25 +540,34 @@ void ArchivoFASTA::armarMatrizSecuencia(std::vector<std::vector<char> > &matriz,
     // }
 }
 
-void ArchivoFASTA::ruta_mas_corta(std::string descripcion_secuencia, int i, int j, int x, int y){
-    try{
-        std::vector<std::vector<char> > matrizSecuencia;
+void ArchivoFASTA::ruta_mas_corta(std::string descripcion_secuencia, int i, int j, int x, int y)
+{
+    try
+    {
+        std::vector<std::vector<char>> matrizSecuencia;
         armarMatrizSecuencia(matrizSecuencia, descripcion_secuencia);
     }
-    catch(std::exception e){}
+    catch (std::exception e)
+    {
+    }
 }
 
-void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j){
-    try{
-        std::vector<std::vector<char> > matrizSecuencia;
+void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j)
+{
+    try
+    {
+        std::vector<std::vector<char>> matrizSecuencia;
         armarMatrizSecuencia(matrizSecuencia, descripcion_secuencia);
 
         // El siguiente ciclo es de prueba...
-        for(int i = 0; i < matrizSecuencia.size(); i++){
-            for(int j = 0; j < matrizSecuencia.at(i).size(); j++)
+        for (int i = 0; i < matrizSecuencia.size(); i++)
+        {
+            for (int j = 0; j < matrizSecuencia.at(i).size(); j++)
                 std::cout << matrizSecuencia.at(i).at(j);
             std::cout << '\n';
         }
     }
-    catch(std::exception e){}
+    catch (std::exception e)
+    {
+    }
 }
