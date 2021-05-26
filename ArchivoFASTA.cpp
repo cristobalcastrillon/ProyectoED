@@ -43,7 +43,7 @@ bool ArchivoFASTA::cargarArchivo(std::string nombreArchivo)
             }
             else
             {
-                secLista.at(lineasDescriptivas.size() - 1).appendSecuencia(linea);
+                secLista.at(lineasDescriptivas.size() - 1).appendSecuencia(linea + '\n');
             }
         }
         conteoBasesXSecuencia();
@@ -225,7 +225,7 @@ bool ArchivoFASTA::guardar(std::string nombreArchivo)
         for (int i = 0; i < secLista.size(); i++)
         {
             contenidoArchivo += lineasDescriptivas.at(i) + '\n';
-            contenidoArchivo += secLista.at(i).getSecuencia() + '\n';
+            contenidoArchivo += secLista.at(i).getSecuencia();
         }
         writeFASTA << contenidoArchivo;
         writeFASTA.close();

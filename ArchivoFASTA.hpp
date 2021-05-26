@@ -41,6 +41,7 @@ struct ArchivoFASTA {
     //Tercera entrega:
     void ruta_mas_corta(std::string descripcion_secuencia, int i, int j, int x, int y);
     void base_remota(std::string descripcion_secuencia, int i, int j);
+    
 };
 
 #endif /* ArchivoFASTA_hpp */
