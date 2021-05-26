@@ -123,13 +123,33 @@ int main(int argc, const char * argv[]) {
             //  j
             //  x
             //  y
-            int posDesSec = comando.find('\b', 15);
-            string descripcion_secuencia = comando.substr(15, posDesSec - 15);
-            string i = comando.substr(posDesSec + 1, posDesSec + 2);
-            string j = comando.substr(posDesSec + 3, posDesSec + 4);
-            string x = comando.substr(posDesSec + 5, posDesSec + 6);
-            string y = comando.substr(posDesSec + 7, posDesSec + 8);
-            archivoNuevo.ruta_mas_corta(descripcion_secuencia, stoi(i), stoi(j), stoi(x), stoi(y));
+
+            string restante = comando.substr(15);
+            std::size_t index = restante.find(' ');
+
+            string descripcion_secuencia = restante.substr(0, index);
+            index++;
+            restante = restante.substr(index);
+            index = restante.find(' ');
+            
+            string i = restante.substr(0, index);
+            index++;
+            restante = restante.substr(index);
+            index = restante.find(' ');
+
+            string j = restante.substr(0, index);
+            index++;
+            restante = restante.substr(index);
+            index = restante.find(' ');
+
+            string x = restante.substr(0, index);
+            index++;
+            restante = restante.substr(index);
+            index = restante.find(' ');
+
+            string y = restante.substr(0);
+
+            archivoNuevo.ruta_mas_corta(descripcion_secuencia, stoi(i), stoi(j), stoi(x), stoi(y));            
         }
         if(comando.find("base_remota") != string::npos)
         {
@@ -138,10 +158,22 @@ int main(int argc, const char * argv[]) {
             //  descripcion_secuencia
             //  i
             //  j
-            int posDesSec = comando.find('\b', 15);
-            string descripcion_secuencia = comando.substr(15, posDesSec - 15);
-            string i = comando.substr(posDesSec + 1, posDesSec + 2);
-            string j = comando.substr(posDesSec + 3, posDesSec + 4);
+
+            string restante = comando.substr(12);
+            std::size_t index = restante.find(' ');
+
+            string descripcion_secuencia = restante.substr(0, index);
+            index++;
+            restante = restante.substr(index);
+            index = restante.find(' ');
+            
+            string i = restante.substr(0, index);
+            index++;
+            restante = restante.substr(index);
+            index = restante.find(' ');
+
+            string j = restante.substr(0);
+
             archivoNuevo.base_remota(descripcion_secuencia, stoi(i), stoi(j));
         }
     }

@@ -1,4 +1,5 @@
 #include "ArchivoFASTA.hpp"
+#include <sstream>
 
 //-------------------------------------------------------------PRIMERA ENTREGA------------------------------------------------------------------
 ArchivoFASTA::ArchivoFASTA()
@@ -349,9 +350,8 @@ HuffmanNode *ArchivoFASTA::codificar(std::string nombreArchivoFABin)
         // }
 
         //LA SIGUIENTE LÍNEA ES DE PRUEBA...
-        std::cout << stringBinario << std::endl;
+        //std::cout << stringBinario << std::endl;
 
-        //TODO: Averiguar por qué no está guardando como binario
         //2. Guardar en archivo .fabin
         nombreArchivoFABin += ".fabin";
         std::fstream writeFABin(nombreArchivoFABin, std::fstream::binary | std::fstream::out | std::fstream::trunc);
@@ -489,12 +489,38 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin)
 }
 
 //-------------------------------------------------------------TERCERA ENTREGA------------------------------------------------------------------
+void ArchivoFASTA::armarMatrizSecuencia(std::vector<std::vector<char> > &matriz, std::string descripcion_secuencia){
+    //Método para armar una matriz que contiene la secuencia, a partir de la descripción de la misma.
+    for(int i = 0; i < lineasDescriptivas.size(); i++){
+        if(lineasDescriptivas.at(i) == descripcion_secuencia){
+            std::string secuencia = secLista.at(i).getSecuencia();
+            std::istringstream ss(secuencia);
+            std::string linea;
+            while(std::getline(ss, linea, '\n')){
+                std::vector<char> lineaMat;
+                std::copy(linea.begin(), linea.end(), std::back_inserter(lineaMat));
+                matriz.push_back(lineaMat);
+                
+                //Línea de prueba...
+                std::cout << linea << std::endl;
+            }
+        }   
+    }
+}
+
 void ArchivoFASTA::ruta_mas_corta(std::string descripcion_secuencia, int i, int j, int x, int y){
-    try{}
+    try{
+        std::vector<std::vector<char> > matrizSecuencia;
+        armarMatrizSecuencia(matrizSecuencia, descripcion_secuencia);
+
+    }
     catch(std::exception e){}
 }
 
 void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j){
-    try{}
+    try{
+        std::vector<std::vector<char> > matrizSecuencia;
+        armarMatrizSecuencia(matrizSecuencia, descripcion_secuencia);
+    }
     catch(std::exception e){}
 }
