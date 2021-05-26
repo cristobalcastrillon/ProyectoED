@@ -500,9 +500,12 @@ void ArchivoFASTA::armarMatrizSecuencia(std::vector<std::vector<char> > &matriz,
                 std::vector<char> lineaMat;
                 std::copy(linea.begin(), linea.end(), std::back_inserter(lineaMat));
                 matriz.push_back(lineaMat);
-                
-                //Línea de prueba...
-                std::cout << linea << std::endl;
+
+                //Impresión de prueba...
+                // for(int it = 0; it < lineaMat.size(); it++)
+                //     std::cout << lineaMat.at(it);
+                // std::cout << '\n';
+                //std::cout << linea << std::endl;
             }
         }   
     }
@@ -517,6 +520,13 @@ void ArchivoFASTA::armarMatrizSecuencia(std::vector<std::vector<char> > &matriz,
         while(matriz.at(i).size() < maxSize)
             matriz.at(i).push_back(NULL);
     }
+
+    //El siguiente ciclo es de prueba...
+    // for(int i = 0; i < matriz.size(); i++){
+    //     for(int j = 0; j < maxSize; j++)
+    //         std::cout << matriz.at(i).at(j);
+    //     std::cout << '\n';
+    // }
 }
 
 void ArchivoFASTA::ruta_mas_corta(std::string descripcion_secuencia, int i, int j, int x, int y){
@@ -532,10 +542,10 @@ void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j){
         std::vector<std::vector<char> > matrizSecuencia;
         armarMatrizSecuencia(matrizSecuencia, descripcion_secuencia);
 
-        //El siguiente ciclo es de prueba...
+        // El siguiente ciclo es de prueba...
         for(int i = 0; i < matrizSecuencia.size(); i++){
-            for(int j = 0; j < 7; j++)
-                std::cout << matrizSecuencia.at(i).at(j) << '\t';
+            for(int j = 0; j < matrizSecuencia.at(i).size(); j++)
+                std::cout << matrizSecuencia.at(i).at(j);
             std::cout << '\n';
         }
     }
