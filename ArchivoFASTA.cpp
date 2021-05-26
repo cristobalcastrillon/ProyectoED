@@ -554,20 +554,14 @@ void ArchivoFASTA::ruta_mas_corta(std::string descripcion_secuencia, int i, int 
 
 void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j)
 {
-    try
+    //Para saber si existe una secuencia con esa descripción
+    bool hallado= false;
+    for(int i=0; i<secLista.size();i++)
     {
-        std::vector<std::vector<char>> matrizSecuencia;
-        armarMatrizSecuencia(matrizSecuencia, descripcion_secuencia);
-
-        // El siguiente ciclo es de prueba...
-        for (int i = 0; i < matrizSecuencia.size(); i++)
+        if()
         {
-            for (int j = 0; j < matrizSecuencia.at(i).size(); j++)
-                std::cout << matrizSecuencia.at(i).at(j);
-            std::cout << '\n';
+            hallado=true;
         }
     }
-    catch (std::exception e)
-    {
-    }
+    if(hallado==true;)
 }
