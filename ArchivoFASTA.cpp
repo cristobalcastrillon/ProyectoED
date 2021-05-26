@@ -512,27 +512,17 @@ void ArchivoFASTA::armarMatrizSecuencia(std::vector<std::vector<char> > &matriz,
         if(matriz.at(i).size() > maxSize)
             maxSize = matriz.at(i).size();
     }
-    std::cout << maxSize << std::endl;
     
     for(int i = 0; i < matriz.size(); i++){
         while(matriz.at(i).size() < maxSize)
             matriz.at(i).push_back(NULL);
     }
-
-    //El siguiente ciclo es de prueba...
-    for(int i = 0; i < matriz.size(); i++){
-        for(int j = 0; j < maxSize; j++)
-            std::cout << matriz.at(i).at(j) << '\t';
-        std::cout << '\n';
-    }
-
 }
 
 void ArchivoFASTA::ruta_mas_corta(std::string descripcion_secuencia, int i, int j, int x, int y){
     try{
         std::vector<std::vector<char> > matrizSecuencia;
         armarMatrizSecuencia(matrizSecuencia, descripcion_secuencia);
-
     }
     catch(std::exception e){}
 }
@@ -541,6 +531,13 @@ void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j){
     try{
         std::vector<std::vector<char> > matrizSecuencia;
         armarMatrizSecuencia(matrizSecuencia, descripcion_secuencia);
+
+        //El siguiente ciclo es de prueba...
+        for(int i = 0; i < matrizSecuencia.size(); i++){
+            for(int j = 0; j < 7; j++)
+                std::cout << matrizSecuencia.at(i).at(j) << '\t';
+            std::cout << '\n';
+        }
     }
     catch(std::exception e){}
 }
