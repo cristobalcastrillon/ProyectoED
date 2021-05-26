@@ -491,6 +491,7 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin)
 //-------------------------------------------------------------TERCERA ENTREGA------------------------------------------------------------------
 void ArchivoFASTA::armarMatrizSecuencia(std::vector<std::vector<char> > &matriz, std::string descripcion_secuencia){
     //Método para armar una matriz que contiene la secuencia, a partir de la descripción de la misma.
+    //La matriz que se arma, se guarda en la Secuencia correspondiente, de esta manera se garantiza que cada Secuencia puede tener una matriz en la misma instancia del programa
     for(int i = 0; i < lineasDescriptivas.size(); i++){
         if(lineasDescriptivas.at(i) == descripcion_secuencia){
             std::string secuencia = secLista.at(i).getSecuencia();
@@ -507,6 +508,8 @@ void ArchivoFASTA::armarMatrizSecuencia(std::vector<std::vector<char> > &matriz,
                 // std::cout << '\n';
                 //std::cout << linea << std::endl;
             }
+            //Se crea la matriz para (dentro de) la estructura Secuencia:
+            secLista.at(i).setMatriz(matriz);
         }   
     }
 

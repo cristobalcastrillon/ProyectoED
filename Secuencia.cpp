@@ -5,7 +5,6 @@
 //  Created by Cristóbal Castrillón Balcázar & Nicolás Pérez Fonseca on 14/02/21.
 //
 #include <iostream>
-
 #include "Secuencia.hpp"
 
 Secuencia::Secuencia(){
@@ -102,6 +101,12 @@ void Secuencia::setIncompleta(bool iC){
 
 bool Secuencia::getIncompleta(){
     return incompleta;
+}
+
+void Secuencia::construirGrafo(){}
+
+void Secuencia::setMatriz(std::vector<std::vector<char> > matriz){
+    this->matrizSecuencia = matriz;
 }
 
 void Secuencia::conteoBases(){

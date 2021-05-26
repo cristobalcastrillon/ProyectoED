@@ -11,6 +11,7 @@
 #define CANTIDAD_BASES 16
 
 #include "Base.hpp"
+#include "Grafo.hpp"
 
 struct Secuencia {
 //Clase que define a una secuencia.
@@ -18,6 +19,9 @@ private:
     std::string secuencia;
     std::vector<Base> bases_seq;
     bool incompleta;
+    std::vector<std::vector<char> > matrizSecuencia;
+    Grafo grafoSecuencia;
+
 public:
     //Cada uno de los constructores debe garantizar que se cree una lista de las bases existentes (A,G,C,T,U).
     Secuencia();
@@ -31,9 +35,11 @@ public:
     void setBases(std::vector<Base> secuenciaBases);
     void setIncompleta(bool iC);
     bool getIncompleta();
+    void construirGrafo();
+    void setMatriz(std::vector<std::vector<char> > matriz);
     
     //Método que cuenta la frecuencia (cantidad de veces que aparece en la secuencia) de cada base.
-    void conteoBases();
+    void conteoBases();    
 };
 
 #endif /* Secuencia_hpp */
