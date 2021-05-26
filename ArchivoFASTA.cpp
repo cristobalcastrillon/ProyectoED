@@ -278,7 +278,7 @@ HuffmanNode *ArchivoFASTA::codificar(std::string nombreArchivoFABin)
         }
 
         //histogramaCaracteres: vector de pares caracter - frecuencia.
-        std::vector<std::pair<char, int>> histogramaCaracteres;
+        std::vector<std::pair<char, int> > histogramaCaracteres;
 
         for (int i = 0; i < CANTIDAD_BASES; i++)
         {
@@ -444,7 +444,7 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin)
         int index = 17;
         std::cout << "n = " << n << std::endl;
         //leyendo ci y fi
-        std::vector<std::pair<char, int>> histogramaCaracteres;
+        std::vector<std::pair<char, int> > histogramaCaracteres;
         char ci;
         int fi;
         //ESTE FOR ESTÁ MAL: LO QUE SE TIENE QUE HACER ES BUSCAR LA CANTIDAD DE REPETICIONES PARA CADA UNA DE LAS BASES (A,C,G,T,U...) SON 16 EN TOTAL
@@ -491,7 +491,7 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin)
 }
 
 //-------------------------------------------------------------TERCERA ENTREGA------------------------------------------------------------------
-void ArchivoFASTA::armarMatrizSecuencia(std::vector<std::vector<char>> &matriz, std::string descripcion_secuencia)
+void ArchivoFASTA::armarMatrizSecuencia(std::vector<std::vector<char> > &matriz, std::string descripcion_secuencia)
 {
     //Método para armar una matriz que contiene la secuencia, a partir de la descripción de la misma.
     //La matriz que se arma, se guarda en la Secuencia correspondiente, de esta manera se garantiza que cada Secuencia puede tener una matriz en la misma instancia del programa
@@ -544,7 +544,7 @@ void ArchivoFASTA::ruta_mas_corta(std::string descripcion_secuencia, int i, int 
 {
     try
     {
-        std::vector<std::vector<char>> matrizSecuencia;
+        std::vector<std::vector<char> > matrizSecuencia;
         armarMatrizSecuencia(matrizSecuencia, descripcion_secuencia);
     }
     catch (std::exception e)
@@ -556,7 +556,7 @@ void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j)
 {
     try
     {
-        std::vector<std::vector<char>> matrizSecuencia;
+        std::vector<std::vector<char> > matrizSecuencia;
         armarMatrizSecuencia(matrizSecuencia, descripcion_secuencia);
 
         // El siguiente ciclo es de prueba...
