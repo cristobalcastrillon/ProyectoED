@@ -506,6 +506,26 @@ void ArchivoFASTA::armarMatrizSecuencia(std::vector<std::vector<char> > &matriz,
             }
         }   
     }
+
+    int maxSize = 0;
+    for(int i = 0; i < matriz.size(); i++){
+        if(matriz.at(i).size() > maxSize)
+            maxSize = matriz.at(i).size();
+    }
+    std::cout << maxSize << std::endl;
+    
+    for(int i = 0; i < matriz.size(); i++){
+        while(matriz.at(i).size() < maxSize)
+            matriz.at(i).push_back(NULL);
+    }
+
+    //El siguiente ciclo es de prueba...
+    for(int i = 0; i < matriz.size(); i++){
+        for(int j = 0; j < maxSize; j++)
+            std::cout << matriz.at(i).at(j) << '\t';
+        std::cout << '\n';
+    }
+
 }
 
 void ArchivoFASTA::ruta_mas_corta(std::string descripcion_secuencia, int i, int j, int x, int y){
