@@ -1,5 +1,6 @@
 #include "ArchivoFASTA.hpp"
 
+//-------------------------------------------------------------PRIMERA ENTREGA------------------------------------------------------------------
 ArchivoFASTA::ArchivoFASTA()
 {
 }
@@ -110,7 +111,6 @@ void ArchivoFASTA::listarSecuencias()
         for (int i = 0; i < secLista.size(); i++)
         {
             int cantBasesSeq = 0;
-            //bool incompleta = false;
             for (int k = 0; k < CANTIDAD_BASES; k++)
             {
                 if (secLista.at(i).getBases().at(k).getCantidad() > 0)
@@ -251,6 +251,7 @@ void ArchivoFASTA::ayuda()
     std::cout << "decodificar <nombre_archivo.fabin>\tDecodifica el contenido de un archivo binario de extensión .fabin y lo carga en memoria." << std::endl;
 }
 
+//-------------------------------------------------------------SEGUNDA ENTREGA------------------------------------------------------------------
 bool sortbysec(const std::pair<char, int> &a, const std::pair<char, int> &b)
 {
     return (a.second > b.second);
@@ -482,18 +483,15 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin)
 
     catch (std::exception e)
     {
-        std::cout << "No se pueden cargar las secuencias en  " << nombreArchivoFABin << std::endl;
+        std::cout << "No se puede cargar las secuencias en  " << nombreArchivoFABin << std::endl;
         return false;
     }    
 }
 
-void ArchivoFasta::ruta_mas_corta(std::string descripcion_secuencia, int i, int j, int x, int y){
-    try{
-
-    }
-    catch(std::exception e){
-        
-    }
+//-------------------------------------------------------------TERCERA ENTREGA------------------------------------------------------------------
+void ArchivoFASTA::ruta_mas_corta(std::string descripcion_secuencia, int i, int j, int x, int y){
+    try{}
+    catch(std::exception e){}
 }
 
 void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j){
