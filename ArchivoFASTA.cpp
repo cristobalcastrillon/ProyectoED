@@ -484,5 +484,19 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin)
     {
         std::cout << "No se pueden cargar las secuencias en  " << nombreArchivoFABin << std::endl;
         return false;
+    }    
+}
+
+void ArchivoFasta::ruta_mas_corta(std::string descripcion_secuencia, int i, int j, int x, int y){
+    try{
+
     }
+    catch(std::exception e){
+        
+    }
+}
+
+void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j){
+    try{}
+    catch(std::exception e){}
 }

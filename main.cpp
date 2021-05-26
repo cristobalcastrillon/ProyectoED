@@ -112,7 +112,38 @@ int main(int argc, const char * argv[]) {
             //PARÁMETROS: 
             //  N/A
             exit(0);
-        }        
+        }
+        if(comando.find("ruta_mas_corta") != string::npos)
+        {
+            //DESCRIPCIÓN:  El comando debe imprimir en pantalla la secuencia de vértices del grafo que describen la ruta más corta entre la base ubicada en la posición [i ,j ] de la matriz de la secuencia descripcion_secuencia y la base ubicada en la posición [x ,y ] de la misma matriz. Así mismo,
+            //debe imprimir el costo total de la ruta, teniendo en cuenta el peso que tiene cada conexión entre bases.
+            //PARÁMETROS:
+            //  descripcion_secuencia
+            //  i
+            //  j
+            //  x
+            //  y
+            int posDesSec = comando.find('\b', 15);
+            string descripcion_secuencia = comando.substr(15, posDesSec - 15);
+            string i = comando.substr(posDesSec + 1, posDesSec + 2);
+            string j = comando.substr(posDesSec + 3, posDesSec + 4);
+            string x = comando.substr(posDesSec + 5, posDesSec + 6);
+            string y = comando.substr(posDesSec + 7, posDesSec + 8);
+            archivoNuevo.ruta_mas_corta(descripcion_secuencia, stoi(i), stoi(j), stoi(x), stoi(y));
+        }
+        if(comando.find("base_remota") != string::npos)
+        {
+            //DESCRIPCIÓN:   Para la base ubicada en la posición [i ,j ] de la matriz de la secuencia descripcion_secuencia , el comando busca la ubicación de la misma base (misma letra) más lejana dentro de la matriz. Para esta base remota, el comando debe imprimir en pantalla su ubicación, la secuencia de vértices que describen la ruta entre la base origen y la base remota, y el costo total de la ruta.
+            //PARÁMETROS:
+            //  descripcion_secuencia
+            //  i
+            //  j
+            int posDesSec = comando.find('\b', 15);
+            string descripcion_secuencia = comando.substr(15, posDesSec - 15);
+            string i = comando.substr(posDesSec + 1, posDesSec + 2);
+            string j = comando.substr(posDesSec + 3, posDesSec + 4);
+            archivoNuevo.base_remota(descripcion_secuencia, stoi(i), stoi(j));
+        }
     }
 
     return 0;
