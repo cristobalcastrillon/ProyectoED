@@ -561,8 +561,9 @@ void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j)
 {
     try
     {
+        int indice = getIndiceSecuencia(descripcion_secuencia);
         std::vector<std::vector<char> > matrizSecuencia;
-        armarMatrizSecuencia(matrizSecuencia, descripcion_secuencia);
+        armarMatrizSecuencia(matrizSecuencia, indice);
 
         // El siguiente ciclo es de prueba...
         for (int i = 0; i < matrizSecuencia.size(); i++)
