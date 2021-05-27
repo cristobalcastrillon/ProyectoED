@@ -574,9 +574,9 @@ void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j)
         std::cout<<"La secuencia no existe"<<std::endl;
         return;
     }
-    for(int k=0; i<secLista.size();k++)
+    for(int k=0; k<secLista.size();k++)
     {
-        if(secLista.at(i).getSecuencia()==descripcion_secuencia)
+        if(secLista.at(k).getSecuencia()==descripcion_secuencia)
         {
             try
             {
@@ -590,5 +590,29 @@ void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j)
         }
     }
     //Si llega hasta aca es porque la entrada es válida
-    
+    char base;
+    char baseRemota;
+    Secuencia secuenciaBase;
+    for(int k=0; i<secLista.size();k++)
+    {
+        if(secLista.at(k).getSecuencia()==descripcion_secuencia)
+        {
+            secuenciaBase=secLista.at(k);
+        }
+    }
+    //sacando la base dada
+    base = secuenciaBase.getMatriz().at(i).at(j);
+    std::pair<int,int> lejano;
+    lejano.first=i;
+    lejano.second=j;
+    for(int k=0;k<secuenciaBase.getMatriz().size();k++)
+    {
+        for(int l=0;secuenciaBase.getMatriz().at(k).size();l++)
+        {
+            if(secuenciaBase.getMatriz().at(k).at(l)==base)
+            {
+                
+            }
+        }
+    }
 }
