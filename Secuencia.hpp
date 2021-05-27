@@ -42,6 +42,7 @@ public:
     
     //Método que cuenta la frecuencia (cantidad de veces que aparece en la secuencia) de cada base.
     void conteoBases();    
+    void rutaMasCorta(int i, int j, int x, int y);
 };
 
 #endif /* Secuencia_hpp */

@@ -192,3 +192,22 @@ float Secuencia::calcularPeso(int i, int j, int x, int y){
     unsigned int r= a-b;
     return 1/1+r;
 } 
+
+void Secuencia::rutaMasCorta(int i, int j, int x, int y){
+    NodoGrafo ij, xy;
+    for(int k = 0; k < grafoSecuencia.V; k++){
+        for(int l = 0; l < grafoSecuencia.listaNodos[k].size(); l++){
+            if(grafoSecuencia.listaNodos[k].at(l).posicionMatriz[0] == i && grafoSecuencia.listaNodos[k].at(l).posicionMatriz[1] == j){
+                ij = grafoSecuencia.listaNodos[k].at(l);
+            }
+        }
+    }
+    for(int k = 0; k < grafoSecuencia.V; k++){
+        for(int l = 0; l < grafoSecuencia.listaNodos[k].size(); l++){
+            if(grafoSecuencia.listaNodos[k].at(l).posicionMatriz[0] == x && grafoSecuencia.listaNodos[k].at(l).posicionMatriz[1] == y){
+                xy = grafoSecuencia.listaNodos[k].at(l);
+            }
+        }
+    }
+    grafoSecuencia.shortestPath(ij, xy);
+}

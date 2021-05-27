@@ -13,6 +13,8 @@ struct NodoGrafo{
 
     int wSup = INF, wInf = INF, wIzq = INF, wDer = INF;
 
+    NodoGrafo(){};
+
     NodoGrafo(char c, int i, int j){
         //Posicion en la matriz:
         //i: fila

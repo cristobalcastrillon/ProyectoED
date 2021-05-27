@@ -552,6 +552,7 @@ void ArchivoFASTA::ruta_mas_corta(std::string descripcion_secuencia, int i, int 
         armarMatrizSecuencia(matrizSecuencia, indice);
         Secuencia secuencia = getSecuencia(indice);
         secuencia.construirGrafo();
+        secuencia.rutaMasCorta(i, j, x, y);
     }
     catch (std::exception e)
     {

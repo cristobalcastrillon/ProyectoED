@@ -22,7 +22,7 @@ struct Grafo{
     }
 
     //Dijkstra's algorithm for finding the shortest path to every other vertex given a source node (s) in a graph
-    void shortestPath(int s){
+    void shortestPath(NodoGrafo s, NodoGrafo e){
         // Create set to store vertices
         // Use this to extract the shortest path
         set<pair<int, int>> extract_set;
@@ -66,9 +66,9 @@ struct Grafo{
             }
         }
 
-        cout << "Minimum distances from vertex: " << s << endl;
+        std::cout << "Minimum distances from vertex: " << s << std::endl;
         for(int i = 0; i < V; i++){
-            cout << "Vertex: " << i << "\tDistance: " << distances[i] << endl;
+            std::cout << "Vertex: " << i << "\tDistance: " << distances[i] << std::endl;
         }
 
     }
