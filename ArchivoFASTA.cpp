@@ -556,6 +556,7 @@ void ArchivoFASTA::ruta_mas_corta(std::string descripcion_secuencia, int i, int 
     }
     catch (std::exception e)
     {
+        perror("calculo de ruta fallido");
     }
 }
 
@@ -626,6 +627,6 @@ void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j)
         }
     }
     //calculando la ruta entre las dos bases
-    
+    ruta_mas_corta(descripcion_secuencia,i,j,lejano.first,lejano.second);
 
 }

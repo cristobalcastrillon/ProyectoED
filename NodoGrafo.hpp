@@ -6,6 +6,7 @@ struct NodoGrafo{
     int posicionMatriz[2];
     char carBase;
     int valASCII;
+    bool visited;
     NodoGrafo * sup = NULL;
     NodoGrafo * inf = NULL;
     NodoGrafo * izq = NULL;

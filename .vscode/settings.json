@@ -80,6 +80,8 @@
         "__tree": "cpp",
         "map": "cpp",
         "semaphore": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "list": "cpp",
+        "set": "cpp"
     }
 }
