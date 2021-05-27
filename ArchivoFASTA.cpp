@@ -535,7 +535,7 @@ void ArchivoFASTA::armarMatrizSecuencia(std::vector<std::vector<char> > &matriz,
     // }
 }
 
-int getIndiceSecuencia(std::string descripcion_secuencia){
+int ArchivoFASTA::getIndiceSecuencia(std::string descripcion_secuencia){
     for(int i = 0; i < lineasDescriptivas.size();  i++){
         if(lineasDescriptivas.at(i) == descripcion_secuencia)
             return i;
