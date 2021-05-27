@@ -558,7 +558,7 @@ void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j)
     bool hallado= false;
     for(int i=0; i<secLista.size();i++)
     {
-        if()
+        if(secLista.at(i).getSecuencia().)
         {
             hallado=true;
         }
