@@ -62,43 +62,44 @@ struct Grafo
         {
             //sacar las cosas
             NodoGrafo temp = visitados.front();
-            //verificar que el destimo no seas igual al comienzo
+            
+            //verificar que el destino no sea igual al comienzo
             if (!(temp.posicionMatriz[0] == e.posicionMatriz[0] && temp.posicionMatriz[1] == e.posicionMatriz[1]))
             {
-                std::cout<<"La ruta mas corta entre la base ["<<s.posicionMatriz[0]<<","<<s.posicionMatriz[1]<<"] y la base en ["<<e.posicionMatriz[0]<<","<<e.posicionMatriz[1]<<"] es: ";
-                float costoFinal=0;
-                for(int i=0;i<path.size();i++)
+                std::cout << "La ruta mas corta entre la base [" << s.posicionMatriz[0] << "," << s.posicionMatriz[1] << "] y la base en [" << e.posicionMatriz[0] << "," << e.posicionMatriz[1] << "] es: ";
+                float costoFinal = 0;
+                for(int i = 0; i < path.size(); i++)
                 {
                     //calculo del costo 
                     //Costo por derecha
-                    if(path.at(i).der->posicionMatriz[0]==path.at(i+1).posicionMatriz[1]&&path.at(i).der->posicionMatriz[1]==path.at(i+1).posicionMatriz[1]&&path.at(i).der->posicionMatriz[1]==path.at(i+1).posicionMatriz[1]&&i+1!=path.size())
+                    if(path.at(i).der->posicionMatriz[0] == path.at(i+1).posicionMatriz[1] && path.at(i).der->posicionMatriz[1] == path.at(i+1).posicionMatriz[1] && path.at(i).der->posicionMatriz[1] == path.at(i+1).posicionMatriz[1] && i+1 != path.size())
                     {
-                        costoFinal+=path.at(i+1).wDer;
+                        costoFinal += path.at(i+1).wDer;
                     }
                     //Costo por izquierda
-                    if(path.at(i).izq->posicionMatriz[0]==path.at(i+1).posicionMatriz[1]&&path.at(i).izq->posicionMatriz[1]==path.at(i+1).posicionMatriz[1]&&path.at(i).izq->posicionMatriz[1]==path.at(i+1).posicionMatriz[1]&&i+1!=path.size())
+                    if(path.at(i).izq->posicionMatriz[0] == path.at(i+1).posicionMatriz[1] && path.at(i).izq->posicionMatriz[1] == path.at(i+1).posicionMatriz[1] && path.at(i).izq->posicionMatriz[1] == path.at(i+1).posicionMatriz[1] && i+1 != path.size())
                     {
-                        costoFinal+=path.at(i+1).wIzq;
+                        costoFinal += path.at(i+1).wIzq;
                     }
                     //Costo por ariba
-                    if(path.at(i).sup->posicionMatriz[0]==path.at(i+1).posicionMatriz[1]&&path.at(i).sup->posicionMatriz[1]==path.at(i+1).posicionMatriz[1]&&path.at(i).sup->posicionMatriz[1]==path.at(i+1).posicionMatriz[1]&&i+1!=path.size())
+                    if(path.at(i).sup->posicionMatriz[0] == path.at(i+1).posicionMatriz[1] && path.at(i).sup->posicionMatriz[1] == path.at(i+1).posicionMatriz[1] && path.at(i).sup->posicionMatriz[1] == path.at(i+1).posicionMatriz[1] && i+1 != path.size())
                     {
-                        costoFinal+=path.at(i+1).wSup;
+                        costoFinal += path.at(i+1).wSup;
                     }
                     //Costo por abajo
-                    if(path.at(i).inf->posicionMatriz[0]==path.at(i+1).posicionMatriz[1]&&path.at(i).inf->posicionMatriz[1]==path.at(i+1).posicionMatriz[1]&&path.at(i).inf->posicionMatriz[1]==path.at(i+1).posicionMatriz[1]&&i+1!=path.size())
+                    if(path.at(i).inf->posicionMatriz[0] == path.at(i+1).posicionMatriz[1] && path.at(i).inf->posicionMatriz[1] == path.at(i+1).posicionMatriz[1] && path.at(i).inf->posicionMatriz[1] == path.at(i+1).posicionMatriz[1] && i+1 != path.size())
                     {
-                        costoFinal+=path.at(i+1).wInf;
+                        costoFinal += path.at(i+1).wInf;
                     }
-                    std::cout<<path.at(i).carBase;
+                    std::cout << path.at(i).carBase;
                 }
 
-                std::cout<<" EL costo toal de la ruta es: "<<costoFinal<<std::endl;
+                std::cout << "El costo total de la ruta es: " << costoFinal << std::endl;
                 
                 return;
             }
             //Se saca de los Visitados
-            std::cout<<"hace pop front de visitados"<<std::endl;
+            std::cout << "hace pop front de visitados" << std::endl;
             visitados.pop_front();
             
             //Tomar todos los vertices adyacentes
@@ -106,9 +107,9 @@ struct Grafo
             {
                 for (int j = 0; listaNodos[i].size(); j++)
                 {
-                    if(listaNodos[i].at(j).visited ==false)
+                    if(listaNodos[i].at(j).visited == false)
                     {
-                        listaNodos[i].at(j).visited=true;
+                        listaNodos[i].at(j).visited = true;
                         visitados.push_back(listaNodos[i].at(j));
                         path.push_back(e);
                     }
