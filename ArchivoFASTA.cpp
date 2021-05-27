@@ -546,6 +546,7 @@ void ArchivoFASTA::ruta_mas_corta(std::string descripcion_secuencia, int i, int 
 {
     try
     {
+        //Comentario random para ver si compila
         int indice = getIndiceSecuencia(descripcion_secuencia);
         std::vector<std::vector<char> > matrizSecuencia;
         armarMatrizSecuencia(matrizSecuencia, indice);

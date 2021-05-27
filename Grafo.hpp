@@ -10,16 +10,14 @@ struct Grafo{
     //Lista de nodos/vértices
     std::vector<NodoGrafo> * listaNodos;
 
-    Grafo();
-    Grafo(int nV);
+    Grafo(){
+        V = 0;
+        listaNodos = NULL;
+    }
+
+    Grafo(int nV){
+        V = nV;
+        listaNodos = new std::vector<NodoGrafo>[V];
+    }
 };
 
-Grafo::Grafo(){
-    V = 0;
-    listaNodos = NULL;
-}
-
-Grafo::Grafo(int nV){
-    V = nV;
-    listaNodos = new std::vector<NodoGrafo>[V];
-}
