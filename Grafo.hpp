@@ -22,47 +22,55 @@ struct Grafo{
     }
 
     //Dijkstra's algorithm for finding the shortest path to every other vertex given a source node (s) in a graph
-    // void dijsktra(int s){
-    //     //Shortest path will be inserted in the following set:
-    //     set<pair<int, int> > extracted;
+    void shortestPath(int s){
+        // Create set to store vertices
+        // Use this to extract the shortest path
+        set<pair<int, int>> extract_set;
 
-    //     //Vector of distances
-    //     vector<int> distances(V, INF);
+        // Vector for distances
+        // All paths are initialized to a large value
+        vector<int> distances(V, INF);
 
-    //     //Distance from source vector to itself = 0
-    //     extracted.insert(make_pair(s, 0));
-    //     distances[s] = 0;
+        // Insert the entry point into the set
+        // Initialize distance to 0
+        extract_set.insert(make_pair(0, s));
+        distances[s] = 0;
 
+        // Continue until all shortest distances are finalized
+        while(!extract_set.empty()){
+            // Extract the minimum distances
+            pair<int, int> tmp = *(extract_set.begin());
+            extract_set.erase(extract_set.begin());
 
-    //     while(!extracted.empty()){
-    //         pair<int, int> temp = *(extracted.begin());
-    //         extracted.erase(extracted.begin());
+            // Get the vertex number
+            int u = tmp.second;
 
-    //         //Vertex key
-    //         int u = temp.second;
+            // Go over the adjacency list
+            for(auto i = adj[u].begin(); i != adj[u].end(); i++){
+                // Get the vertex and weight
+                int v = (*i).first;
+                int weight = (*i).second;
 
-    //         for(auto it = listaNodos[u].begin(); it != listaNodos[u].end(); it++){
-    //             //v: adjacent vertex 'key'
-    //             int v = it->first;
-    //             int weight = it->second;
+                // Check if we have found a shorter path to v
+                if(distances[v] > distances[u] + weight){
 
-    //             if(distances[v] > distances[u] + weight){
+                    // Remove the current distance if it is in the set
+                    if(distances[v] != INF){
+                        extract_set.erase(extract_set.find(make_pair(distances[v], v)));
+                    }
+                
+                    // Update the distance
+                    distances[v] = distances[u] + weight;
+                    extract_set.insert(make_pair(distances[v], v));
+                }
+            }
+        }
 
-    //                 if(distances[v] != INF){
-    //                     extracted.erase(extracted.find(make_pair(distances[v], v)));
-    //                 }
+        cout << "Minimum distances from vertex: " << s << endl;
+        for(int i = 0; i < V; i++){
+            cout << "Vertex: " << i << "\tDistance: " << distances[i] << endl;
+        }
 
-    //                 distances[v] = distances[u] + weight;
-    //                 extracted.insert(make_pair(distances[v], v));
-    //             }
-    //         }
-    //     }
-
-    //     cout << "Distancias mínimas desde el vértice " << s << ':' << endl;
-    //     for(int i = 0; i < V; i++){
-    //         cout << "Vértice " << i << "\tDistancia " << distances[i] << endl;
-    //     }
-
-    // }
+    }
 };
 
