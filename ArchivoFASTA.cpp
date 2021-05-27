@@ -491,33 +491,28 @@ bool ArchivoFASTA::decodificar(std::string nombreArchivoFABin)
 }
 
 //-------------------------------------------------------------TERCERA ENTREGA------------------------------------------------------------------
-void ArchivoFASTA::armarMatrizSecuencia(std::vector<std::vector<char> > &matriz, std::string descripcion_secuencia)
+void ArchivoFASTA::armarMatrizSecuencia(std::vector<std::vector<char> > &matriz, int indice)
 {
     //Método para armar una matriz que contiene la secuencia, a partir de la descripción de la misma.
     //La matriz que se arma, se guarda en la Secuencia correspondiente, de esta manera se garantiza que cada Secuencia puede tener una matriz en la misma instancia del programa
-    for (int i = 0; i < lineasDescriptivas.size(); i++)
+    
+    std::string secuencia = secLista.at(indice).getSecuencia();
+    std::istringstream ss(secuencia);
+    std::string linea;
+    while (std::getline(ss, linea, '\n'))
     {
-        if (lineasDescriptivas.at(i) == descripcion_secuencia)
-        {
-            std::string secuencia = secLista.at(i).getSecuencia();
-            std::istringstream ss(secuencia);
-            std::string linea;
-            while (std::getline(ss, linea, '\n'))
-            {
-                std::vector<char> lineaMat;
-                std::copy(linea.begin(), linea.end(), std::back_inserter(lineaMat));
-                matriz.push_back(lineaMat);
+        std::vector<char> lineaMat;
+        std::copy(linea.begin(), linea.end(), std::back_inserter(lineaMat));
+        matriz.push_back(lineaMat);
 
-                //Impresión de prueba...
-                // for(int it = 0; it < lineaMat.size(); it++)
-                //     std::cout << lineaMat.at(it);
-                // std::cout << '\n';
-                //std::cout << linea << std::endl;
-            }
-            //Se crea la matriz para (dentro de) la estructura Secuencia:
-            secLista.at(i).setMatriz(matriz);
-        }
+        //Impresión de prueba...
+        // for(int it = 0; it < lineaMat.size(); it++)
+        //     std::cout << lineaMat.at(it);
+        // std::cout << '\n';
+        //std::cout << linea << std::endl;
     }
+    //Se crea la matriz para (dentro de) la estructura Secuencia:
+    secLista.at(indice).setMatriz(matriz);
 
     int maxSize = 0;
     for (int i = 0; i < matriz.size(); i++)
@@ -540,12 +535,22 @@ void ArchivoFASTA::armarMatrizSecuencia(std::vector<std::vector<char> > &matriz,
     // }
 }
 
+int getIndiceSecuencia(std::string descripcion_secuencia){
+    for(int i = 0; i < lineasDescriptivas.size();  i++){
+        if(lineasDescriptivas.at(i) == descripcion_secuencia)
+            return i;
+    }
+    return NULL;
+}
+
 void ArchivoFASTA::ruta_mas_corta(std::string descripcion_secuencia, int i, int j, int x, int y)
 {
     try
     {
+        int indice = getIndiceSecuencia(descripcion_secuencia);
         std::vector<std::vector<char> > matrizSecuencia;
-        armarMatrizSecuencia(matrizSecuencia, descripcion_secuencia);
+        armarMatrizSecuencia(matrizSecuencia, indice);
+        
     }
     catch (std::exception e)
     {
@@ -572,7 +577,7 @@ void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j)
     {
         if(secLista.at(i).getSecuencia()==descripcion_secuencia)
         {
-            secLista.at(i).matrizSecuencia
+            secLista.at(i).getMatriz[i][j]
         }
     }
 }

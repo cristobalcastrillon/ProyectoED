@@ -39,7 +39,8 @@ struct ArchivoFASTA {
     bool decodificar(std::string nombreArchivoFABin); //Decodificación de Huffman
 
     //Tercera entrega:
-    void armarMatrizSecuencia(std::vector<std::vector<char> > &matriz, std::string descripcion_secuencia);
+    void armarMatrizSecuencia(std::vector<std::vector<char> > &matriz, int indice);
+    int getIndiceSecuencia(std::string descripcion_secuencia);
     void ruta_mas_corta(std::string descripcion_secuencia, int i, int j, int x, int y);
     void base_remota(std::string descripcion_secuencia, int i, int j);
     
