@@ -1,3 +1,6 @@
+//INF: Infinito / número muy grande
+#define INF 1000000
+
 struct NodoGrafo{
 
     int posicionMatriz[2];
@@ -7,6 +10,8 @@ struct NodoGrafo{
     NodoGrafo * inf = NULL;
     NodoGrafo * izq = NULL;
     NodoGrafo * der = NULL;
+
+    int wSup = INF, wInf = INF, wIzq = INF, wDer = INF;
 
     NodoGrafo(char c, int i, int j){
         //Posicion en la matriz:

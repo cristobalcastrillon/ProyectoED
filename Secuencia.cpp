@@ -115,24 +115,28 @@ void Secuencia::construirGrafo(){
             if(i == 0){
                 limSup = true;
                 temp.inf = new NodoGrafo(matrizSecuencia.at(i+1).at(j), i+1, j);
+                temp.wInf = calcularPeso(i, j, i+1, j);
             }
 
             //Límite izquierdo de la matriz
             if(j == 0){
                 limIzq = true;
                 temp.der = new NodoGrafo(matrizSecuencia.at(i).at(j+1), i, j+1);
+                temp.wDer = calcularPeso(i, j, i, j+1);
             }
 
             //Límite derecho de la matriz
             if(j == matrizSecuencia.at(i).size() - 1){
                 limDer = true;
                 temp.izq = new NodoGrafo(matrizSecuencia.at(i).at(j-1), i, j-1);
+                temp.wIzq = calcularPeso(i, j, i, j-1);
             }
 
             //Límite inferior de la matriz
             if(i == matrizSecuencia.size() - 1){
                 limInf = true;
                 temp.sup = new NodoGrafo(matrizSecuencia.at(i-1).at(j), i-1, j);
+                temp.wSup = calcularPeso(i, j, i-1, j);
             }
 
             if(!(limSup && limIzq && limDer && limInf)){
@@ -140,6 +144,11 @@ void Secuencia::construirGrafo(){
                 temp.der = new NodoGrafo(matrizSecuencia.at(i).at(j+1), i, j+1);
                 temp.izq = new NodoGrafo(matrizSecuencia.at(i).at(j-1), i, j-1);
                 temp.sup = new NodoGrafo(matrizSecuencia.at(i-1).at(j), i-1, j);
+
+                temp.wInf = calcularPeso(i, j, i+1, j);
+                temp.wDer = calcularPeso(i, j, i, j+1);
+                temp.wIzq = calcularPeso(i, j, i, j-1);
+                temp.wSup = calcularPeso(i, j, i-1, j);
             }
 
             grafoSecuencia.listaNodos->push_back(temp);
