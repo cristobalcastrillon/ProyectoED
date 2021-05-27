@@ -602,17 +602,29 @@ void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j)
     }
     //sacando la base dada
     base = secuenciaBase.getMatriz().at(i).at(j);
-    std::pair<int,int> lejano;
+    std::pair<int,int> lejano,maxDist;
     lejano.first=i;
     lejano.second=j;
+    maxDist.first=0;
+    maxDist.second=0;
+    //buscado la base máslejana
     for(int k=0;k<secuenciaBase.getMatriz().size();k++)
     {
         for(int l=0;secuenciaBase.getMatriz().at(k).size();l++)
         {
             if(secuenciaBase.getMatriz().at(k).at(l)==base)
             {
-                
+                unsigned int a = i-k;
+                unsigned int b = j-l;
+                if(a>maxDist.first||b>maxDist.second)
+                {
+                    lejano.first=k;
+                    lejano.second=l;
+                }
             }
         }
     }
+    //calculando la ruta entre las dos bases
+    
+
 }
