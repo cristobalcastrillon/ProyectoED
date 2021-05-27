@@ -104,22 +104,45 @@ bool Secuencia::getIncompleta(){
 }
 
 void Secuencia::construirGrafo(){
+    Grafo grafoSecuencia(secuencia.size());
     for (int i = 0; i < this->matrizSecuencia.size(); i++)
     {
         for (int j = 0; j < this->matrizSecuencia.at(i).size(); j++)
         {
-            if (i - 1 != 0)
-                //superior
-                this->grafoSecuencia.insertarArista(this->matrizSecuencia.at(i).at(j), this->matrizSecuencia.at(i - 1).at(j));
-            if (i + 1 != this->matrizSecuencia.size())
-                //inferior
-                this->grafoSecuencia.insertarArista(this->matrizSecuencia.at(i).at(j), this->matrizSecuencia.at(i + 1).at(j));
-            if (j != this->matrizSecuencia.at(i).size())
-                //izquierdo
-                this->grafoSecuencia.insertarArista(this->matrizSecuencia.at(i).at(j), this->matrizSecuencia.at(i).at(j + 1));
-            if (j - 1 != 0)
-                //derecho
-                this->grafoSecuencia.insertarArista(this->matrizSecuencia.at(i).at(j), this->matrizSecuencia.at(i).at(j - 1));
+            bool limSup, limIzq, limDer, limInf;
+            NodoGrafo temp(matrizSecuencia.at(i).at(j), i, j);
+            //Límite superior de la matriz
+            if(i == 0){
+                limSup = true;
+                temp.inf = new NodoGrafo(matrizSecuencia.at(i+1).at(j), i+1, j);
+            }
+
+            //Límite izquierdo de la matriz
+            if(j == 0){
+                limIzq = true;
+                temp.der = new NodoGrafo(matrizSecuencia.at(i).at(j+1), i, j+1);
+            }
+
+            //Límite derecho de la matriz
+            if(j == matrizSecuencia.at(i).size() - 1){
+                limDer = true;
+                temp.izq = new NodoGrafo(matrizSecuencia.at(i).at(j-1), i, j-1);
+            }
+
+            //Límite inferior de la matriz
+            if(i == matrizSecuencia.size() - 1){
+                limInf = true;
+                temp.sup = new NodoGrafo(matrizSecuencia.at(i-1).at(j), i-1, j);
+            }
+
+            if(!(limSup && limIzq && limDer && limInf)){
+                temp.inf = new NodoGrafo(matrizSecuencia.at(i+1).at(j), i+1, j);
+                temp.der = new NodoGrafo(matrizSecuencia.at(i).at(j+1), i, j+1);
+                temp.izq = new NodoGrafo(matrizSecuencia.at(i).at(j-1), i, j-1);
+                temp.sup = new NodoGrafo(matrizSecuencia.at(i-1).at(j), i-1, j);
+            }
+
+            grafoSecuencia.listaNodos->push_back(temp);
         }
     }
 }
