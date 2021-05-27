@@ -1,5 +1,4 @@
 #include "ArchivoFASTA.hpp"
-#include "Grafo.hpp"
 #include <sstream>
 
 //-------------------------------------------------------------PRIMERA ENTREGA------------------------------------------------------------------
@@ -550,7 +549,8 @@ void ArchivoFASTA::ruta_mas_corta(std::string descripcion_secuencia, int i, int 
         int indice = getIndiceSecuencia(descripcion_secuencia);
         std::vector<std::vector<char> > matrizSecuencia;
         armarMatrizSecuencia(matrizSecuencia, indice);
-        
+        Secuencia secuencia = getSecuencia(indice);
+        secuencia.construirGrafo();
     }
     catch (std::exception e)
     {
