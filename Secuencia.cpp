@@ -151,6 +151,11 @@ void Secuencia::setMatriz(std::vector<std::vector<char> > matriz){
     this->matrizSecuencia = matriz;
 }
 
+std::vector<std::vector<char> >  Secuencia::getMatriz()
+{
+    return matrizSecuencia;
+}
+
 void Secuencia::conteoBases(){
     std::string secuencia = this->getSecuencia();
     std::vector<Base> secuenciaBases = this->getBases();

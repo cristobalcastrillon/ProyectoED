@@ -37,6 +37,7 @@ public:
     bool getIncompleta();
     void construirGrafo();
     void setMatriz(std::vector<std::vector<char> > matriz);
+    std::vector<std::vector<char> >  getMatriz();
     
     //Método que cuenta la frecuencia (cantidad de veces que aparece en la secuencia) de cada base.
     void conteoBases();    
