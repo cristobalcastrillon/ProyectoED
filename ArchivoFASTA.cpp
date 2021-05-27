@@ -561,9 +561,9 @@ void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j)
 {
     //Para saber si existe una secuencia con esa descripción
     bool hallado= false;
-    for(int i=0; i<secLista.size();i++)
+    for(int k=0; i<secLista.size();k++)
     {
-        if(secLista.at(i).getSecuencia()==descripcion_secuencia)
+        if(secLista.at(k).getSecuencia()==descripcion_secuencia)
         {
             hallado=true;
         }
@@ -573,11 +573,21 @@ void ArchivoFASTA::base_remota(std::string descripcion_secuencia, int i, int j)
         std::cout<<"La secuencia no existe"<<std::endl;
         return;
     }
-    for(int i=0; i<secLista.size();i++)
+    for(int k=0; i<secLista.size();k++)
     {
         if(secLista.at(i).getSecuencia()==descripcion_secuencia)
         {
-            secLista.at(i).getMatriz[i][j]
+            try
+            {
+                char c = secLista.at(k).getMatriz().at(i).at(j);
+            }
+            catch(const std::exception& e)
+            {
+                std::cout<<"posición["<<i<<","<<j<<"] no existe"<<std::endl;
+                return;
+            }
         }
     }
+    //Si llega hasta aca es porque la entrada es válida
+    
 }
