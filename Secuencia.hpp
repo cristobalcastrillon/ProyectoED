@@ -38,6 +38,7 @@ public:
     void construirGrafo();
     void setMatriz(std::vector<std::vector<char> > matriz);
     std::vector<std::vector<char> >  getMatriz();
+    float Secuencia::calcularPeso(int i, int j, int x, int y);
     
     //Método que cuenta la frecuencia (cantidad de veces que aparece en la secuencia) de cada base.
     void conteoBases();    

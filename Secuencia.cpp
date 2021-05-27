@@ -175,7 +175,11 @@ void Secuencia::conteoBases(){
             }
         }
     }
+}
 
-float calcularPeso(int i, int j, int x, int y){
-    matrizSecuencia.at(i).at(j)
+float Secuencia::calcularPeso(int i, int j, int x, int y){
+    char a = matrizSecuencia.at(i).at(j);
+    char b = matrizSecuencia.at(x).at(y);
+    unsigned int r= a-b;
+    return 1/1+r;
 } 
