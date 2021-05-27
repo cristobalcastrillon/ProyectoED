@@ -28,7 +28,7 @@ struct Grafo
     //Dijkstra's algorithm for finding the shortest path to every other vertex given a source node (s) in a graph
     void shortestPath(NodoGrafo s, NodoGrafo e)
     {
-
+        std::cout<<"Entra a shortest path"<<std::endl;
         //Marcando todos los nodos como no visitados
         std::vector<NodoGrafo> path;
 
@@ -40,6 +40,8 @@ struct Grafo
                 listaNodos[i].at(j).visited = false;
             }
         }
+
+        std::cout<<"Marca no visitados"<<std::endl;
         //cola para los visitados
         std::list<NodoGrafo> visitados;
         //marcando como visitado el nodo de partida
@@ -61,7 +63,7 @@ struct Grafo
             //sacar las cosas
             NodoGrafo temp = visitados.front();
             //verificar que el destimo no seas igual al comienzo
-            if (s.posicionMatriz[0] == e.posicionMatriz[0] && s.posicionMatriz[1] == e.posicionMatriz[1])
+            if (!(temp.posicionMatriz[0] == e.posicionMatriz[0] && temp.posicionMatriz[1] == e.posicionMatriz[1]))
             {
                 std::cout<<"La ruta mas corta entre la base ["<<s.posicionMatriz[0]<<","<<s.posicionMatriz[1]<<"] y la base en ["<<e.posicionMatriz[0]<<","<<e.posicionMatriz[1]<<"] es: ";
                 float costoFinal=0;
@@ -96,6 +98,7 @@ struct Grafo
                 return;
             }
             //Se saca de los Visitados
+            std::cout<<"hace pop front de visitados"<<std::endl;
             visitados.pop_front();
             
             //Tomar todos los vertices adyacentes

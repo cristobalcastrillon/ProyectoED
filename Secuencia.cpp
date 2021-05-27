@@ -194,6 +194,7 @@ float Secuencia::calcularPeso(int i, int j, int x, int y){
 } 
 
 void Secuencia::rutaMasCorta(int i, int j, int x, int y){
+    std::cout<<"entra a ruta mas corta"<<std::endl;
     NodoGrafo ij, xy;
     for(int k = 0; k < grafoSecuencia.V; k++){
         for(int l = 0; l < grafoSecuencia.listaNodos[k].size(); l++){
@@ -209,5 +210,6 @@ void Secuencia::rutaMasCorta(int i, int j, int x, int y){
             }
         }
     }
+    std::cout<<"Llama a shortestPath"<<std::endl;
     grafoSecuencia.shortestPath(ij, xy);
 }
